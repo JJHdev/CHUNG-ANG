@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Login">
+
+	<select id="loginProc" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			
+			SELECT *,
+
+			CASE WHEN user_pw = CRYPT(#{userPw}, user_pw)
+				THEN 'SUCCESS'
+				ELSE 'WRONG PW'
+			END AS is_valid_pw
+			
+			FROM user_data
+			WHERE user_id = #{userId}
+		]]>
+	</select>
+</mapper>

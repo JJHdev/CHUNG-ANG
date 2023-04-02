@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="report">
+
+<select id="cityImpactLevleCount" parameterType="java.util.Date" resultType="business.egov.cmmvo.ImpactLevelCityCountVO">
+		select
+			COUNT(CASE WHEN ct_health = 1 THEN 1 END) AS ct_health_1_count,
+	    COUNT(CASE WHEN ct_health = 2 THEN 1 END) AS ct_health_2_count,
+	    COUNT(CASE WHEN ct_health = 3 THEN 1 END) AS ct_health_3_count,
+	    COUNT(CASE WHEN ct_health = 4 THEN 1 END) AS ct_health_4_count,
+	    COUNT(CASE WHEN ct_construction_industry = 1 THEN 1 END) AS ct_construction_industry_1_count,
+	    COUNT(CASE WHEN ct_construction_industry = 2 THEN 1 END) AS ct_construction_industry_2_count,
+	    COUNT(CASE WHEN ct_construction_industry = 3 THEN 1 END) AS ct_construction_industry_3_count,
+	    COUNT(CASE WHEN ct_construction_industry = 4 THEN 1 END) AS ct_construction_industry_4_count,
+	    COUNT(CASE WHEN ct_agriculture = 1 THEN 1 END) AS ct_agriculture_1_count,
+	    COUNT(CASE WHEN ct_agriculture = 2 THEN 1 END) AS ct_agriculture_2_count,
+	    COUNT(CASE WHEN ct_agriculture = 3 THEN 1 END) AS ct_agriculture_3_count,
+	    COUNT(CASE WHEN ct_agriculture = 4 THEN 1 END) AS ct_agriculture_4_count,
+	    COUNT(CASE WHEN ct_livestock_industry = 1 THEN 1 END) AS ct_livestock_industry_1_count,
+	    COUNT(CASE WHEN ct_livestock_industry = 2 THEN 1 END) AS ct_livestock_industry_2_count,
+	    COUNT(CASE WHEN ct_livestock_industry = 3 THEN 1 END) AS ct_livestock_industry_3_count,
+	    COUNT(CASE WHEN ct_livestock_industry = 4 THEN 1 END) AS ct_livestock_industry_4_count,
+	    COUNT(CASE WHEN ct_aquaculture = 1 THEN 1 END) AS ct_aquaculture_1_count,
+	    COUNT(CASE WHEN ct_aquaculture = 2 THEN 1 END) AS ct_aquaculture_2_count,
+	    COUNT(CASE WHEN ct_aquaculture = 3 THEN 1 END) AS ct_aquaculture_3_count,
+	    COUNT(CASE WHEN ct_aquaculture = 4 THEN 1 END) AS ct_aquaculture_4_count,
+	    COUNT(CASE WHEN ct_traffic = 1 THEN 1 END) AS ct_traffic_1_count,
+	    COUNT(CASE WHEN ct_traffic = 2 THEN 1 END) AS ct_traffic_2_count,
+	    COUNT(CASE WHEN ct_traffic = 3 THEN 1 END) AS ct_traffic_3_count,
+	    COUNT(CASE WHEN ct_traffic = 4 THEN 1 END) AS ct_traffic_4_count,
+	    COUNT(CASE WHEN ct_electric = 1 THEN 1 END) AS ct_electric_1_count,
+	    COUNT(CASE WHEN ct_electric = 2 THEN 1 END) AS ct_electric_2_count,
+	    COUNT(CASE WHEN ct_electric = 3 THEN 1 END) AS ct_electric_3_count,
+	    COUNT(CASE WHEN ct_electric = 4 THEN 1 END) AS ct_electric_4_count
+		from impact_level_city
+		where ct_date = #{selectDate}
+	</select>
+	
+	<select id="ImpactNwPart" parameterType="java.util.Date" resultType="business.egov.cmmvo.ImpactLevelNationwideVO">
+		select nw_code, nw_health, nw_construction_industry, nw_agriculture, nw_livestock_industry, nw_aquaculture, nw_traffic, nw_electric 
+		from impact_level_nationwide
+		where nw_date = #{selectDate}
+	</select>
+	
+	<select id="ImpactWaPart" parameterType="java.util.Date" resultType="business.egov.cmmvo.ImpactLevelWideareaVO">
+		select * 
+		from impact_level_widearea
+		where wa_date = #{selectDate}
+	</select>
+
+
+<select id="impactLevelCityCountVO" parameterType="business.egov.cmmvo.ImpactLevelCityCountQuery" resultType="business.egov.cmmvo.ImpactLevelCityCountVO">
+  SELECT
+    <foreach collection="columns" item="column" separator=",">
+      COUNT(CASE WHEN ${column} = 0 THEN 1 END) AS ${column}_0_count,
+      COUNT(CASE WHEN ${column} = 1 THEN 1 END) AS ${column}_1_count,
+      COUNT(CASE WHEN ${column} = 2 THEN 1 END) AS ${column}_2_count,
+      COUNT(CASE WHEN ${column} = 3 THEN 1 END) AS ${column}_3_count,
+      COUNT(CASE WHEN ${column} = 4 THEN 1 END) AS ${column}_4_count
+    </foreach>
+  FROM impact_level_city
+  WHERE ct_date = #{selectDate}
+</select>
+	
+	<select id="impactInfoNw" parameterType="java.util.Date" resultType="business.egov.cmmvo.ImpactInfoNwVO">
+		 select nw_impact_stage, nw_national_code as wa_national, nw_field, nw_division, nw_impact_range, nw_impact_target, nw_influence_phrase
+		 from impact_information_nationwide
+		 where nw_infodate = #{selectDate}
+	</select>
+	
+	<select id="counterMeasuresNw" parameterType="java.util.Date" resultType="business.egov.cmmvo.CounterMeasuresNwVO">
+		select nw_impact_stage, nw_national_code, nw_field, nw_division, nw_response_range, nw_response_target, nw_response_phrase
+		from countermeasures_nationwide
+		where nw_cmdate = #{selectDate}
+	</select>
+	
+	<select id="impactInfo" parameterType="map" resultType="business.egov.cmmvo.ImpactInfoNwVO">
+		select wa_impact_stage as nw_impact_stage, wa_national_code as nw_national_code, wa_field as nw_field, wa_division as nw_division, wa_impact_range as nw_impact_range, wa_impact_target as nw_impact_target, wa_influence_phrase as nw_influence_phrase
+		from impact_information_widearea
+		where wa_infodate = #{date} and wa_national_code = #{wa_code}
+	</select>
+	
+	<select id="counterMeasures" parameterType="map" resultType="business.egov.cmmvo.CounterMeasuresNwVO">
+		select wa_impact_stage as nw_impact_stage, wa_national_code as nw_national_code, wa_field as nw_field, wa_division as nw_division, wa_response_range as nw_response_range, wa_response_target as nw_response_target, wa_response_phrase as nw_response_phrase 
+		from countermeasures_widearea
+		where wa_cmdate = #{date} and wa_national_code = #{wa_code}
+	</select>
+	
+	 <select id="isDataSelect" parameterType="java.util.Date" resultType="int">
+		 select count(nw_infodate)
+		 from impact_information_nationwide
+		 where nw_infodate = #{selectDate}
+	</select>
+	
+	 <select id="selectCityName" parameterType="String" resultType="String">
+		 select sg_nm
+		 from sigun_layer
+		 where wide_nm = #{wideName}
+	</select>
+	
+	 <select id="selectCtCode" parameterType="String" resultType="int">
+		select sg_cd
+		from sigun_layer
+		where sg_nm = #{cityName}
+	</select>
+	
+	<select id="impactLevelCt" parameterType="hashMap" resultType="hashMap">
+		select *
+		from impact_level_city
+		where ct_date = #{date} and ct_code = #{ctCode}
+	</select>
+	
+	<select id="impactInfoCt" parameterType="hashMap" resultType="hashMap">
+		select *
+		from impact_information_city
+		where ct_infodate = #{date} and ct_national_code = #{ctCode}
+	</select>
+	
+	<select id="counterMeasuresCt" parameterType="hashMap" resultType="hashMap">
+		select *
+		from countermeasures_city
+		where ct_cmdate = #{date} and ct_national_code = #{ctCode}
+	</select>
+	
+	<select id="selectLaLoCode" parameterType="hashMap" resultType="hashMap">
+		select *
+		from latitudeandlongitude
+		where cityname = #{cityName}
+	</select>
+	
+</mapper>

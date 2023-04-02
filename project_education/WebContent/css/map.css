@@ -1,0 +1,117 @@
+.ol-popup {
+        position: absolute;
+        background-color: white;
+        -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #cccccc;
+        bottom: 12px;
+        left: -50px;
+        /* min-width: 280px; */
+      }
+      .ol-popup:after, .ol-popup:before {
+        top: 100%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+      .ol-popup:after {
+        border-top-color: white;
+        border-width: 10px;
+        left: 48px;
+        margin-left: -10px;
+      }
+      .ol-popup:before {
+        border-top-color: #cccccc;
+        border-width: 11px;
+        left: 48px;
+        margin-left: -11px;
+      }
+      .ol-popup-closer {
+        text-decoration: none;
+        position: absolute;
+        top: 2px;
+        right: 8px;
+      }
+      .ol-popup-closer:after {
+        content: "✖";
+      }
+
+.measuretooltip {
+  position: relative;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  color: #fff;
+  padding: 4px 8px;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+.measuretooltip.tooltip-measure {
+  opacity: 1;
+  font-weight: bold;
+}
+.measuretooltip.tooltip-measure sup {
+	vertical-align: super;
+}
+.measuretooltip.tooltip-static {
+  background-color: #000;
+  color: #fff;
+  border: 1px solid #fff;
+}
+.measuretooltip.tooltip-static sup {
+  vertical-align: super;
+}
+.measuretooltip.tooltip-measure:before,
+.measuretooltip.tooltip-static:before {
+  border-top: 6px solid rgba(0, 0, 0, 0.5);
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  margin-left: -7px;
+  left: 50%;
+}
+.measuretooltip.tooltip-static:before {
+  border-top-color: #000;
+}
+
+/* 버퍼 툴팁 */
+.buffer-tooltip {
+	position: relative;
+	background: rgba(0, 0, 0, 0.5);
+	border-radius: 4px;
+	color: white;
+	padding: 4px 8px;
+	opacity: 0.9;
+	white-space: nowrap;
+}
+.buffer-tooltip.tooltip-measure {
+	opacity: 1;
+	font-weight: bold;
+}
+
+.buffer-tooltip.tooltip-static {
+	background-color: #ffcc33;
+	color: black;
+	border: 1px solid white;
+}
+
+.buffer-tooltip.tooltip-measure:before, .buffer-tooltip.tooltip-static:before {
+	border-top: 6px solid rgba(0, 0, 0, 0.5);
+	border-right: 6px solid transparent;
+	border-left: 6px solid transparent;
+	content: "";
+	position: absolute;
+	bottom: -6px;
+	margin-left: -7px;
+	left: 50%;
+}
+
+.buffer-tooltip.tooltip-static:before {
+	border-top-color: #ffcc33;
+}

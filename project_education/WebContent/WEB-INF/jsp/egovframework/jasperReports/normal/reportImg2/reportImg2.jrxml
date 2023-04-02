@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportImg" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a2b885b3-aebe-4c33-9432-19ac6b1047a8">
+	<parameter name="sradarField" class="java.lang.String"/>
+	<parameter name="sradarCity" class="java.lang.String"/>
+	<parameter name="img1" class="java.lang.String"/>
+	<parameter name="img2" class="java.lang.String"/>
+	<parameter name="img3" class="java.lang.String"/>
+	<parameter name="img4" class="java.lang.String"/>
+	<parameter name="img5" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<title>
+		<band height="79" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement x="0" y="0" width="595" height="79" uuid="4f954a14-a199-4c48-885c-575f494076d4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="595" height="50" forecolor="#434867" backcolor="#FFFFFF" uuid="2475da2a-3950-40e8-b0f5-ae6ee2741fae"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="NanumGothic.ttf" size="26" isBold="true"/>
+					</textElement>
+					<text><![CDATA[도시안전성평가 분석 결과]]></text>
+				</staticText>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="391" y="59" width="144" height="20" forecolor="#98A5D4" uuid="4c42ae9a-3181-4755-afa9-f167c83a4115"/>
+					<textElement textAlignment="Right">
+						<font fontName="NanumGothic.ttf" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="39" y="59" width="200" height="17" forecolor="#98A5D4" uuid="9d0c1c4a-5900-4f6f-a610-e6896baa3e10">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="나눔고딕코딩 (NanumGothicCoding.ttf)" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{sradarField} + " / " + $P{sradarCity}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="643" splitType="Prevent">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement x="37" y="0" width="235" height="200" uuid="fe666daa-aa55-4479-b989-abcd1cfdd54f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineColor="#CCCCCC"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="235" height="25" forecolor="#434867" backcolor="#FFFFFF" uuid="b3d6ceda-d83c-4a64-adbd-f6a0d6f79554">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+						<font fontName="NanumGothic.ttf" isBold="true"/>
+					</textElement>
+					<text><![CDATA[정책변수별 상관계수]]></text>
+				</staticText>
+				<image>
+					<reportElement x="0" y="25" width="235" height="175" uuid="c7635f6f-b69b-4ac4-8538-c7f3c673eaf3"/>
+					<box>
+						<pen lineColor="#E2E6EF"/>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#E2E6EF"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#E2E6EF"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#E2E6EF"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#E2E6EF"/>
+					</box>
+					<imageExpression><![CDATA[new java.io.ByteArrayInputStream(org.apache.commons.codec.binary.Base64.decodeBase64(new String($P{img1}).getBytes("UTF-8")))]]></imageExpression>
+				</image>
+			</frame>
+			<frame>
+				<reportElement x="322" y="0" width="235" height="200" uuid="7abc99d7-7491-4f1b-ad4c-13cd813397be">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="235" height="25" forecolor="#434867" backcolor="#FFFFFF" uuid="a1261f23-a17a-46ef-a33a-d4e97ebaf9b8">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="NanumGothic.ttf" isBold="true"/>
+					</textElement>
+					<text><![CDATA[정책변수별 상관계수]]></text>
+				</staticText>
+				<image>
+					<reportElement x="0" y="25" width="235" height="175" uuid="d1e9fbc7-cdd9-42f5-8fa2-65a75d594101">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<box>
+						<pen lineColor="#E2E6EF"/>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#E2E6EF"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#E2E6EF"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#E2E6EF"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#E2E6EF"/>
+					</box>
+					<imageExpression><![CDATA[new java.io.ByteArrayInputStream(org.apache.commons.codec.binary.Base64.decodeBase64(new String($P{img2}).getBytes("UTF-8")))]]></imageExpression>
+				</image>
+			</frame>
+			<frame>
+				<reportElement x="37" y="200" width="520" height="250" uuid="e14807ef-f422-4c9c-9e6b-eadd376a3d98"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="520" height="25" forecolor="#434867" backcolor="#FFFFFF" uuid="5b13c106-81b6-4a91-9f6d-cce460243c13">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="NanumGothic.ttf" isBold="true"/>
+					</textElement>
+					<text><![CDATA[정책효과 변화 양상]]></text>
+				</staticText>
+				<image>
+					<reportElement x="0" y="25" width="520" height="225" uuid="7899685d-e67d-49b6-8ea8-cf5bdd380148">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<imageExpression><![CDATA[new java.io.ByteArrayInputStream(org.apache.commons.codec.binary.Base64.decodeBase64(new String($P{img3}).getBytes("UTF-8")))]]></imageExpression>
+				</image>
+			</frame>
+			<frame>
+				<reportElement x="37" y="450" width="520" height="193" uuid="7e2a9355-3e87-4338-81da-6b48120b25f5">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="520" height="25" forecolor="#434867" backcolor="#FFFFFF" uuid="7209a3b3-6657-4cec-a7e5-c1fc1faceafd">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="NanumGothic.ttf" isBold="true"/>
+					</textElement>
+					<text><![CDATA[도시 안전등급]]></text>
+				</staticText>
+				<image>
+					<reportElement x="0" y="25" width="235" height="167" uuid="25f01209-914c-46a6-ac8b-38a54cd9c941">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<pen lineColor="#E2E6EF"/>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#E2E6EF"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#E2E6EF"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#E2E6EF"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#E2E6EF"/>
+					</box>
+					<imageExpression><![CDATA[new java.io.ByteArrayInputStream(org.apache.commons.codec.binary.Base64.decodeBase64(new String($P{img4}).getBytes("UTF-8")))]]></imageExpression>
+				</image>
+				<image>
+					<reportElement x="285" y="26" width="235" height="167" uuid="a53ce6a8-ff5b-499d-8d32-dee0dd7a91f1">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<box>
+						<pen lineColor="#E2E6EF"/>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#E2E6EF"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#E2E6EF"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#E2E6EF"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#E2E6EF"/>
+					</box>
+					<imageExpression><![CDATA[new java.io.ByteArrayInputStream(org.apache.commons.codec.binary.Base64.decodeBase64(new String($P{img5}).getBytes("UTF-8")))]]></imageExpression>
+				</image>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="25">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="layouts-tiles" template="/WEB-INF/layout/tile/default-layouts.jsp">
+    	<put-attribute name="cmmlib" value="/WEB-INF/layout/cmms/basic-lib.jsp"/>
+    	<put-attribute name="tiles_header" value="/WEB-INF/layout/cmms/header.jsp"/>
+  <put-attribute name="tiles_content" value="" />
+    </definition>
+	
+	<definition name="admin/index" template="/WEB-INF/layout/tile/default-layouts.jsp">
+		<put-attribute name="cmmlib" value="/WEB-INF/jsp/egovframework/admin/include/adminHeader.jsp"/>
+		<put-attribute name="tiles_content" value="/WEB-INF/jsp/egovframework/admin/index.jsp"/>
+	</definition>
+	
+	<definition name="login" template="/WEB-INF/layout/tile/default-login.jsp">
+		<put-attribute name="cmmlib" value="/WEB-INF/layout/cmms/basic-lib.jsp"/>
+		<put-attribute name="tiles_content" value="" />
+	</definition>
+	
+	 <definition name="*" extends="login">
+		<put-attribute name="tiles_content" value="/WEB-INF/jsp/egovframework/main/login.jsp"/>
+	</definition>
+	
+	<definition name="*/*" extends="login">
+		<put-attribute name="tiles_content" value="/WEB-INF/jsp/egovframework/{1}/{2}.jsp"/>
+	</definition>
+	
+	<definition name="report" template="/WEB-INF/layout/tile/default-layouts.jsp">
+    	<put-attribute name="cmmlib" value="/WEB-INF/layout/cmms/basic-lib.jsp"/>
+    	<put-attribute name="tiles_header" value="/WEB-INF/layout/cmms/header.jsp"/>
+  <put-attribute name="tiles_content" value="" />
+    </definition>
+    <definition name="main/report" extends="report">
+		<put-attribute name="tiles_content" value="/WEB-INF/jsp/egovframework/main/report.jsp"/>
+	</definition>
+	
+	<definition name="report-detail" template="/WEB-INF/layout/tile/default-layouts.jsp">
+    	<put-attribute name="cmmlib" value="/WEB-INF/layout/cmms/basic-lib.jsp"/>
+    	<put-attribute name="tiles_header" value="/WEB-INF/layout/cmms/header.jsp"/>
+  <put-attribute name="tiles_content" value="" />
+    </definition>
+    <definition name="main/report2" extends="report-detail">
+		<put-attribute name="tiles_content" value="/WEB-INF/jsp/egovframework/main/report2.jsp"/>
+	</definition>
+	
+</tiles-definitions>

@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Cherry" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13acf49e-4913-4d1b-bccc-113817ad15d1">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="rxdrive"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="648"/>
+	<property name="net.sf.jasperreports.export.docx.frames.as.nested.tables" value="false"/>
+	<property name="ireport.jasperserver.url" value="http://localhost:8080/jasperserver/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin"/>
+	<property name="ireport.jasperserver.report.resource" value="/Resources/Cherry_files/main_jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/Resources/Cherry"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="352"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Dataset1" uuid="787b12a3-698c-42ba-bc16-6958e4895cab">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="rxdrive"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT * FROM public.city_safe_rank]]>
+		</queryString>
+		<field name="index" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="index"/>
+			<property name="com.jaspersoft.studio.field.label" value="index"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="city_safe_rank"/>
+		</field>
+		<field name="sgg_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="sgg_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="sgg_code"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="city_safe_rank"/>
+		</field>
+		<field name="sido_name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="sido_name"/>
+			<property name="com.jaspersoft.studio.field.label" value="sido_name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="city_safe_rank"/>
+		</field>
+		<field name="sgg_name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="sgg_name"/>
+			<property name="com.jaspersoft.studio.field.label" value="sgg_name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="city_safe_rank"/>
+		</field>
+		<field name="c_year" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="c_year"/>
+			<property name="com.jaspersoft.studio.field.label" value="c_year"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="city_safe_rank"/>
+		</field>
+		<field name="rgn_lval" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="rgn_lval"/>
+			<property name="com.jaspersoft.studio.field.label" value="rgn_lval"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="city_safe_rank"/>
+		</field>
+	</subDataset>
+	<parameter name="myParam" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="myImg" class="java.awt.image.BufferedImage"/>
+	<queryString>
+		<![CDATA[SELECT *
+FROM city_safe_rank LIMIT 10]]>
+	</queryString>
+	<field name="index" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="index"/>
+		<property name="com.jaspersoft.studio.field.label" value="index"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="city_safe_rank"/>
+	</field>
+	<field name="sgg_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="sgg_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="sgg_code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="city_safe_rank"/>
+	</field>
+	<field name="sido_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="sido_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="sido_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="city_safe_rank"/>
+	</field>
+	<field name="sgg_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="sgg_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="sgg_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="city_safe_rank"/>
+	</field>
+	<field name="c_year" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="c_year"/>
+		<property name="com.jaspersoft.studio.field.label" value="c_year"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="city_safe_rank"/>
+	</field>
+	<field name="rgn_lval" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="rgn_lval"/>
+		<property name="com.jaspersoft.studio.field.label" value="rgn_lval"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="city_safe_rank"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<image onErrorType="Blank">
+				<reportElement x="456" y="0" width="99" height="132" uuid="97705585-a0b5-4ec7-86f3-ae10c220e6af"/>
+				<imageExpression><![CDATA[$P{myImg}]]></imageExpression>
+			</image>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="451" height="95" backcolor="#000000" uuid="6c6ca4e1-17cd-4913-93d6-5e670ea9ae8a"/>
+				<staticText>
+					<reportElement style="Title" x="0" y="0" width="444" height="66" uuid="a2a2cac8-5a7d-4487-8c54-dab235ce4e21"/>
+					<textElement>
+						<font fontName="NanumGothic.ttf" isBold="false"/>
+					</textElement>
+					<text><![CDATA[도시안전등급수치]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="157" y="66" width="249" height="29" uuid="8978eac3-c578-41c9-837e-48d2b0184642"/>
+					<textElement>
+						<font fontName="NanumGothic.ttf" size="22" isBold="false"/>
+					</textElement>
+					<text><![CDATA[도시안전등급수치]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="100" width="451" height="32" forecolor="#000000" backcolor="#CC0000" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="307" y="12" width="144" height="20" forecolor="#FFFFFF" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
+					<textElement textAlignment="Right">
+						<font fontName="NanumGothic.ttf" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="2" width="555" height="18" backcolor="#A61D1B" uuid="4a99573f-a95c-4db2-ae88-77102aeb000b">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<staticText>
+					<reportElement style="SubTitle" mode="Transparent" x="0" y="0" width="111" height="18" forecolor="#FCA6A4" uuid="0c8f99c1-a9b9-48b6-bda5-e546c97a32f3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="NanumGothic.ttf" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[순번]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" mode="Transparent" x="111" y="0" width="111" height="18" forecolor="#FCA6A4" uuid="e9c6aab2-7ffc-410f-8c3a-55be99aa7eb5"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="NanumGothic.ttf" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[시군구코드]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" mode="Transparent" x="222" y="0" width="111" height="18" forecolor="#FCA6A4" uuid="20cdbc2a-73b6-47de-a0c9-927d725c8ae9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="NanumGothic.ttf" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[시도]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" mode="Transparent" x="333" y="0" width="111" height="18" forecolor="#FCA6A4" uuid="b244c34c-cc20-4ce0-b8d7-cc1c1c0112f3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="NanumGothic.ttf" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[시군구]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" mode="Transparent" x="444" y="0" width="111" height="18" forecolor="#FCA6A4" uuid="3f42e68f-1ec5-4de9-a887-5e8414ec4757"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="NanumGothic.ttf" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[도시안전등급]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="200" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="0" width="555" height="30" uuid="4db7daed-f666-40c7-ad7b-747b3ee64e2f">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset1" uuid="f6f8381d-29a0-49e2-87cc-f27ed46fa811">
+						<dataSourceExpression><![CDATA[$P{myParam}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="110" uuid="1dfa18fd-b666-4997-80fc-8f7689b66af5">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField>
+								<reportElement x="0" y="0" width="110" height="30" uuid="1d6f5bb0-b4e4-406d-860c-81d9015bb109"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="NanumGothic.ttf"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{index}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="110" uuid="b5ccd42b-4c7e-4b2b-96e4-2d691c102b81">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField>
+								<reportElement x="0" y="0" width="110" height="30" uuid="a22a4526-70bd-4a8f-80b3-6c521904d962"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="NanumGothic.ttf"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{sgg_code}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="110" uuid="988274ca-8763-4cd5-8b4e-beef22a0f27a">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField>
+								<reportElement x="0" y="0" width="110" height="30" uuid="afe17e62-f9b7-48fc-b7d6-569ceb5e8c79"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="NanumGothic.ttf"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{sido_name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="110" uuid="497c2df1-c596-4f40-9695-d45d8c059db0">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField>
+								<reportElement x="0" y="0" width="110" height="30" uuid="95809980-3cf7-4def-90f0-16903faa962f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="NanumGothic.ttf"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{sgg_name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="110" uuid="23bf529e-6f9c-47cd-9461-7aa1881fe40a">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField>
+								<reportElement x="0" y="0" width="110" height="30" uuid="8680bf09-9ea8-4838-92ee-20941ea9b3af"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="NanumGothic.ttf"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{rgn_lval}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="1133a906-5b71-476e-9f3e-bc97c97058c1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="729c3539-f946-4d0e-a0a7-bda2815ea1b0"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF" uuid="4834e99c-7f6c-485a-b098-50e5187f2ab4"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="NanumGothic.ttf" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="0" width="80" height="20" forecolor="#FFFFFF" uuid="9825b46e-76f1-469a-abb8-a1cc27aad685"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="NanumGothic.ttf" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF" uuid="137d38c7-1a83-4fc5-b156-9d5f1b1a0ddc"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="NanumGothic.ttf" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

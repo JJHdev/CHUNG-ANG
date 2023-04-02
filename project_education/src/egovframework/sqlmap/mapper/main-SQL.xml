@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main">
+	<select id="ChkWheter" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		
+		SELECT DISTINCT A.agent_name, A.active_cddt_idx AS cddt_idx, B.menu_lyr_nm AS menu_nm
+		FROM r_agent_active_list A,
+		(	SELECT
+				DISTINCT
+					B.cddt_idx, A.menu_lyr_nm
+			FROM	code_menu A,
+					code_data B
+			WHERE	A.cddt_idx = B.cddt_idx
+			AND	A.USE_YN = 'Y'
+			ORDER BY cddt_idx ASC	) B
+		WHERE A.active_cddt_idx = B.cddt_idx
+		and A.agent_name = #{agentNm}
+		and b.menu_lyr_nm = #{menuNm}
+		ORDER BY A.agent_name, A.active_cddt_idx
+		
+	</select>
+	
+	<select id="ChkFirstMenu" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		<choose>
+			<when test="division == 'heat'">
+				SELECT DISTINCT A.agent_name, A.active_cddt_idx AS cddt_idx, B.menu_lyr_nm AS menu_nm
+				FROM r_agent_active_list A,
+				(	SELECT
+						DISTINCT
+							B.cddt_idx, A.menu_lyr_nm
+					FROM	code_menu A,
+							code_data B
+					WHERE	A.cddt_idx = B.cddt_idx
+					AND	A.USE_YN = 'Y'
+					ORDER BY cddt_idx ASC	) B
+				WHERE A.active_cddt_idx = B.cddt_idx
+				and A.agent_name = #{agentNm}
+				ORDER BY A.active_cddt_idx
+				limit 1
+			</when>
+			<when test="division == 'cold'">
+				SELECT DISTINCT A.agent_name, A.active_cddt_idx AS cddt_idx, B.menu_lyr_nm AS menu_nm
+				FROM r_agent_active_list A,
+				(	SELECT
+						DISTINCT
+							B.cddt_idx, A.menu_lyr_nm
+					FROM	code_menu A,
+							code_data B
+					WHERE	A.cddt_idx = B.cddt_idx
+					AND	A.USE_YN = 'Y'
+					ORDER BY cddt_idx ASC	) B
+				WHERE A.active_cddt_idx = B.cddt_idx
+				and A.agent_name = #{agentNm}
+				and B.menu_lyr_nm like '%_c'
+				ORDER BY A.active_cddt_idx
+				limit 1
+			</when>
+		</choose>
+	</select>
+	
+</mapper>

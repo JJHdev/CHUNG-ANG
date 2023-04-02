@@ -1,0 +1,49 @@
+
+
+	/*레이어팝업::*/
+	.layer-popup-wrap {
+		display:none; position:fixed; padding:10vh 33.3vw; top:0; left:0; width:100vw; height:100vh; z-index:999999; background-color:rgba(0,0,0,.63);
+	}	
+	.layer-popup-wrap>.wrap {
+		position:relative;
+		display:block;
+		height:100%;
+		background:#fff;
+		overflow:hidden;
+		border:6px;
+	}
+	.layer-popup-wrap>.wrap .title {position:absolute; width:100%; height:60px; padding:15px 80px 15px 30px; font-size:20px; color:#2a2b2e; background:#fafbfb; border-bottom:1px solid #c9cdd1;}
+	.layer-popup-wrap>.wrap .title>p {overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+	.layer-popup-wrap>.wrap .title>p span[class*="icon-"] {margin-right:10px;}
+	.layer-popup-wrap>.wrap .h60 {height:60px !important;}
+	.layer-popup-wrap>.wrap .title .close-btn {position:absolute; right:0; top:0; display:block; height:60px; width:60px; line-height:60px; text-align:center;}
+	.layer-popup-wrap>.wrap .title .close-btn:before {font-size:20px;}
+	.layer-popup-wrap>.wrap .inner {overflow:hidden; height:calc(100% - 60px - 101px); overflow-x:hidden; overflow-y:auto; }
+
+
+	.layer-popup-btn {
+		position:absolute; bottom:0; left:0; display:block;
+		width:100%; padding:25px 0;
+		border-top:1px dotted #ddd;
+	}
+	.layer-popup-btn ul {font-size:0; text-align:center;}
+	.layer-popup-btn ul li {display:inline-block;}
+	.layer-popup-btn ul li+li {margin-left:20px;}
+	.layer-popup-btn ul li a {
+		display:block;
+		height:50px; line-height:50px; padding:0 15px;
+		text-align:center;
+		font-size:16px; font-weight:500;
+		background:#35a6d9; color:#2a2b2e; letter-spacing:-1px;
+		border:1px solid #afafaf; background:#fff; border-radius:4px;
+		box-shadow:0 1px 0 0 rgba(22,29,37,0.05);
+	}
+	.layer-popup-btn ul li a.color-blue {background:#0081ee; border:1px solid #0081ee; color:#fff;}
+	
+	.layer-popup-btn ul li a span[class*="icon-"] {margin-right:10px;}
+	.layer-popup-btn ul li a span[class*="icon-"]:before {font-size:20px;}
+	.layer-popup-btn ul li a.color-blue span[class*="icon-"] {color:#fff;}
+	
+	.layer-popup-wrap div[class*="wrap-pop"] {padding:20px;}
+	.layer-popup-wrap div[class*="wrap-pop"] .con {text-align:left;}
+	

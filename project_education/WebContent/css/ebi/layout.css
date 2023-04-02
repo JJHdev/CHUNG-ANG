@@ -1,0 +1,216 @@
+@charset "utf-8";
+
+/* a {text-decoration:none !important; outline:none !important; selector-dummy:expression(this.hideFocus=true) !important; transition-duration:.3s !important;} */
+a:link {text-decoration:none; color:#3d3833;}
+a:visited {text-decoration:none; color:#3d3833;}
+a:hover {text-decoration:none; color:#000;}
+a:active {text-decoration:none; color:#3d3833;}
+a,img,i {transition:all .1s linear;	-webkit-transition:all .1s linear; -moz-transition:all .1s linear;}
+			
+body {
+	font-family:NotoSansKR,AppleSDGothicNeo-Light,DroidSans,HelveticaNeue,"돋움",sans-serif;
+	font-size:16px; line-height:1.6; color:#666; letter-spacing:-.2px;
+}
+
+.contents img {max-width:100%; height:auto;}
+
+
+#stdpop {
+    background: #eef3f6;
+    color: #fff;
+    position: absolute;
+    border: 2px solid #000;
+    display: none;
+    z-index: 100;
+    overflow: hidden;
+    width: 1391px;
+    height: 910px;
+    top: 1.4vh; 
+    left:15vw;
+}
+#stdpop > div > div.divWrap {
+    float: left;
+	border: 1px solid #c9cdd1;
+	border-radius: 6px;
+	overflow: hidden;
+	box-shadow: 2px 2px 6px 0 rgb(58 70 93/ 12%);
+	background: #fff;
+	width: 670.5px;
+	height: 795px;
+	margin-top: 14px;
+}
+
+.map{
+	height:100%;
+	width:100%;
+}
+
+#stdpop > div > #std_data {
+   	margin-left: 14px;
+    overflow-y: auto;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#stdpop > div > div > select {
+	width: max-content;
+	margin-top: 14px;
+	margin-left:5px;
+	padding-right: 41px;
+}
+
+#stdpop > div > div > button {
+	background-color: #0081ee !important;
+	border: 1px solid #0081ee;
+	color: #fff !important;
+	width:auto;
+	top: 9px;
+	margin-left:5px;
+}
+
+#stdpop > div > div > button[class*="i-"] {padding-left:35px; position:relative;}
+#stdpop > div > div > button[class*="i-"]:before {position:absolute; top:0; left:12px; font-size:18px; color:#fff; font-family:"Epic" !important;}
+#stdpop > div > div > .i-search:before {content:"\e927"}
+#stdpop > div > div > .i-exel:before {content:"\e919"}
+#stdpop > div > div > .i-condition:before {content:"\e92a"}
+#stdpop > div > div > .i-file:before {content: "\e91a";}
+
+#stdpop > div > #std_data > table.infor thead tr th+th {border-left:none;}
+
+#pop {
+	background: #fff;
+	color: #fff;
+	position: absolute;
+	top: 3vh;
+	left: 26vw;
+	text-align: center;
+	border: 2px solid #000;
+	display : none;
+	z-index : 100;
+	resize:both;
+	overflow:hidden;
+	min-height:30px;
+	min-width:200px;
+	width:auto;
+	height:700px;
+	max-height: 900px;
+	max-width: 1800px;
+}
+
+#table{
+	margin-top: 10px;
+}
+
+#table > tbody > tr{
+	text-align:left;
+	padding-top:6px;
+}
+
+#table > tbody > tr > td{
+	font-weight:300;
+	padding-top:4px;
+}
+
+#table > tbody > tr > td.explain{
+	padding-bottom:20px;
+}
+
+#table > tbody > tr > th{
+	padding-top:20px;
+}
+
+.after-tit {background-color:#3c3c3c; height:30px; position:relative;}
+.after-tit .subject {width:calc(100% - 40px - 10px); margin-right:40px; margin-left:10px; position:relative;}
+.after-tit .subject>* {display:inline-block; vertical-align:middle; color:#fff;}
+.after-tit .subject>p {font-size:13px; padding-left:5px;}
+.after-tit .subject>span.mini {position:absolute; top:7px; right:0;}
+.after-tit a.close-btn {
+	width:40px; height:30px; line-height:30px; position:absolute; top:0; right:0; color:#fff; text-align:center;
+}
+
+/*header*/
+header {width:100%; background:#273142;}
+	header .head {max-width:1920px; margin:0 auto; width:100%; height:70px;}
+	header .head>div.logo {position:absolute; top:20px; left:30px;}
+	header .head>div.logo h1 a {font-size:22px; font-weight:700; color:#fff;}
+	
+	header .head>div.side {position:absolute; top:0; right:0; height:70px; line-height:70px;}
+	header .head>div.side ul li {display:inline-block; float:left; border-left:1px solid #4a596f; background:#273142; padding-right:20px; padding-left:20px; padding-top:25px;height: 70px;}
+	header .head>div.side ul li * {font-size:18px; font-weight:300; color:#fff; letter-spacing:-1px; opacity:.7; letter-spacing:-1px; line-height:1;}
+	header .head>div.side ul li.today span[class*=icon-] {margin-right:15px; opacity:.67;}
+	header .head>div.side ul li.today>* {display:inline-block; vertical-align:middle;}
+	header .head>div.side ul li.tab {height:70px; line-height:70px; padding-top:15px;}
+	header .head>div.side ul li.tab a {
+		float:left; display:inline-block; padding:10px 25px;
+		border:1px solid #4e5e77; border-radius:8px 0 0 8px;
+		
+	}
+	header .head>div.side ul li.tab a:hover {opacity:.95;}
+	header .head>div.side ul li.tab a+a {border-radius:0 8px 8px 0;}
+	header .head>div.side ul li.tab a.on {background:#e7282b; color:#fff; border:1px solid #e7282b; font-weight:500; opacity:1;}
+	header .head>div.side ul li.tab a+a.on {background:#0081ee; border:1px solid #0081ee;}
+	header .head>div.side ul li.on-off {padding:0;}
+	header .head>div.side ul li.on-off a span {display:block; color:#fff; opacity:.52; transition-duration:.3s !important; width:73px; height:70px; line-height:70px; text-align:center;}
+	header .head>div.side ul li.on-off a span:before {font-size:33px;}
+	header .head>div.side ul li.on-off a:hover span {opacity:.88;}
+	
+	header .head>div.side ul li.admin {padding:0;}
+	header .head>div.side ul li.admin a span {display:block; color:#fff; opacity:.52; transition-duration:.3s !important; width:73px; height:70px; line-height:70px; text-align:center;}
+	header .head>div.side ul li.admin a span:before {font-size:33px;}
+	header .head>div.side ul li.admin a:hover span {opacity:.88;}
+	
+	header .head>div.side ul li.manual {padding:0;}
+	header .head>div.side ul li.manual a span {display:block; color:#fff; opacity:.52; transition-duration:.3s !important; width:73px; height:70px; line-height:70px; text-align:center;}
+	header .head>div.side ul li.manual a span:before {font-size:33px;}
+	header .head>div.side ul li.manual a:hover span {opacity:.88; background-image:url(../../images/admin/manual_hover.png);}
+	
+	/*lnb*/
+	body {height:100vh; min-width:1440px; overflow-y:hidden;}
+	section.contents-wrap {height:calc(100vh - 70px);}
+	section.contents-wrap>div {float:left;}
+	section.contents-wrap>div.lnb-part {width:204px; border-right:1px solid #cecece; height:calc(100vh - 70px);}
+	section.contents-wrap>div.lnb-part .lnb>p {color:#808080; font-size:13px; letter-spacing:0; padding:20px 30px;}
+	section.contents-wrap>div.lnb-part .lnb>ul li a {display:block; padding:10px 20px 10px 25px; font-size:16px; font-weight:500; letter-spacing:-1px; color:#808080; border-left:4px solid transparent;}
+	section.contents-wrap>div.lnb-part .lnb>ul li.on a {font-weight:700; color:#007fe6; border-color:#007fe6;}
+	section.contents-wrap>div.lnb-part .lnb>ul li a>span {display:inline-block; vertical-align:middle;}
+	section.contents-wrap>div.lnb-part .lnb>ul li a>span[class*="icon-"] {margin-right:10px;}
+	section.contents-wrap>div.lnb-part .lnb>ul li a span:before {font-size:22px !important; font-weight:400;}
+	
+	/*contents*/
+	section.contents-wrap>div.contents {width:calc(100% - 204px); height:calc(100vh - 70px); background:#eef3f6; overflow-y:hidden;}
+	section.contents-wrap>div.contents .title {height:70px; line-height:1; border-bottom:1px solid #cecece; position:relative;}
+	section.contents-wrap>div.contents .title>* {float:left; height:70px; display:inline-block;}
+	section.contents-wrap>div.contents .title h2 {
+		color:#393b3d;
+		font-size:30px;
+		font-weight:500;
+		padding:15px 30px 0;
+		border-right:1px solid #cecece;
+		height:100%;
+		line-height:1;
+	}
+	section.contents-wrap>div.contents .title h2>* {display:inline-block; vertical-align:middle; letter-spacing:-1.5px;}
+	section.contents-wrap>div.contents .title h2 span[class*="icon-"] {margin-right:15px;}
+	section.contents-wrap>div.contents .title h2 span[class*="icon-"]:before {font-size:36px;}
+	section.contents-wrap>div.contents .inner {width:100%; height:calc(100vh - 70px - 70px); overflow-y:auto; padding:20px;}
+	
+	
+	
+	
+	
+
+/* ************************ 노트북 (~1800) ************************ */
+@media screen and (max-width:1800px){
+	
+	
+	
+	
+	
+}
+
+
+
