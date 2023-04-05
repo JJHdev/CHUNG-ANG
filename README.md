@@ -52,14 +52,11 @@
 
 ### 4.3.핵심코드 리뷰
 <details>
-<summary><b>Form 안에 submit2개 요청 처리</b></summary>
+<summary><b>스케쥴러 기능 구현</b></summary>
 <div markdown="1">
   
-##### 4.2.1 JSP에서 1개의 form태그에서 2개의 submit 버튼으로 보내기
-![2개 submit jsp](https://user-images.githubusercontent.com/116694081/230015412-643b9691-2b00-4f9e-b9a1-1354c6702f83.png)
-
-##### 4.2.1 Controller에서 1개의 form태그에서 2개의 submit 버튼 구분하기
-![2개 submit con](https://user-images.githubusercontent.com/116694081/230015245-c1e98b03-981c-4e1d-b6bc-79723c2dbd8e.png)
+##### 4.2.1 스케쥴러 기능 구현코드
+![스케쥴러](https://user-images.githubusercontent.com/116694081/230059488-2873822c-ac45-44eb-a8f1-c38f20c5f093.png)
   
 </div>
 </details>
@@ -67,17 +64,11 @@
 </br>
 
 <details>
-<summary><b>유효성 검사하기</b></summary>
+<summary><b>실시간 시간</b></summary>
 <div markdown="1">
   
-##### 4.2.2 html에서의 유효성검사
-![html에서의 유효성검사](https://user-images.githubusercontent.com/116694081/230015658-fc6d5469-b55c-45e5-8856-96b6a234842a.png)
-
-##### 4.2.2 script에서의 유효성 검사
-![script에서의 유효성 검사](https://user-images.githubusercontent.com/116694081/230015830-7010ab6b-b119-47af-9615-f36081638e7b.png)
-  
-##### 4.2.2 Java에서의 유효성 검사
-![자바에서의 유효성 검사](https://user-images.githubusercontent.com/116694081/230016153-2583b369-eedb-4e65-b298-29f1b2250e2e.png)
+##### 4.2.2 실시간 시간 JS코드
+![시간 실시간으로 나오게 하기](https://user-images.githubusercontent.com/116694081/230059564-8b7209e5-8f69-4a40-9f1c-24563a91abe7.png)
   
 </div>
 </details>
@@ -85,11 +76,11 @@
 </br>
 
 <details>
-<summary><b>Controller에서 4가지의 요청방식 처리하기</b></summary>
+<summary><b>Ajax이용한 실시간 카운드 다운, 테이블생성</b></summary>
 <div markdown="1">
   
-##### 4.2.3 Controller에서 4가지의 요청리처리
-![접근방식에 따라 처리하기 (처음, 사원조회, 삭제하기, 조회)](https://user-images.githubusercontent.com/116694081/230016198-042fbcfd-eabf-4296-a194-bc0e965c3549.png)
+##### 4.2.3 실 시간 카운드 다운, 테이블 생성 코
+![실시간 시간 count과 ajax테이블 생성](https://user-images.githubusercontent.com/116694081/230059630-9c012db6-6420-44b5-b7d2-392834ee2ea7.png)
   
 </div>
 </details>
@@ -97,11 +88,11 @@
 </br>
 
 <details>
-<summary><b>부서삭제시 ajax처리</b></summary>
+<summary><b>이미지 업로드 구현</b></summary>
 <div markdown="1">
   
-##### 4.2.4 JSP Ajax처
-![부서삭제시 ajax처리](https://user-images.githubusercontent.com/116694081/230016017-d26510e5-e6bf-459d-95eb-6920e13c938b.png)
+##### 4.2.4 이미지 업로드시 이미지파일, 데이터 드구분코드
+![이미지 업로드](https://user-images.githubusercontent.com/116694081/230059866-523cc430-cb08-4914-aa7d-6cc7c7da821f.png)
 
 </div>
 </details>
@@ -109,23 +100,11 @@
 </br>
 
 <details>
-<summary><b>삭제할 쪽지 배열로 받고 한번에 삭제하기</b></summary>
+<summary><b>경매시간 종료 후 countDown, 메세지 발송 구현 코드</b></summary>
 <div markdown="1">
   
-##### 4.2.5 Controller에서 배열요청 처리
-![삭제할 쪽지 배열로 받고 한번에 삭제하기](https://user-images.githubusercontent.com/116694081/230015949-a682e3d7-5c55-472c-be31-c52d13357eb4.png)
-  
-</div>
-</details>
-
-</br>
-
-<details>
-<summary><b>DB요청 후 여러개의 로직 수행시 트렌젝션 처리</b></summary>
-<div markdown="1">
-  
-##### 4.2.6 DB 접근 처리시 트렌젝션 처리
-![여러개의 DB 접근 처리시 트렌젝션 처리](https://user-images.githubusercontent.com/116694081/230016076-93bb0d50-2f82-47c5-b0e4-ecb14b2a39a0.png)
+##### 4.2.5 Repository에서 경매시간 종료 후 코드 구현
+![판매완료 상품 메세지 발송 번호바꾸기](https://user-images.githubusercontent.com/116694081/230059925-5d7964ae-0821-4763-bfbd-523e84644ac4.png)
   
 </div>
 </details>
