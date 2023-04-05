@@ -37,11 +37,11 @@
   
 ## 4. 핵심 기능
 - 파이썬을 이용하여 데이터를  자동적으로 DB에 입력
-- OpenLayers 이용하여 지도 기능 표현
+- OpenLayers 이용하여 지도 기능 표현(레이어 in 레이어, 레이어 set 레이어)
 - 날짜 지역에 따른 정보를 geoserver에 전달 레이어 변경
 - geoServer Sql문 이용 레이어 생성
-- ~~~~~~~~~~~~~~~~~~
-- ~~~~~~~~~~~~~~~~~~
+- Range를 이용한 OpenLayers Opcity조절
+- Mybaits 배열과 forEach문 이용 컬럼 생성
 
 ### 4.1. 구현한 JSP Page (WebContent/WEB-INf/jsp/egovframework/main)
 - report  (JS. Jquery 구현)
@@ -53,56 +53,11 @@
 
 ### 4.3.핵심코드 리뷰
 <details>
-<summary><b>Form 안에 submit2개 요청 처리</b></summary>
+<summary><b>Python을 이용한 데이터 업데이트</b></summary>
 <div markdown="1">
   
-##### 4.2.1 JSP에서 1개의 form태그에서 2개의 submit 버튼으로 보내기
-![2개 submit jsp](https://user-images.githubusercontent.com/116694081/230015412-643b9691-2b00-4f9e-b9a1-1354c6702f83.png)
-
-##### 4.2.1 Controller에서 1개의 form태그에서 2개의 submit 버튼 구분하기
-![2개 submit con](https://user-images.githubusercontent.com/116694081/230015245-c1e98b03-981c-4e1d-b6bc-79723c2dbd8e.png)
-  
-</div>
-</details>
-
-</br>
-
-<details>
-<summary><b>유효성 검사하기</b></summary>
-<div markdown="1">
-  
-##### 4.2.2 html에서의 유효성검사
-![html에서의 유효성검사](https://user-images.githubusercontent.com/116694081/230015658-fc6d5469-b55c-45e5-8856-96b6a234842a.png)
-
-##### 4.2.2 script에서의 유효성 검사
-![script에서의 유효성 검사](https://user-images.githubusercontent.com/116694081/230015830-7010ab6b-b119-47af-9615-f36081638e7b.png)
-  
-##### 4.2.2 Java에서의 유효성 검사
-![자바에서의 유효성 검사](https://user-images.githubusercontent.com/116694081/230016153-2583b369-eedb-4e65-b298-29f1b2250e2e.png)
-  
-</div>
-</details>
-
-</br>
-
-<details>
-<summary><b>Controller에서 4가지의 요청방식 처리하기</b></summary>
-<div markdown="1">
-  
-##### 4.2.3 Controller에서 4가지의 요청리처리
-![접근방식에 따라 처리하기 (처음, 사원조회, 삭제하기, 조회)](https://user-images.githubusercontent.com/116694081/230016198-042fbcfd-eabf-4296-a194-bc0e965c3549.png)
-  
-</div>
-</details>
-
-</br>
-
-<details>
-<summary><b>부서삭제시 ajax처리</b></summary>
-<div markdown="1">
-  
-##### 4.2.4 JSP Ajax처
-![부서삭제시 ajax처리](https://user-images.githubusercontent.com/116694081/230016017-d26510e5-e6bf-459d-95eb-6920e13c938b.png)
+##### 4.2.1 폴더에 있는 폴더와, 파일명을 이용하여 데이터 입력(파일에 있는 날짜로 데이터넣기)
+![Python폴더에서폴더이름숫자](https://user-images.githubusercontent.com/116694081/230078147-10c15244-7a54-4705-b6c8-390531a3a0b9.png)
 
 </div>
 </details>
@@ -110,23 +65,68 @@
 </br>
 
 <details>
-<summary><b>삭제할 쪽지 배열로 받고 한번에 삭제하기</b></summary>
+<summary><b>MyBatis forEach문이용 컬럼 136개 만들</b></summary>
 <div markdown="1">
   
-##### 4.2.5 Controller에서 배열요청 처리
+##### 4.2.2 MyBatis에 파라미터 배열로 넘기기
+![배열로파라미터 넘기고](https://user-images.githubusercontent.com/116694081/230078262-bafc0650-0ac5-45ea-976f-24782837e86b.png)
+
+##### 4.2.2 MyBatis의 forEach문 이용 컬럼 136개 만들기
+![MyBatis136개 컬럼구현(배열받기)](https://user-images.githubusercontent.com/116694081/230077902-c5fc88d0-5966-44a2-be6b-53826c8b1a2c.png)
+  
+</div>
+</details>
+
+</br>
+
+<details>
+<summary><b>DB데이터 수정하기</b></summary>
+<div markdown="1">
+  
+##### 4.2.3 Controller에서 데이터가 있을 경우와 없을 경우 데이터 구분하여 각 방식에 맞게 데이터 수정
+![데이터없을경우있을경우구분](https://user-images.githubusercontent.com/116694081/230078230-a35effe9-5d11-46c3-ba03-bec1d3905e2b.png)
+ 
+</div>
+</details>
+
+</br>
+
+<details>
+<summary><b>Ajax를 이용한 HTML데이터 넣기</b></summary>
+<div markdown="1">
+  
+##### 4.2.4 Ajax데이터 if와 each문 이용하여 모든 데이터 넣기 
+![if문과 each문을 이용 Ajax값넣기](https://user-images.githubusercontent.com/116694081/230077842-ae6d14c9-661d-4153-8668-a5aac2b53555.png)
+
+</div>
+</details>
+
+</br>
+
+
+
+
+
+
+
+
+<details>
+<summary><b>OpenLayer 코드 정리</b></summary>
+<div markdown="1">
+  
+##### 4.2.5 2중배열과 forEach문을 이용하여 OpenLayer여러개 만들기 
+![2중배열을이용한forEach문으로 지도만들기](https://user-images.githubusercontent.com/116694081/230077712-32431ca7-03b2-447c-916d-cec7bd8ef77c.png)
+
+##### 4.2.5 Range를 이용하여 OpenLayers Opacity조절
+![Range이용한Opacity조절](https://user-images.githubusercontent.com/116694081/230078195-45b31077-b014-4513-9cf6-bb44054b1171.png)
+
+##### 4.2.5 OpenLayers 만들기 (레이어 in 레이어)
 ![삭제할 쪽지 배열로 받고 한번에 삭제하기](https://user-images.githubusercontent.com/116694081/230015949-a682e3d7-5c55-472c-be31-c52d13357eb4.png)
+
+##### 4.2.5 OpenLayers 만들기 (레이어 set 레이어)
+![OpenLayers레이어에 레이어겹치기](https://user-images.githubusercontent.com/116694081/230077971-bfe6333f-ffce-4a41-917a-7a110c2ad607.png)
   
 </div>
 </details>
 
 </br>
-
-<details>
-<summary><b>DB요청 후 여러개의 로직 수행시 트렌젝션 처리</b></summary>
-<div markdown="1">
-  
-##### 4.2.6 DB 접근 처리시 트렌젝션 처리
-![여러개의 DB 접근 처리시 트렌젝션 처리](https://user-images.githubusercontent.com/116694081/230016076-93bb0d50-2f82-47c5-b0e4-ecb14b2a39a0.png)
-  
-</div>
-</details>
