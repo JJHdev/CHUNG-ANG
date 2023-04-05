@@ -16,7 +16,6 @@ public class ProductServiceImpl implements ProductService{
 	@Autowired
 	ProductRepository productRepository;
 	
-	
 	//판매 상품 등록
 	@Override
 	public int productAdd(Map productAdd) throws Exception {
@@ -57,7 +56,6 @@ public class ProductServiceImpl implements ProductService{
 		return productRepository.goodsGradeUpdate(gradeChangeMap);
 	}
 	
-	
 	//판매하기 게시글 갯수 조회 (페이징 처리)
 	@Override
 	public int productListCount() throws Exception {
@@ -88,12 +86,4 @@ public class ProductServiceImpl implements ProductService{
 		System.out.println("productAutoEnd Ser()");
 		return productRepository.productAutoEnd(goodsGrade);
 	}
-	
-	
-	//판매 상품 최고가 조회
-	/*
-	 * @Override public int checkDesiredSellPrice(Map map2) throws Exception {
-	 * return productRepository.selectDesiredSellPrice(map2); }
-	 */
-
 }

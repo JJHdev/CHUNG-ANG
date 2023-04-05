@@ -46,7 +46,6 @@ public class productSellController extends  BaseController implements WebMvcConf
 	ProductService productService;
 	@Autowired
 	ProductRepository productRepository;
-	
 	 //판매하기 글 등록 페이지
 	 @RequestMapping(value="/productAddForm", method= {RequestMethod.GET})
 		public String productSell(HttpServletRequest request, String goodsSize,String goods,Model model) {
@@ -68,7 +67,6 @@ public class productSellController extends  BaseController implements WebMvcConf
 		 return "auctionGoodsSell/productSalesAgreement";
 	 }
 	 
-	 
 	 //판매하기 글 등록
 	@RequestMapping(value="/productAdd",method= {RequestMethod.POST})
 	public ModelAndView productAdd(ModelAndView mv,
@@ -87,7 +85,6 @@ public class productSellController extends  BaseController implements WebMvcConf
 	  		map.put(name,value);  //name에 들어가는 "memberId","file1","file2","file3"
 	  		//<input type="file">이 아닌 것들에 대한 파라미터명과  값이 담긴다
 		}
-		
 				
 		//2.form요소 중에서<input type="file"> 가져오기		
 		//여기에서는 다중파일업로드이므로  n개이니 List로 처리하겠다
@@ -140,7 +137,6 @@ public class productSellController extends  BaseController implements WebMvcConf
 		return "auctionGoodsSell/productDetail";
 	}
 	
-	
 	// 상품 상태 변경
 	@PostMapping("/GoodsGradeChange")
 	public String goodsGradeChange(@RequestParam("sellNo") int sellNo,
@@ -162,19 +158,12 @@ public class productSellController extends  BaseController implements WebMvcConf
 	@GetMapping("/productBuyForm")
 	public String productBuy(Model model,String goodsSize,String goods,int sellNo, HttpServletRequest request) throws Exception {
 		
-		
-		/*
-		 * Map map = new HashMap(); map.put("itemSize",goodsSize);
-		 * map.put("goods",goods);
-		 */
-		
 		//물품 상제 정보 조회
 		Product product =productService.productBuyDetail(sellNo);
 		model.addAttribute("product",product);
 		model.addAttribute("sellNo",sellNo);
 		return "auctionGoodsSell/productBuyForm";
 	}
-	
 	
 	//구매하기 상품 등록
 	@PostMapping("/productBuy")
@@ -230,15 +219,4 @@ public class productSellController extends  BaseController implements WebMvcConf
 		      System.out.println("삭제 데이터 없음");
 		   }
 		}
-		
 }
-
-
-
-
-
-
-
-
-
-

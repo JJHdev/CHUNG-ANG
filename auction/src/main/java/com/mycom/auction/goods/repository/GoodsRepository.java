@@ -37,7 +37,6 @@ public class GoodsRepository{
 		for(int i=0; i<newGoodsMap.size();i++){
 			if(newGoodsMap.containsKey("goodsSize"+i)) {
 				newGoodsMap.put("goodsSize", newGoodsMap.get("goodsSize"+i));
-				System.out.println("insertGoodsSize에서 newGoodsMap.put"+newGoodsMap.get("goodsSize"));
 				sqlSession.insert("mapper.auctionGoods.insertGoodsSizeFile",newGoodsMap);
 			}
 		}
@@ -72,23 +71,15 @@ public class GoodsRepository{
 		ProductDTO productDTO = new ProductDTO();
 		productDTO.setGoods(goods);
 		productDTO.setGoodsSize(goodsSize);
-		
 		List<Product> goodsSell= sqlSession.selectList("mapper.auctionGoods.selectGoodsSize", productDTO);
-		
-		
 		for(Product product :goodsSell) {
-		System.out.println(product);
 		}
 		
 		return goodsSell;
 	}
 
 	public List<ProductPurchaseDTO> sellNoGoodsSearch(int sellNo) {
-		System.out.println("sellNo="+sellNo);
 		List<ProductPurchaseDTO> sellNoList= sqlSession.selectList("mapper.auctionGoods.sellNoGoodsSearch", sellNo);
-		for(ProductPurchaseDTO productPurchaseDTO :sellNoList) {
-			System.out.println(productPurchaseDTO);
-		}
 		return sellNoList;
 	}
 

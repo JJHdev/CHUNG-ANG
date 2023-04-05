@@ -63,7 +63,4 @@ public class ProductPurchaseDTO {
 				+ desiredPurPrice + ", purchaseNo=" + purchaseNo + ", goodsName=" + goodsName + ", id=" + id
 				+ ", desireQuantity=" + desireQuantity + ", messageNo=" + messageNo + "]";
 	}
-	
-	
-	
 }

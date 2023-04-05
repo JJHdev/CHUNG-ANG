@@ -13,7 +13,6 @@ public class ProductDTO {
 	private String goodsSize;
 	private String image;
 	
-	
 	@Override
 	public String toString() {
 		return "ProductDTO [goods=" + goods + ", goodsName=" + goodsName + ", color=" + color + ", goodsContent="
