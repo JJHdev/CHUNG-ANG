@@ -30,20 +30,21 @@
 </br>
   
 ## 4. 핵심 기능
-사원과 부서를 추가 삭제할 수 있으며 쪽지를 보내고 삭제할 수 있습니다.
-그리고 삭제 할 경우 체크박스에 체크하여 삭제하면 한번에 모든 사원, 쪽지를 삭제 할 수 있습니다. 
-사원 삭제, 쪽지 보기탭에서 조회, 페이징 처리가 되어 있습니다. 
+- 다중 image 업로드 기능
+- JS와 Jquery를 이용하여 각 경매 제품마다 경매종료일 까지 카운트다운 기능
+- Ajax를 이용하여 판매자가 판매등록시 판매탭에 비동기적으로 업데이트 구현
+- Ajax를 이용하여 판매물품에 대한 구매가 있을경우 구매목록리스트 클릭시 구매자 금액 순으로 구현
+- @scheduler를 이용하여 주기적으로 종료 된 경매물품 check 하여 자동 쪽지 발송
+- 발송 된 쪽지 결재 기능 구현
 
-### 4.1. 구현한 JSP Page (Webcontent - view)
-- deletemypage
-- dept
+### 4.1. 구현한 JSP Page (src/webapp/WebInf/views)
+- acutionGoods
+- module
 - emp (select_*)제외
 - message
 - modeul
-- mypage
-- updateMypage
 
-### 4.2. 구현한 Java Page (java Resources - src)
+### 4.2. 구현한 Java Page (java Resources/src/main/java/com/mycom/auction)
 - auth
 - emp (select* 제외)
 - mypage
