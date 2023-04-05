@@ -121,10 +121,10 @@
 ![Range이용한Opacity조절](https://user-images.githubusercontent.com/116694081/230078195-45b31077-b014-4513-9cf6-bb44054b1171.png)
 
 ##### 4.2.5 OpenLayers 만들기 (레이어 in 레이어)
-![삭제할 쪽지 배열로 받고 한번에 삭제하기](https://user-images.githubusercontent.com/116694081/230015949-a682e3d7-5c55-472c-be31-c52d13357eb4.png)
+![OpenLayers레이어에 레이어겹치기](https://user-images.githubusercontent.com/116694081/230077971-bfe6333f-ffce-4a41-917a-7a110c2ad607.png)
 
 ##### 4.2.5 OpenLayers 만들기 (레이어 set 레이어)
-![OpenLayers레이어에 레이어겹치기](https://user-images.githubusercontent.com/116694081/230077971-bfe6333f-ffce-4a41-917a-7a110c2ad607.png)
+![OpenLayers에서 객체로 지도 겹치기](https://user-images.githubusercontent.com/116694081/230078060-4c91e399-8a44-4b29-a7e1-4d1e9388018f.png)
   
 </div>
 </details>
