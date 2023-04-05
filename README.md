@@ -25,8 +25,7 @@
 </br>
 
 ## 3. ERD 설계
-![ERDClude](https://user-images.githubusercontent.com/116694081/229997011-844b20ed-1bff-4c19-a299-c24567a97ca0.png)
-
+![화면 캡처 2023-04-03 004102](https://user-images.githubusercontent.com/116694081/230029046-470154ec-6da6-4f07-b1bf-5f8a4e00e886.png)
 
 </br>
   
