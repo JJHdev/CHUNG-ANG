@@ -1,5 +1,4 @@
 # :pushpin: GIS 기반 리포팅 시스템 구축
-![image](https://user-images.githubusercontent.com/116694081/230061549-8ad2d994-104c-4e21-83bf-707d9391c25f.png)
 
 > 지역에 따른 데이터를 취합 후 관련 정보를 Python으로 DB 입력
 > 입력된 DB를 이용하여 Geoserver, OpenLayers를 이용하여 지도 표현
@@ -32,30 +31,25 @@
 </br>
 
 ## 3. ERD 설계
-![ERDClude](https://user-images.githubusercontent.com/116694081/229997011-844b20ed-1bff-4c19-a299-c24567a97ca0.png)
-
+![화면 캡처 2023-04-03 030845](https://user-images.githubusercontent.com/116694081/230062766-98945dd6-643c-4f55-9fd8-bb254f5b26d8.png)
 
 </br>
   
 ## 4. 핵심 기능
-사원과 부서를 추가 삭제할 수 있으며 쪽지를 보내고 삭제할 수 있습니다.
-그리고 삭제 할 경우 체크박스에 체크하여 삭제하면 한번에 모든 사원, 쪽지를 삭제 할 수 있습니다. 
-사원 삭제, 쪽지 보기탭에서 조회, 페이징 처리가 되어 있습니다. 
+- 파이썬을 이용하여 데이터를  자동적으로 DB에 입력
+- OpenLayers 이용하여 지도 기능 표현
+- 날짜 지역에 따른 정보를 geoserver에 전달 레이어 변경
+- geoServer Sql문 이용 레이어 생성
+- ~~~~~~~~~~~~~~~~~~
+- ~~~~~~~~~~~~~~~~~~
 
-### 4.1. 구현한 JSP Page (Webcontent/view)
-- deletemypage
-- dept
-- emp (select_*)제외
-- message
-- modeul
-- mypage
-- updateMypage
+### 4.1. 구현한 JSP Page (WebContent/WEB-INf/jsp/egovframework/main)
+- report  (JS. Jquery 구현)
+- repott2 (Ajax 구현)
 
-### 4.2. 구현한 Java Page (java Resources/src)
-- auth
-- emp (select* 제외)
-- mypage
-
+### 4.2. 구현한 Java Page (java Resources/src/business/)
+- biz/report
+- egov/cmmvo
 
 ### 4.3.핵심코드 리뷰
 <details>
