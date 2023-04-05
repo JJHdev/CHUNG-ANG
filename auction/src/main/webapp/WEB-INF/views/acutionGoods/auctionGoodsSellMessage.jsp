@@ -141,35 +141,27 @@
         <table>
           <tr>
             <td>
-            
-            
- 
- 
-  
-  
-  
- <c:set  var="goods_count" value="0" /> 
- <c:forEach var="message" items="${messageList}" begin="0" end="0">
-  <div class="table">
-  	<div class="cell">Message No</div>
-  	<div class="cell">Title</div>
-  	<div class="cell">content</div>
-  	<div class="cell">Send ID</div>
-  	<div class="cell">Receive ID</div>
-  	
-   <c:set  var="goods_count" value="${goods_count+1 }" />
-  	<div class="row">
-    <div class="cell">${goods_count}</div>
-    <div class="cell">${message.title}</div>
-    <div class="cell"> ${message.content}</div>
-	    <div class="cell">${message.sendId}</div>
-	    <div class="cell">${message.receiveId}</div>
-    </div>
-  </div>
-</c:forEach>
-  </tbody>
- </table>   
-              
+						 <c:set  var="goods_count" value="0" /> 
+						 <c:forEach var="message" items="${messageList}" begin="0" end="0">
+						  <div class="table">
+						  	<div class="cell">Message No</div>
+						  	<div class="cell">Title</div>
+						  	<div class="cell">content</div>
+						  	<div class="cell">Send ID</div>
+						  	<div class="cell">Receive ID</div>
+						  	
+						   <c:set  var="goods_count" value="${goods_count+1 }" />
+						  	<div class="row">
+						    <div class="cell">${goods_count}</div>
+						    <div class="cell">${message.title}</div>
+						    <div class="cell"> ${message.content}</div>
+							    <div class="cell">${message.sendId}</div>
+							    <div class="cell">${message.receiveId}</div>
+						    </div>
+						  </div>
+						</c:forEach>
+						  </tbody>
+						 </table>   
             </td>
           </tr>
         </table>

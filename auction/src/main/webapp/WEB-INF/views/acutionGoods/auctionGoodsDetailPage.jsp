@@ -199,9 +199,7 @@ th {
 
 		      table += "</tbody></table>";
 		      document.getElementById("tableContainer").innerHTML = table;
-		      
 		   // 카운트 다운 실행
-		   		
 		      let countdowns = document.getElementsByClassName("countdown");
 		      for (let i = 0; i < countdowns.length; i++) {
 		        let countdown = countdowns[i];
@@ -237,8 +235,6 @@ th {
 		    }
 		  });
 	}
-    
-    
     
     // 탭 메뉴 구현
    $(document).ready(function() {

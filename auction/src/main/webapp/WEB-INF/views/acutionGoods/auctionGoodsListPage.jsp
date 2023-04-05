@@ -131,11 +131,6 @@
           <tr>
             <td>
               
-
-<!-- mv.addObject("goodsInfo",goodsInfo);
- goodsInfo[ProductDTO [goods=test, goodsName=test, color=tes, 
- goodsContent=test, firstPrice=32, imageNo=0, releaseDate=Wed Mar 29 00:00:00 KST 2023, goodsSize=null, image=null], 
-  -->
  
 <table>
   <tr>
@@ -155,11 +150,6 @@
     </td>
   </tr>
 </table>
-
-
-
-
-
 
             </td>
           </tr>

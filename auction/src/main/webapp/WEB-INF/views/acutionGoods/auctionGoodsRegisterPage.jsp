@@ -169,107 +169,102 @@ $("form#uploadForm").submit(function(){
           <tr>
             <td>
             
-            
-            
-            
-<form id="uploadForm" name="uploadForm" method="post" enctype="multipart/form-data" action="${path}/goodsRegisterForm">
-	<table>
-		<tr>
-			<th>
-				제품명
-			</th>
-			<td>
-				<input type="text" name="goodsName" id="goodsName" placeholder="제품명 입력하세요" required="required">
-			</td>
-		</tr>
-		
-		<tr>
-			<th>
-				모델명
-			</th>
-			<td>
-				<input type="text" name="goods" id="goods" placeholder="모델명 입력하세요" required="required">
-			</td>
-		</tr>
-		
-		<tr>
-			<th>
-				제품 상세 설명
-			</th>
-			<td>
-				<textarea name="goodsContent" id="goodsContent" cols="50px" rows="8px"  ></textarea>
-			</td>
-		</tr>
-		
-		<tr>
-			<th>
-				발매가
-			</th>
-			<td>
-				<input type="number" name="firstPrice" id="firstPrice" oninput="regexPhoneNumber(this)" placeholder="출시 금액을 입력하세요" required="required">
-			</td>
-		</tr>
-		
-		<tr>
-			<th>
-				출시일
-			</th>
-			<td>
-				<input type="date" name="releaseDate" id="releaseDate" required="required">
-			</td>
-		</tr>
-		
-		<tr>
-			<th>
-				색상
-			</th>
-			<td>
-				<input type="text" name="color" id="color" placeholder="색상을 입력하세요" required="required">
-			</td>
-		</tr>
-		
-		<tr>
-		<th>사이즈</th>
-			<td>
-				<input type="button" id="btnAddSize" value="사이즈 추가"/>		
-				<input type="button" id="btnDelSize" value="사이즈 삭제"/>	
-			</td>
-		</tr>
-		
-		<tr>
-			<th>
-				사이즈1
-			</th>
-			<td>
-					<input type="text" name="goodsSize1" id="goodsSizes1" required="required"/>
-			</td>
-		</tr>
-		
-		<tr id="insertSize">
-			<th>이미지첨부</th>
-			<td>
-				<input type="button" id="btnAddFile" value="이미지추가"/>		
-				<input type="button" id="btnDelFile" value="이미지삭제"/>	
-			</td>
-		</tr>
-		<tr>
-			<th>이미지1(이미지1 썸네일용)</th>
-			<td>
-					<input type="file" name="image1" id="images1" required="required"/>
-			</td>
-		</tr>
-		
-		<tr  id="insertFile">
-			<td colspan="2">
-				<input type="submit" value="상품 등록하기">
-				<input type="reset" value="목록 초기화">
-			</td>
-		</tr>
-		
-	</table>
-	</form>              
-              
-              
+					<form id="uploadForm" name="uploadForm" method="post" enctype="multipart/form-data" action="${path}/goodsRegisterForm">
+						<table>
+							<tr>
+								<th>
+									제품명
+								</th>
+								<td>
+									<input type="text" name="goodsName" id="goodsName" placeholder="제품명 입력하세요" required="required">
+								</td>
+							</tr>
+							
+							<tr>
+								<th>
+									모델명
+								</th>
+								<td>
+									<input type="text" name="goods" id="goods" placeholder="모델명 입력하세요" required="required">
+								</td>
+							</tr>
+							
+							<tr>
+								<th>
+									제품 상세 설명
+								</th>
+								<td>
+									<textarea name="goodsContent" id="goodsContent" cols="50px" rows="8px"  ></textarea>
+								</td>
+							</tr>
+							
+							<tr>
+								<th>
+									발매가
+								</th>
+								<td>
+									<input type="number" name="firstPrice" id="firstPrice" oninput="regexPhoneNumber(this)" placeholder="출시 금액을 입력하세요" required="required">
+								</td>
+							</tr>
+							
+							<tr>
+								<th>
+									출시일
+								</th>
+								<td>
+									<input type="date" name="releaseDate" id="releaseDate" required="required">
+								</td>
+							</tr>
+							
+							<tr>
+								<th>
+									색상
+								</th>
+								<td>
+									<input type="text" name="color" id="color" placeholder="색상을 입력하세요" required="required">
+								</td>
+							</tr>
+							
+							<tr>
+							<th>사이즈</th>
+								<td>
+									<input type="button" id="btnAddSize" value="사이즈 추가"/>		
+									<input type="button" id="btnDelSize" value="사이즈 삭제"/>	
+								</td>
+							</tr>
+							
+							<tr>
+								<th>
+									사이즈1
+								</th>
+								<td>
+										<input type="text" name="goodsSize1" id="goodsSizes1" required="required"/>
+								</td>
+							</tr>
+							
+							<tr id="insertSize">
+								<th>이미지첨부</th>
+								<td>
+									<input type="button" id="btnAddFile" value="이미지추가"/>		
+									<input type="button" id="btnDelFile" value="이미지삭제"/>	
+								</td>
+							</tr>
+							<tr>
+								<th>이미지1(이미지1 썸네일용)</th>
+								<td>
+										<input type="file" name="image1" id="images1" required="required"/>
+								</td>
+							</tr>
+							
+							<tr  id="insertFile">
+								<td colspan="2">
+									<input type="submit" value="상품 등록하기">
+									<input type="reset" value="목록 초기화">
+								</td>
+							</tr>
+							
+						</table>
+					</form>              
               
             </td>
           </tr>

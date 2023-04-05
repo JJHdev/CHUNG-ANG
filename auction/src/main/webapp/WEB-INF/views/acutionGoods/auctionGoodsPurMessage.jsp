@@ -145,10 +145,6 @@
         <table>
           <tr>
             <td>
-            
-            
- 
- 
   <table>
   <tr>
     <td>
@@ -182,7 +178,6 @@
   </tr>
 </table>
 </tbody>
-              
             </td>
           </tr>
         </table>
