@@ -1,6 +1,8 @@
 package business.biz.report;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -42,6 +44,7 @@ public class ReportController {
 	@RequestMapping(value = "/report/all.do", method = RequestMethod.GET)
 	public String ctAllSelect(HttpServletRequest request, HttpSession session, HttpServletResponse response, Model model,
 							 @RequestParam(required = false, defaultValue = "2022-07-01") String date, @RequestParam(required = false, defaultValue = "0") int wa_code,	 @RequestParam(required = false, defaultValue = "0") int how) throws Exception{
+		long millis = System.currentTimeMillis();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date dateSelect = dateFormat.parse(date);
 		int cnt = this.ReportService.isDataSelect(dateSelect);
@@ -69,6 +72,8 @@ public class ReportController {
 		model.addAttribute("ImpactInfoNw", impactInfoNw);
 		model.addAttribute("cmNw", cmNw);
 		model.addAttribute("selectCtName", selectCtName);
+		long millis2 = System.currentTimeMillis();
+		System.out.println("JS,Jquery 구현시간"+(millis2-millis));
 	    return "main/report";
 	}
 	
@@ -150,13 +155,9 @@ public class ReportController {
 		return cmNwList;
 	}
 	
-	
-	
-	
 	@RequestMapping(value = "/report2/all.do", method = RequestMethod.GET)
 	public String selectGetReport2(HttpServletRequest request, HttpSession session, HttpServletResponse response, Model model,@RequestParam("date") String date,@RequestParam("cityName") String cityName) throws Exception{
 		int ctCode = report2SelectCtCode(cityName);
-		
 		model.addAttribute("selectLaLoCode", selectLaLoCode(cityName));
 		model.addAttribute("date", date);
 		model.addAttribute("cityName", cityName);
@@ -167,31 +168,29 @@ public class ReportController {
 	public @ResponseBody Object selectPostReport2(HttpServletRequest request, HttpSession session, HttpServletResponse response, Model model, 
 			@RequestParam String date,
 			@RequestParam String cityName) throws Exception{
+				long millis = System.currentTimeMillis();
 			
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			Date dateSelect = dateFormat.parse(date);
-			Map selectLaLoCode = new HashMap();
-			
-			
-			selectLaLoCode = selectLaLoCode(cityName);
-			int ctCode = report2SelectCtCode(cityName);
-			
-			Map map = new HashMap();
-			
-			
-			map.put("impactLevelCt", impactLevelCt(dateSelect,ctCode));
-			map.put("impactInfoCt", impactInfoCt(dateSelect,ctCode));
-			map.put("counterMeasuresCt", counterMeasuresCt(dateSelect,ctCode));
-			map.put("selectLaLoCode", selectLaLoCode(cityName));
-			map.put("cityNameAjax",cityName);
-			map.put("dateAjax",date);
-			map.put("selectLaLoCode",selectLaLoCode);
-			
-			System.out.println("22번"+map);
-			
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				Date dateSelect = dateFormat.parse(date);
+				Map selectLaLoCode = new HashMap();
+				
+				selectLaLoCode = selectLaLoCode(cityName);
+				int ctCode = report2SelectCtCode(cityName);
+				
+				Map map = new HashMap();
+				
+				map.put("impactLevelCt", impactLevelCt(dateSelect,ctCode));
+				map.put("impactInfoCt", impactInfoCt(dateSelect,ctCode));
+				map.put("counterMeasuresCt", counterMeasuresCt(dateSelect,ctCode));
+				map.put("selectLaLoCode", selectLaLoCode(cityName));
+				map.put("cityNameAjax",cityName);
+				map.put("dateAjax",date);
+				map.put("ctCodeAjax",ctCode);
+				map.put("selectLaLoCode",selectLaLoCode);
+				long millis2 = System.currentTimeMillis();
+				System.out.println("Ajax코드구현 시간"+(millis2-millis));
 	    return map;
 	}
-	
 	
 	@RequestMapping(value = "/report2/wideA.do", method = RequestMethod.GET)
 	public @ResponseBody Object selectPostReport2(HttpServletRequest request, HttpSession session, HttpServletResponse response, Model model, 
@@ -199,13 +198,11 @@ public class ReportController {
 			
 			List<String> selectCtName = new ArrayList<>();
 			selectCtName = this.ReportService.selectCityName(wa_code);
-			
 			Map map = new HashMap();
 			map.put("selectCtName",selectCtName);
 	    return map;
 	}
-	
-	
+
 	private int report2SelectCtCode(String cityName) throws Exception{
 		int ctCode = this.ReportService.selectCtCode(cityName);
 		return  ctCode;
@@ -234,5 +231,4 @@ public class ReportController {
 			selectLaLoCode = this.ReportService.selectLaLoCode(cityName);
 		return selectLaLoCode;
 	}
-	
 }

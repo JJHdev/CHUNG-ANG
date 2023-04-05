@@ -51,7 +51,6 @@ public class ReportServiceImpl extends EgovAbstractServiceImpl implements Report
 	
 	 @Override public int isDataSelect(Date dateSelect) { 
 		 return	this.ReportDAO.isDataSelect(dateSelect); }
-	 
 	
 	@Override
 	public ImpactLevelCityCountVO cityImpactLevleCount(Date selectDate) {
@@ -95,7 +94,6 @@ public class ReportServiceImpl extends EgovAbstractServiceImpl implements Report
 
 	@Override
 	public Map selectLaLoCode(String cityName) {
-		System.out.println("7번");
 		return this.ReportDAO.selectLaLoCode(cityName);
 	}
 	

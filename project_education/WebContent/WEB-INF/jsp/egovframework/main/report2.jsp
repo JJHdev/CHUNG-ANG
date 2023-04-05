@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<script src="https://kit.fontawesome.com/af287cf24e.js" crossorigin="anonymous"></script>
 	<link type="text/css" href="${pageContext.request.contextPath}/css/ebi/jquery-ui.css" rel="stylesheet">
 	<link type="text/css" href="${pageContext.request.contextPath}/css/map.css" rel="stylesheet">
 	<link type="text/css" href="${pageContext.request.contextPath}/css/report/report.css" rel="stylesheet">
@@ -60,41 +61,18 @@
 		});
 		
 		
-		$(document).ready(function() {
-			  // Add a click event listener to the toggle switch label
-			  $('.toggleSwitch').on('click', function() {
-			    // Get the checkbox input and its state
-			    var checkbox = $('#' + $(this).attr('for'));
-			    var isChecked = checkbox.prop('checked');
-
-			    // Toggle the toggle switch position and color
-			    var toggleButton = $(this).find('.toggleButton');
-			    if (!isChecked) {
-			      toggleButton.animate({ 'margin-left': '40px' }, 200);
-			      toggleButton.css('background-color', '#FFFFFF');
-			      $(this).css('background-color', '#0497E9');
-			    } else {
-			      toggleButton.animate({ 'margin-left': '0px' }, 200);
-			      toggleButton.css('background-color', '#0497E9');
-			      $(this).css('background-color', '#FFFFFF');
-			    }
-			  });
-			});
 	</script>
 	<style>
-	.rangeWrap {
-  	position: relative;
- 	 margin: 20px 0;
-  	text-align: center;
-	}
-	.rangeWrap .rangeSlider {
-  	width: 92%;
-  	margin: 0 auto;
-	}
-	
-	
-/*=====================*/
-	/* 체크박스 스타일 초기화 */
+.rangeWrap {
+  position: relative;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.rangeWrap input[type="range"] {
+  width: 92%;
+  margin: 0 auto;
+}
 	
 	.toggleSwitch {
   width: 60px;
@@ -122,11 +100,24 @@
 .toggleSwitch,
 .toggleButton {
   transition: all 0.2s ease-in;
+  
 }
 
 .toggle-container {
   display: flex;
   align-items: center;
+	justify-content: space-between;
+}
+.left-container {
+  display: flex;
+  align-items: center;
+}
+
+.right-container {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 8px;
 }
 	</style>
 </head>
@@ -151,6 +142,7 @@
 					<input type="hidden" name="latitude" id="hidden-latitude" value="${selectLaLoCode.latitude}" />
 					<input type="hidden" name="longitudeAjax" id="hidden-longitudeAjax" />
 					<input type="hidden" name="latitudeAjax" id="hidden-latitudeAjax" />
+					<input type="hidden" name="ctCodeAjax" id="hidden-ctCodeAjax" />
 					
 						<div class="input-wrap r75">
 							<select id ="sido" >
@@ -273,37 +265,45 @@
 										</div>
 									</div>
 									
-									
-<div class="display">
-  <div class="titWrap">표출레이어 선택</div>
-  <div class="listWrap">
-  
-		 
-		 
-		 
- <div class="toggle-container">
-  <span class="icon-Clipboard"></span>
-  <span>시군구 경계 레이어</span>
-  <label for="toggle" class="toggleSwitch">
-    <span class="toggleButton"></span>
-  </label>
-  <input type="checkbox" id="toggle" hidden>
-  <span></span>
-</div>
-	 
-
-
-   
-   
-    <div class="rangeWrap">
-      <input type="range" min="0" max="100" value="50" class="rangeSlider">
-    </div>
-  </div>
-</div>
-									
-									
-									
-									
+		<div class="display">
+			  <div class="toggle-range-wrap">
+				  <div class="toggle-container">
+				    <div class="left-container">
+				      <span class="icon-Clipboard"></span>
+				      <span>시군구 경계 레이어</span>
+				    </div>
+				    <div class="right-container">
+				      <label for="toggle1" class="toggleSwitch" id="toggleSwitch1">
+				        <span class="toggleButton"></span>
+				      </label>
+				      <input type="checkbox" id="toggle1" class="toggleCheckbox" name="toggleGroup" hidden>
+				      <i class="fa-solid fa-code-compare fa-lg" style="color: #0a60f5;"></i>
+				    </div>
+				  </div>
+				  <div class="rangeWrap">
+				    <input id="opacity-input1" type="range" min="0" max="1" step="0.01" value="1" />
+				  </div>
+				</div>
+				
+				<div class="toggle-range-wrap">
+				  <div class="toggle-container">
+				    <div class="left-container">
+				      <span class="icon-Clipboard"></span>
+				      <span>종합 경계 레이어</span>
+				    </div>
+				    <div class="right-container">
+				      <label for="toggle2" class="toggleSwitch" id="toggleSwitch2">
+				        <span class="toggleButton"></span>
+				      </label>
+				      <input type="checkbox" id="toggle2" class="toggleCheckbox" name="toggleGroup" hidden>
+				      <i class="fa-solid fa-code-compare fa-lg" style="color: #0a60f5;"></i>
+				    </div>
+				  </div>
+				  <div class="rangeWrap">
+				    <input id="opacity-input2" type="range" min="0" max="1" step="0.01" value="1" />
+				  </div>
+				</div>
+			</div>
 									<div class="category-Zone inBox">
 										<div class="inWrap">
 											<div class="titleWrap"><span class="icon-Clipboard"></span><span>세부 부문별 단계 현황</span></div>
@@ -1235,7 +1235,6 @@
 	const totalLayout = 'http://210.113.102.169:8090/geoserver/EDU4/wms?service=WMS&version=1.1.0&request=GetMap&layers=EDU4%3Asigun_total&bbox=746368.7309%2C1458754.2808%2C1394213.4428%2C2068442.8942&width=768&height=722&srs=EPSG%3A5179&styles=&format=application/openlayers&viewparams=';
 	const selectLayout = 'http://210.113.102.169:8090/geoserver/EDU4/wms?service=WMS&version=1.1.0&request=GetMap&layers=EDU4%3Asigun_select&bbox=746368.7309%2C1458754.2808%2C1394213.4428%2C2068442.8942&width=768&height=722&srs=EPSG%3A5179&styles=&format=application/openlayers&viewparams=';
 	
-	
 		function selectCity() {
 			  var selectedCity = $('#sigungu').val();
 			  var dateAjax = document.getElementById("hidden-dateAjax").value;
@@ -1249,7 +1248,6 @@
 		}
 	
 	 $(function() {
-				
 			 const regionSelect = document.getElementById('sido');
 			 regionSelect.addEventListener('change', function() {
 			 const wa_code = regionSelect.value;
@@ -1358,7 +1356,9 @@
 		    		    alert("조회된 데이터가 없습니다.");
 		    		    return;
 	    		  }
-						
+		    	 var hiddenctCodeAjax = document.getElementById('hidden-ctCodeAjax');
+		    	 		hiddenctCodeAjax.value = data.ctCodeAjax;
+		    	 
 		    	 var hiddenDateAjax = document.getElementById('hidden-dateAjax');
 		    	 var hiddenCityNameAjax = document.getElementById('hidden-cityNameAjax');
 		    	   hiddenDateAjax.value = data.dateAjax; // 원하는 날짜 값을 할당
@@ -1369,22 +1369,21 @@
 				    	 hiddenlongitudeAjax.value = data.selectLaLoCode.longitude
 				    	 hiddenlatitudeAjax.value = data.selectLaLoCode.latitude
 			    	   
-	 		    
-	    	   initMakeMap(totalLayout,data.selectLaLoCode.longitude,data.selectLaLoCode.latitude,date)
-		    	   
-		    	   function influenceData(impactNum, articleNum, stageNum, fieldName) {
-		    		    var $dotZone = $('.impact:eq(' + impactNum + ') article:eq(' + articleNum + ') .dot-zone');
-		    		    $dotZone.find('li').remove(); // remove all existing li elements
-		    		    var addedPhrases = []; // empty array to keep track of added phrases
-		    		    $.each(data.impactInfoCt, function(index, item) {
-		    		        if (item.ct_impact_stage === stageNum && item.ct_field === fieldName) {
-		    		            if ($.inArray(item.ct_influence_phrase, addedPhrases) === -1) {
-		    		                addedPhrases.push(item.ct_influence_phrase); // add phrase to array
-		    		                $dotZone.append('<li>' + item.ct_influence_phrase + '</li>');
-		    		            }
-		    		        }
-		    		    });
-		    		}
+	    	   initMakeMap(totalLayout,data.selectLaLoCode.longitude,data.selectLaLoCode.latitude,date,data.ctCodeAjax)
+				    	 
+	    	   function influenceData(impactNum, articleNum, stageNum, fieldName) {
+	    		    var $dotZone = $('.impact:eq(' + impactNum + ') article:eq(' + articleNum + ') .dot-zone');
+	    		    $dotZone.find('li').remove(); // remove all existing li elements
+	    		    var addedPhrases = []; // empty array to keep track of added phrases
+	    		    $.each(data.impactInfoCt, function(index, item) {
+	    		        if (item.ct_impact_stage === stageNum && item.ct_field === fieldName) {
+	    		            if ($.inArray(item.ct_influence_phrase, addedPhrases) === -1) {
+	    		                addedPhrases.push(item.ct_influence_phrase); // add phrase to array
+	    		                $dotZone.append('<li>' + item.ct_influence_phrase + '</li>');
+	    		            }
+	    		        }
+	    		    });
+	    		}
 		    	
 		    	function counterMeasuresData(division,responseNum){
 		    	    $('.response:eq('+responseNum+')').each(function() {
@@ -1474,28 +1473,54 @@
 		});
    }
 	
-	let map = []; // 전역 변수로 map 배열을 정의합니다.
-	function initMapLayout(targetM,uriM,layoutM,centerM1,centerM2,zoomM,category,mapDate){
-	  const newMap = new ol.Map({
-	    target: targetM,
-	    layers: [
-	      new ol.layer.Tile({source: new ol.source.OSM()}),
-	      new ol.layer.Tile({source: new ol.source.TileWMS({
-	        url: uriM + category + mapDate,
+	let mapArr = []; // 전역 변수로 map 배열을 정의합니다.
+	function initMapLayout(targetM, uriM, layoutM, centerM1, centerM2, zoomM, category, mapDate, ctCode){
+	  const osmLayer = new ol.layer.Tile({source: new ol.source.OSM()});
+	  
+	  const wmsLayer = new ol.layer.Tile({
+		  source: new ol.source.TileWMS({
+		    url: uriM + category + mapDate,
+		    params: {
+		      LAYERS: layoutM,
+		      TILED: true,
+		    },   
+		    serverType: 'geoserver',
+		  }),
+		});
+		
+	  const wmsSigunLayer = new ol.layer.Tile({
+		  source: new ol.source.TileWMS({
+	        url: "http://210.113.102.169:8090/geoserver/EDU4/wms?service=WMS&version=1.1.0&request=GetMap&layers=EDU4%3AsigunColor&bbox=935032.575%2C1936663.6925%2C972064.6652%2C1966985.0578&width=768&height=628&srs=EPSG%3A5179&styles=&format=application/openlayers&viewparams=" + category + mapDate +";sg_cd:"+ctCode,
 	        params: {
-	          LAYERS: layoutM,
+	          LAYERS: 'EDU4:sigunColor',
 	          TILED: true,
 	        },   
 	        serverType: 'geoserver',
 	      }),
-	    }),
-	  ],	
-	  view: new ol.View({
-	    center: ol.proj.fromLonLat([centerM1,centerM2]), 
-	    zoom: zoomM,
-	  }),
-	});
-	  map.push(newMap); // map 배열에 새로운 지도 객체를 추가합니다.
+	    }); 
+	  
+	  const totalBlur = new ol.layer.Tile({
+		  source: new ol.source.TileWMS({
+	        url: "http://210.113.102.169:8090/geoserver/EDU4/wms?service=WMS&version=1.1.0&request=GetMap&layers=EDU4%3Atotal_blur&bbox=746368.7309%2C1458754.2808%2C1394213.4428%2C2068442.8942&width=768&height=722&srs=EPSG%3A5179&styles=&format=application/openlayers",
+	        params: {
+	          LAYERS: 'EDU4:total_blur',
+	          TILED: true,
+	        },   
+	        serverType: 'geoserver',
+	      }),
+	    }); 
+	  
+	  const newSigunLayer = new ol.layer.Tile({
+		  source: new ol.source.TileWMS({
+	        url: "http://210.113.102.169:8090/geoserver/EDU4/wms?service=WMS&version=1.1.0&request=GetMap&layers=EDU4%3AsigunOffset&bbox=935032.575%2C1936663.6925%2C972064.6652%2C1966985.0578&width=768&height=628&srs=EPSG%3A5179&styles=&format=application/openlayers&viewparams=sg_cd:"+ctCode,
+	        params: {
+	          LAYERS: 'EDU4:sigunOffset',
+	          TILED: true,
+	        },
+	        serverType: 'geoserver',
+	      }),
+	    }); 
+	  
 	  const newLayerM = new ol.layer.Tile({
 	    source: new ol.source.TileWMS({
 	      url: 'http://210.113.102.169:8090/geoserver/EDU4/wms?service=WMS&version=1.1.0&request=GetMap&layers=EDU4%3Asigun_layer&bbox=746368.7309%2C1458754.2808%2C1394213.4428%2C2068442.8942&width=768&height=722&srs=EPSG%3A5179&styles=&format=application/openlayers', // WMS 서비스 URL
@@ -1505,9 +1530,128 @@
 	      serverType: 'geoserver',
 	    }),
 	  });
-	  newMap.addLayer(newLayerM);
+	  
+	  const newMap = new ol.Map({
+		    layers: [osmLayer, wmsLayer, totalBlur,wmsSigunLayer, newLayerM, newSigunLayer],
+		    target: targetM,
+			  view: new ol.View({
+		    center: ol.proj.fromLonLat([centerM1, centerM2]), 
+		    zoom: zoomM,
+		  }),
+		});
+	  mapArr.push(newMap); // map 배열에 새로운 지도 객체를 추가합니다.
 	}
-		
+	
+	$(document).ready(function() {
+		  // Add a click event listener to the toggle switch label
+		  $('#toggleSwitch1').on('click', function() {
+		    // Get the checkbox input and its state
+		    var checkbox = $('#' + $(this).attr('for'));
+		    var isChecked = checkbox.prop('checked');
+
+		    // Toggle the toggle switch position and color
+		    var toggleButton = $(this).find('.toggleButton');
+		    if (!isChecked) {
+		      toggleButton.animate({ 'margin-left': '40px' }, 200);
+		      toggleButton.css('background-color', '#FFFFFF');
+		      $(this).css('background-color', '#0497E9');
+		      
+		      const opacityInput1 = document.getElementById('opacity-input1');
+		  	  const opacity = parseFloat(opacityInput1.value);
+		  	  mapArr.forEach((map) => {
+		  	    const layers = map.getLayers();
+		  	    const wmsLayer = layers.getArray().find(layer => layer instanceof ol.layer.Tile && layer.getSource() instanceof ol.source.TileWMS);
+		  	    if (wmsLayer) {
+		  	      wmsLayer.setOpacity(1);
+		  	    }
+		  	  });
+		  	  
+		    } else {
+		      toggleButton.animate({ 'margin-left': '0px' }, 200);
+		      toggleButton.css('background-color', '#0497E9');
+		      $(this).css('background-color', '#FFFFFF');
+		      
+		      const opacityInput1 = document.getElementById('opacity-input1');
+		  	  const opacity = parseFloat(opacityInput1.value);
+		  	  mapArr.forEach((map) => {
+		  	    const layers = map.getLayers();
+		  	    const wmsLayer = layers.getArray().find(layer => layer instanceof ol.layer.Tile && layer.getSource() instanceof ol.source.TileWMS);
+		  	    if (wmsLayer) {
+		  	      wmsLayer.setOpacity(0);
+		  	    }
+		  	  });
+		      
+		    }
+		  });
+		});
+	
+	
+	$(document).ready(function() {
+		  // Add a click event listener to the toggle switch label
+		  $('#toggleSwitch2').on('click', function() {
+		    // Get the checkbox input and its state
+		    var checkbox = $('#' + $(this).attr('for'));
+		    var isChecked = checkbox.prop('checked');
+		    // Toggle the toggle switch position and color
+		    var toggleButton = $(this).find('.toggleButton');
+		    if (!isChecked) {
+		      toggleButton.animate({ 'margin-left': '40px' }, 200);
+		      toggleButton.css('background-color', '#FFFFFF');
+		      $(this).css('background-color', '#0497E9');
+		      const opacityInput2 = document.getElementById('opacity-input2');
+		  	  const opacity = parseFloat(opacityInput2.value);
+		  	  mapArr.forEach((map) => {
+		  	    const layers = map.getLayers();
+		  	    const newLayerM = layers.getArray().find(layer => layer instanceof ol.layer.Tile && layer.getSource() instanceof ol.source.TileWMS && layer.getSource().getParams().LAYERS === 'EDU4:sigun_layer');
+		  	    if (newLayerM) {
+		  	      newLayerM.setOpacity(1);
+		  	    }
+		  	  });
+		    } else {
+		      toggleButton.animate({ 'margin-left': '0px' }, 200);
+		      toggleButton.css('background-color', '#0497E9');
+		      $(this).css('background-color', '#FFFFFF');
+		      const opacityInput2 = document.getElementById('opacity-input2');
+		  	  const opacity = parseFloat(opacityInput2.value);
+		  	  mapArr.forEach((map) => {
+		  	    const layers = map.getLayers();
+		  	    const newLayerM = layers.getArray().find(layer => layer instanceof ol.layer.Tile && layer.getSource() instanceof ol.source.TileWMS && layer.getSource().getParams().LAYERS === 'EDU4:sigun_layer');
+		  	    if (newLayerM) {
+		  	      newLayerM.setOpacity(0);
+		  	    }
+		  	  });
+		    }
+		  });
+		});
+	
+	const opacityInput1 = document.getElementById('opacity-input1');
+	function updateSigun() {
+	  const opacity = parseFloat(opacityInput1.value);
+	  mapArr.forEach((map) => {
+	    const layers = map.getLayers();
+	    const wmsLayer = layers.getArray().find(layer => layer instanceof ol.layer.Tile && layer.getSource() instanceof ol.source.TileWMS);
+	    if (wmsLayer) {
+	      wmsLayer.setOpacity(opacity);
+	    }
+	  });
+	}
+	opacityInput1.addEventListener('input', updateSigun);
+	updateSigun(); 
+	
+	const opacityInput2 = document.getElementById('opacity-input2');
+	function updateTotal() {
+	  const opacity = parseFloat(opacityInput2.value);
+	  mapArr.forEach((map) => {
+	    const layers = map.getLayers();
+	    const newLayerM = layers.getArray().find(layer => layer instanceof ol.layer.Tile && layer.getSource() instanceof ol.source.TileWMS && layer.getSource().getParams().LAYERS === 'EDU4:sigun_layer');
+	    if (newLayerM) {
+	      newLayerM.setOpacity(opacity);
+	    }
+	  });
+	}
+
+	opacityInput2.addEventListener('input', updateTotal);
+	updateTotal();
 	
 	window.addEventListener('load', function() {
 	 	selectReport2(cityName,date); 
@@ -1515,25 +1659,26 @@
 	}); 
 	
 	function initMakeMap(totalLayout,longitude,latitude,mapDate){
+		var ctCode = document.getElementById("hidden-ctCodeAjax").value;	
+		alert(ctCode);
 		deleteMap()
-		initMapLayout('total_map',totalLayout,'EDU4:sigun_total',longitude,latitude,10,'date:',mapDate);
-		initMapLayout('health_map',selectLayout,'EDU4:sigun_select',longitude,latitude,10,'category:ct_health;date:',mapDate);
-		initMapLayout('industry_map',selectLayout,'EDU4:sigun_select',longitude,latitude,10,'category:ct_industry_no;date:',mapDate);
-		initMapLayout('agriculture_map',selectLayout,'EDU4:sigun_select',longitude,latitude,10,'category:ct_agriculture;date:',mapDate);
-		initMapLayout('waterfarm_map',selectLayout,'EDU4:sigun_select',longitude,latitude,10,'category:ct_aquaculture;date:',mapDate);
-		initMapLayout('livestock_map',selectLayout,'EDU4:sigun_select',longitude,latitude,10,'category:ct_livestock_industry;date:',mapDate);
-		initMapLayout('trans_map',selectLayout,'EDU4:sigun_select',longitude,latitude,10,'category:ct_traffic;date:',mapDate);
-		initMapLayout('elect_map',selectLayout,'EDU4:sigun_select',longitude,latitude,10,'category:ct_electric;date:',mapDate);
+		initMapLayout('total_map',totalLayout,'EDU4:sigun_total',longitude,latitude,10,'date:',mapDate,ctCode);
+		initMapLayout('health_map',selectLayout,'EDU4:sigun_select',longitude,latitude,10,'category:ct_health;date:',mapDate,ctCode);
+		initMapLayout('industry_map',selectLayout,'EDU4:sigun_select',longitude,latitude,10,'category:ct_industry_no;date:',mapDate,ctCode);
+		initMapLayout('agriculture_map',selectLayout,'EDU4:sigun_select',longitude,latitude,10,'category:ct_agriculture;date:',mapDate,ctCode);
+		initMapLayout('waterfarm_map',selectLayout,'EDU4:sigun_select',longitude,latitude,10,'category:ct_aquaculture;date:',mapDate,ctCode);
+		initMapLayout('livestock_map',selectLayout,'EDU4:sigun_select',longitude,latitude,10,'category:ct_livestock_industry;date:',mapDate,ctCode);
+		initMapLayout('trans_map',selectLayout,'EDU4:sigun_select',longitude,latitude,10,'category:ct_traffic;date:',mapDate,ctCode);
+		initMapLayout('elect_map',selectLayout,'EDU4:sigun_select',longitude,latitude,10,'category:ct_electric;date:',mapDate,ctCode);
 	}
 	
 	function deleteMap(){
-		  map.forEach(function(m) {
+		mapArr.forEach(function(m) {
 			    m.setTarget(null);
 			  });
 			  // 이전에 생성된 지도 인스턴스 삭제
-			  map = [];
+			  mapArr = [];
 	}
-	
 	
 	</script>	
 	

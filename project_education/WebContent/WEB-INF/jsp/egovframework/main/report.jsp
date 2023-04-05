@@ -68,8 +68,6 @@
 			    location.href = "${pageContext.request.contextPath}/report/all.do?date=" + newDateString;
 			  });
 		  
-		  
-		  
 	  const tds = document.querySelectorAll('#levelTable td');
 	  tds.forEach(td => {
 	    const num = parseInt(td.innerText);
@@ -1702,8 +1700,6 @@
 		elect.dataset.mapType = 'ct_electric';
 		elect.addEventListener('click', elect_mapFn);
 		
-		
-		
 		function total_mapFn(event) {
  			const divId = 'total_map'; // 특정 div의 id
  			const layers = map[0].getLayers();
@@ -1751,7 +1747,6 @@
 
 		    	MapSide.addLayer(newLayer);
 		}
-		
 		
 		function health_mapFn(event) {
  			const divId = 'health_map'; // 특정 div의 id

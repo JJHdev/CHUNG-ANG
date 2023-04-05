@@ -78,7 +78,6 @@ public class ReportDAO extends EgovComAbstractDAO {
 		cmNw = selectList("report.counterMeasures", map);
 		return cmNw;
 	}
-
 	
 	 public int isDataSelect(Date dateSelect) { 
 	 return  selectOne("report.isDataSelect", dateSelect); 
@@ -108,8 +107,6 @@ public class ReportDAO extends EgovComAbstractDAO {
 		return ctCode;
 	}
 	
-	
-	
 	public Map impactLevelCt(Date date,int ctCode) {
 		Map mapPara = new HashMap();
 		Map mapResu = new HashMap();
@@ -128,7 +125,6 @@ public class ReportDAO extends EgovComAbstractDAO {
 		mapPara.put("date", date);
 		mapPara.put("ctCode", ctCode);
 		
-		
 		mapResu = selectList("report.impactInfoCt",mapPara);
 		return mapResu;
 	}
@@ -136,7 +132,6 @@ public class ReportDAO extends EgovComAbstractDAO {
 	public List<Map> counterMeasuresCt(Date date,int ctCode) {
 		Map mapPara = new HashMap();
 		List<Map> mapResu = new ArrayList();
-		
 		
 		mapPara.put("date", date);
 		mapPara.put("ctCode", ctCode);
