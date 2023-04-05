@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.review">
+ 
+    <resultMap type="reviewDTO" id="reviewResult">
+        <result property="reviewNo" column="reviewno"/>
+        <result property="id" column="id"/>
+        <!-- <result property="sellNo" column="sellno"/> -->
+        <result property="reviewTitle" column="reviewtitle"/>
+        <result property="reviewContent" column="reviewcontent"/>
+        <result property="reviewDate" column="reviewdate"/>
+        <!-- <result property="filePath" column="filepath"/> -->
+        <result property="starRating" column="starrating"/>
+        <!-- <result property="recommendCnt" column="recommendcnt"/> -->
+        <result property="viewCnt" column="viewcnt"/>
+        <result property="review_fileName" column="fileName"/>
+    </resultMap>
+ 	
+ 	<resultMap type="reviewFileVO" id="fileResult">
+	   <result property="fileNo" column="fileNo" />
+	   <result property="reviewNo" column="reviewno" />
+	   <result property="fileName" column="fileName" />
+	   <result property="id"   column="id" />
+	   <result property="creDate"  column="creDate" />
+	</resultMap>
+ 
+    <!-- select 요소: select 쿼리문 실행 -->
+    <!-- 전체 리뷰 개수 조회 -->
+    <select id="totalCnt" resultType="int">
+        <![CDATA[
+        select count(*) from review
+        ]]>
+    </select>
+   
+    <!-- 특정 리뷰의 글번호 조회 -->
+    <select id="getReviewNo" resultType="int" parameterType="int">
+        <![CDATA[
+        select reviewno from review where reviewno=#{no}
+        ]]>
+    </select>
+ 
+    <!-- 특정 리뷰의 제목 조회 -->
+    <select id="titleByReviewNo" resultType="string" parameterType="int">
+        <![CDATA[
+        select reviewtitle from review where reviewno=#{no}
+        ]]>
+    </select>
+   
+    <!-- 특정 리뷰의 상세 조회 -->
+    <select id="reviewDetail" resultMap="reviewResult" parameterType="int">
+        <![CDATA[
+        select * from review where reviewno=#{no}
+        ]]>
+    </select>
+      
+      
+      
+      
+      
+      
+      <!-- 파일 포함 상세조회  -->
+    <select id="selectReviewDetail_join" resultMap="reviewResult" parameterType="int">
+        <![CDATA[
+        select r.*, f.filename
+from review r, reviewFile f
+where r.reviewno=f.reviewno
+and r.reviewno=#{no}
+        ]]>
+    </select>
+    
+    
+    
+          <!-- 파일 포함 상세조회  -->
+    <select id="selectReviewDetail" resultMap="reviewResult" parameterType="int">
+        <![CDATA[
+        select *
+from review
+where reviewno=#{no}
+        ]]>
+    </select>
+
+<!-- 이미지목록 -->
+  <select id="selectReviewDetailImage" resultMap="fileResult" parameterType="int">
+     <![CDATA[
+   	select *
+	from reviewFile
+	where reviewno=#{no}
+     ]]>
+    </select>
+
+
+
+
+
+
+
+    <!-- 전체 리뷰 목록 조회 -->
+    <select id="reviewAllList" resultMap="reviewResult">
+        <![CDATA[
+        select * from review
+        ]]>
+    </select>
+    
+    <!-- 조회수 증가 -->
+	<update id="increaseViewCnt" parameterType="int">
+    	<![CDATA[
+    	update review set viewcnt=viewcnt+1 where reviewno=#{no}
+    	]]>
+	</update>
+   
+    <!-- 리뷰 글등록 #{sellNo} 나중 글전용-->
+    <insert id="insertReview" parameterType="reviewDTO">
+        <![CDATA[
+        insert into review(reviewno,id,reviewtitle,reviewcontent,reviewdate,starrating,viewcnt)
+        values(seq_review.nextval,#{id},#{reviewTitle},#{reviewContent},sysdate,#{starRating},0)
+        ]]>
+    </insert> 
+   
+	<!-- 리뷰 글등록 -->
+	<insert id="insertNewReview" parameterType="java.util.Map">
+		<selectKey resultType="int" keyProperty="reviewNo" order="BEFORE">
+	    	select seq_review.nextval from dual
+	    </selectKey>
+	<![CDATA[
+	 insert into review(reviewno,id,reviewtitle,reviewcontent,reviewdate,starrating,viewcnt)
+        values(#{reviewNo},#{id},#{reviewTitle},#{reviewContent},sysdate,#{starRating},0)
+    ]]>
+	</insert>
+	
+	<!-- 첨부파일 등록  -->
+	<insert id="insertReviewImageFile" 
+	        parameterType="reviewFileVO">
+	   <selectKey resultType="int" keyProperty="fileNo" order="BEFORE"> 
+ 		select SEQ_REVIEWFILE.nextval from dual
+	   </selectKey>
+	<![CDATA[
+	 insert into reviewFile(fileNo,reviewno,fileName,id,creDate)
+	 values(#{fileNo},#{reviewNo},#{fileName},#{id},sysdate)	
+	]]>
+	</insert>
+	
+    <!-- 특정 리뷰 글수정 -->
+    <update id="updateReview" parameterType="reviewDTO">
+        <![CDATA[
+        update review
+        set reviewtitle=#{reviewTitle},reviewcontent=#{reviewContent},starrating=#{starRating}
+        where reviewno=#{reviewNo}
+        ]]>
+    </update>
+    
+   
+   
+    <!-- 리뷰 삭제 -->
+    <delete id="deleteReview" parameterType="int">
+        <![CDATA[
+        delete from review where reviewno=#{no}
+        ]]>
+    </delete>
+    
+    
+</mapper>

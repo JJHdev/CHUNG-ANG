@@ -1,0 +1,154 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0px solid silver;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1rem;
+  color: #999;
+  letter-spacing: 0.1px;
+}
+
+h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.4rem;
+  line-height: 2.4rem;
+  text-transform: uppercase;
+}
+
+a:link { color: #666; text-decoration: none;}
+a:visited { color: #666;}
+a:hover { color: #000000;}
+a:active { color: #000000;}
+
+button {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  padding: 10px 30px;
+  border: 1px solid #ccc;
+  background: white;
+  transition: 0.3s;
+}
+button:hover {
+  color: #000000;
+  color: white;
+  cursor: pointer;
+}
+
+table th ,table th, table td {
+    text-align: center;
+}
+.search_wrap{
+  width: 50%;
+  float:right;
+}
+  
+.search_wrap button:hover {
+  background: #000000;
+}  
+
+ /* page
+ 
+ 
+.pageInfo{
+      list-style : none;
+      display: inline-block;
+   	  margin: 50px 0 0 100px;
+  }
+  .pageInfo li{
+    float: left;
+    font-size: 20px;
+    margin-left: 18px;
+    padding: 7px;
+    font-weight: 500; 
+  }
+ 
+ 
+  */  
+.pageInfo ul{
+    list-style : none;
+	text-align: center;
+  }
+.pageInfo li{
+    font-size: 20px;
+	display:inline;
+	margin-left:5px;
+  }
+   
+/* start */
+
+.join-c input::placeholder {
+  color: #bbb;
+}
+.join-c> div {
+  width: 1200px;
+  margin: 0 auto;
+}
+.join-c td {
+  color: #222;
+}
+
+.join-t {
+  width: 1250px;
+  border-collapse: collapse;
+  border-top: 3px solid #bbb;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.join-c table tr td {
+  padding: 1rem 0;
+}
+.join-c table tr th {
+  padding: 1rem 0;
+}
+.join-c table tr td {
+  border-bottom: 1px solid #ccc;
+}
+
+.join-c button {
+  width: 45px;
+  height: 35px;
+  padding: 0 5px;
+  font-size: 0.8rem;
+}
+
+.join-c button:hover {
+  background: #000000;
+}
+
+.join-t tr> :nth-child(1) {
+  width: 80px;
+}
+
+.join-t tr> :nth-child(2) {
+  width: 60px;
+}
+
+.join-t tr> :nth-child(3) {
+  width: 110px;
+  text-align: center;
+}
+
+.join-t tr> :nth-child(4) {
+  width: 160px;
+}
+
+.join-t tr> :nth-child(5) {
+  width: 60px;
+}
+.join-t tr> :nth-child(6) {
+  width: 100px;
+}
+.
+
+

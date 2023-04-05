@@ -1,0 +1,223 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0px solid silver;
+}
+
+img {
+  width: 100px;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1rem;
+  color: #999;
+  letter-spacing: 0.1px;
+}
+
+h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.4rem;
+  line-height: 2.4rem;
+  text-transform: uppercase;
+}
+
+a:link { color: #666; text-decoration: none;}
+a:visited { color: #666;}
+a:hover { color: #000000;}
+a:active { color: #000000;}
+
+button {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  padding: 10px 30px;
+  border: 1px solid #ccc;
+  background: white;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: crimson;
+  color: white;
+  cursor: pointer;
+}
+
+/* user */
+
+.user-c input::placeholder {
+  color: #bbb;
+}
+
+.user-c> div {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.user-c td {
+  color: #222;
+}
+
+.user-t {
+  width: 1000px;
+  border-collapse: collapse;
+  border-top: 3px solid #bbb;
+}
+
+.user-c table tr td {
+  padding: 1rem 0;
+}
+
+.user-c table tr td {
+  border-bottom: 1px solid #ccc;
+}
+
+.user-c input {
+  height: 35px;
+  padding: 0 10px;
+  border: 1px solid silver;
+}
+
+.user-c select {
+  width: 120px;
+  height: 35px;
+  padding: 0 2px;
+  border: 1px solid silver;
+}
+
+.user-c button {
+  width: 150px;
+  height: 35px;
+  padding: 0 5px;
+  font-size: 0.8rem;
+}
+
+.user-c button:hover {
+  background: #000000;
+}
+
+.user-t tr> :nth-child(1), .join-t2 tr>:nth-child(1), .join-t3 tr>:nth-child(1) {
+  width: 150px;
+}
+
+.user-t tr> :nth-child(2) {
+  width: 140px;
+}
+
+.user-t tr> :nth-child(3) {
+  width: 30px;
+  text-align: center;
+}
+
+.user-t tr> :nth-child(4) {
+  width: 160px;
+}
+
+.user-t tr> :nth-child(5) {
+  width: 140px;
+}
+
+.user-t input {
+  width: 140px;
+  height: 35px;
+  padding: 0 10px;
+  border: 1px solid silver;
+}
+
+.user-btn {
+	text-align: center;
+}
+.adress-box input {
+  width: 400px;
+}
+
+/* admin */
+
+.admin-c input::placeholder {
+  color: #bbb;
+}
+
+.admin-c> div {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.admin-c td {
+  color: #222;
+}
+
+.admin-t {
+  width: 500px;
+  border-collapse: collapse;
+  border-top: 3px solid #bbb;
+}
+
+.admin-c table tr td {
+  padding: 1rem 0;
+}
+
+.admin-c table tr td {
+  border-bottom: 1px solid #ccc;
+}
+
+.admin-c input {
+  height: 35px;
+  padding: 0 10px;
+  border: 1px solid silver;
+}
+
+.admin-c select {
+  width: 120px;
+  height: 35px;
+  padding: 0 2px;
+  border: 1px solid silver;
+}
+
+.admin-c button {
+  width: 150px;
+  height: 35px;
+  padding: 0 5px;
+  font-size: 0.8rem;
+}
+
+.admin-c button:hover {
+  background: #000000;
+}
+
+.admin-t tr> :nth-child(1), .join-t2 tr>:nth-child(1), .join-t3 tr>:nth-child(1) {
+  width: 150px;
+}
+
+.admin-t tr> :nth-child(2) {
+  width: 140px;
+}
+
+.admin-t tr> :nth-child(3) {
+  width: 30px;
+  text-align: center;
+}
+
+.admin-t tr> :nth-child(4) {
+  width: 160px;
+}
+
+.admin-t tr> :nth-child(5) {
+  width: 140px;
+}
+
+.admin-t input {
+  width: 140px;
+  height: 35px;
+  padding: 0 10px;
+  border: 1px solid silver;
+}
+
+.admin-btn {
+	text-align: center;
+}

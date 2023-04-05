@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="mapper.product">
+ 
+ 	<!-- <resultMap type="product" id="productResult">
+		<result property="필드명"  column="컬럼명"/>	
+		<result property="sellNo"  column="sellNo"/>	
+		<result property="itemSize"  column="itemSize"/>	
+		<result property="desiredSellPrice"  column="desiredSellPrice"/>	
+		<result property="quantity"  column="quantity"/>	
+		<result property="goodsGrade"  column="goodsGrade"/>	
+		<result property="id"  column="id"/>	
+		<result property="startTime"  column="startTime"/>	
+		<result property="endTime"  column="endTime"/>	
+		<result property="goods"  column="goods"/>	
+		<result property="vailDate"  column="vailDate"/>	
+	</resultMap> -->
+ 
+ 
+ 	<!-- 판매하기 목록 조회 -->
+	 <select id="productAllList" resultType="product">
+		 	<![CDATA[
+		 		SELECT * FROM productSell order by sellNo DESC
+		 	]]>
+	 </select>
+ 
+ 
+ 	<!-- 판매하기 이미지DB 상세 조회 -->
+	 <select id="imageFileList" resultType="imageFileVO">
+			 <![CDATA[
+					 SELECT sellImageNo,sellImages
+					FROM PRODUCTSELLIMAGE
+					WHERE sellNo=#{sellNo}
+			 ]]>
+	 </select>
+	 
+	 <!-- 판매하기 게시물 상세 조회 -->
+	<select id="productDetail" parameterType="Integer" resultType="product">
+		<![CDATA[
+			SELECT *
+			FROM PRODUCTSELL
+			WHERE SELLNO=#{sellNo}
+		]]>
+	</select> 
+ 
+ <!-- 상품 등급 변경 -->
+ 	<update id="goodsGradeUpdate" parameterType="java.util.Map">
+ 		<![CDATA[
+ 			UPDATE PRODUCTSELL 
+			SET GOODSGRADE = #{grade},startTime=TRUNC(SYSDATE, 'HH') ,endTime=TRUNC(SYSDATE, 'HH')+#{vailDate}
+			WHERE SELLNO = #{sellNo}
+ 		]]>
+ 	</update>
+ 
+ <!-- 판매 전 게시물 갯수 조회 -->
+ 	<select id="productListConut" resultType="java.lang.Integer">
+ 		<![CDATA[
+ 		SELECT COUNT(*)
+		FROM PRODUCTSELL
+		WHERE goodsGrade=1
+ 		]]>
+ 	</select>
+ 
+ 
+ <!-- 판매 내역 최고가 조회 -->
+ <select id="selectBuyPrice" parameterType="Integer" resultType="Integer">
+ 	<![CDATA[
+ 		SELECT MAX(desiredPurPrice)
+		FROM productPurchase
+		WHERE SELLNO=#{sellNo}
+	 ]]>
+ </select>
+ 
+ <!-- 구매 내역 최고가 조회 -->
+ 	<select id="selectSellNoPrice" parameterType="java.util.Map" resultType="java.lang.Integer">
+ 		<![CDATA[
+ 		SELECT MAX(desiredSellPrice) 
+		FROM productsell
+		WHERE ITEMSIZE=#{goodsSize} AND SELLNO =#{sellNo}
+ 		]]>
+ 	</select>
+ 
+ 
+ 
+  <!-- 판매 완료 상태 물품 목록 조회 -->
+ <select id="productAutoSelectList" parameterType="Integer" resultType="com.mycom.auction.goodsSell.domain.Product">
+		<![CDATA[
+		 	select *
+			from PRODUCTSELL
+			where endTime < TRUNC(SYSDATE, 'HH') AND goodsGrade = 2
+			]]>
+ </select>
+ 
+ 
+ 
+ 
+ <select id="selectMaxDesiredPurPricePurchaseNo" parameterType="com.mycom.auction.goodsSell.domain.Product" resultType="com.mycom.auction.goods.domain.ProductPurchaseDTO">
+  SELECT MAX(purchaseNo) AS purchaseNo, #{sellNo} AS sellNo , #{id} AS id, #{itemSize} AS goodsSize, #{goods} AS goodsName
+  FROM productPurchase
+  WHERE sellNo = #{sellNo}
+</select>
+
+ <select id="selectPurOne" parameterType="com.mycom.auction.goods.domain.ProductPurchaseDTO" resultType="com.mycom.auction.goods.domain.ProductPurchaseDTO">
+  SELECT *
+  FROM productPurchase
+  WHERE purchaseNo = #{purchaseNo}
+</select>
+
+
+ 
+<!-- 물품등록:productSell테이블에 등록 -->
+<insert id="insertEndPurMessage" parameterType="com.mycom.auction.goods.domain.ProductPurchaseDTO">
+    <selectKey resultType="java.lang.Integer" keyProperty="messageNo" order="BEFORE">
+        SELECT seq_productFinally_messageNo.nextval FROM dual
+    </selectKey>
+    <![CDATA[
+        insert into productFinally(messageNo,title,content,sendTime,sendId,receiveId,purchaseNo)
+        values (#{messageNo},'거래채결','거래가 체결 되었으니 버튼을 클릭하여 결재 하시거나 기업 은행(561-051976-01017 장정현)으로 입금해주세요.',SYSDATE,'admin',#{id},#{purchaseNo})
+    ]]>
+</insert>
+
+
+<!-- 물품등록:productSell테이블에 등록 -->
+<insert id="insertEndSellMessage" parameterType="com.mycom.auction.goods.domain.ProductPurchaseDTO">
+    <selectKey resultType="java.lang.Integer" keyProperty="messageNo" order="BEFORE">
+        SELECT seq_productFinally_messageNo.nextval FROM dual
+    </selectKey>
+    <![CDATA[
+        insert into productFinally(messageNo,title,content,sendTime,sendId,receiveId,sellNo)
+        values (#{messageNo},'거래채결','거래가 체결 되어 서울특별시 마포구 신촌로 176 중앙정보 처리학원 6층으로 물품을 보내주세요.',SYSDATE,'admin',#{id},#{sellNo})
+    ]]>
+</insert>
+
+
+
+ 
+ <!-- 판매 기간 만료된 게시글 자동 삭제 -->
+ 	<update id="productAutoDelete">
+ 		<![CDATA[
+	 		UPDATE PRODUCTSELL 
+			SET GOODSGRADE = 3
+			WHERE endTime < TRUNC(SYSDATE, 'HH') AND goodsGrade = 2
+		]]>
+ 	</update>
+ 
+ 
+ 
+ 	<!-- 페이징 처리 -->
+ 	<select id="getListWithPaging" resultType="product">
+	 	<![CDATA[
+	 	SELECT 
+			sellNo,itemSize,desiredSellPrice,quantity,goodsGrade,id,startTime,endTime,goods,vailDate
+		FROM 
+			(
+			SELECT 
+				rownum rn,sellNo,itemSize,desiredSellPrice,quantity,goodsGrade,id,startTime,endTime,goods,vailDate
+			FROM 
+				PRODUCTSELL
+			WHERE ROWNUM <= #{pageNum} * #{amount}
+			)
+		WHERE rn > (#{pageNum}-1) * #{amount} AND goodsGrade LIKE #{goodsGrade}
+		ORDER BY sellNo DESC
+	 	]]>
+ 	</select>
+ 
+ 	<!-- 상품 구매 정보 등록 -->
+ 		<insert id="productBuyInsert" parameterType="java.util.Map">
+	 		<![CDATA[
+		 		insert into productPurchase (sellNo,goodsSize,desiredPurPrice,purchaseNo,goodsName,id,desireQuantity)
+				values (#{sellNo},#{goodsSize},#{desiredPurPrice},seq_productPurchase.nextval,#{goodsName},#{id},#{desireQuantity})
+		 	]]>
+ 		</insert>
+ 
+ 
+ 
+ <!-- 구매 상품 정보 조회 -->
+ 	<select id="productBuyDetail" parameterType="java.util.Map" resultType="product">
+	 	<![CDATA[
+	 		SELECT *
+			FROM productsell
+			WHERE sellNo=#{sellNo}
+	 	]]>
+ 	</select>
+ 
+	
+	<!-- 물품등록:productSell테이블에 등록 -->
+	<insert id="insertProductAdd" parameterType="java.util.Map">
+		<selectKey resultType="java.lang.String" keyProperty="sellNo" order="BEFORE">
+	    	SELECT seq_product.nextval FROM dual
+	    </selectKey>
+	<![CDATA[
+	 INSERT INTO productSell (sellNo,itemSize,desiredSellPrice,quantity,goodsGrade,id,startTime,endTime,goods,vailDate)
+	 VALUES (#{sellNo},#{itemSize},#{desiredSellPrice},#{quantity},#{goodsGrade},#{id},TRUNC(SYSDATE, 'HH'),TRUNC(SYSDATE, 'HH'),#{goods},#{vailDate})	
+	]]>
+	</insert>
+
+	
+	<!-- 첨부파일:article_image테이블에 등록  -->
+	<insert id="insertProductImageFile" 
+	        parameterType="com.mycom.auction.goodsSell.domain.ImageFileVO">
+	   <selectKey resultType="java.lang.Integer" keyProperty="sellImageNo" order="BEFORE"> 
+ 				SELECT seq_productsellimage.nextval FROM dual
+	   </selectKey>
+				<![CDATA[
+				 insert into productsellimage (sellImageNo,sellNo,sellImages)
+				 values (#{sellImageNo},#{sellNo},#{sellImages})	
+				]]>
+	</insert>
+</mapper>    
+
+      
+
+
+
+
+
+
+
+
+
+
+

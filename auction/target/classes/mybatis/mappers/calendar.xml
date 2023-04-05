@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+	<mapper namespace="mapper.calendar">
+	
+	<!-- <result property="필드명"  column="컬럼명"/>	 -->
+	<resultMap type="calendar"  
+	           id="calendarResult">
+		<!-- <result property="필드명"  column="컬럼명"/>	 -->
+		<result property="calenNo"  column="calenno"/>	
+		<result property="calenTitle"  column="calentitle"/>	
+		<result property="calenStart"  column="calenstart"/>	
+		<result property="calenEnd"  column="calenend"/>	
+	</resultMap>
+	
+	<select id="calenList" resultMap="calendarResult">
+		<![CDATA[
+		select *
+		from calendar
+		]]>
+	</select>
+	<!-- 전체 목록조회 -->
+	<select id="selectAllList" resultMap="calendarResult">
+		<![CDATA[
+		select * from calendar
+		order by calenno desc
+		]]>
+	</select>
+		
+		
+	<!-- 특정글 조회 -->
+	<select id="selectCalenNoList" resultMap="calendarResult">
+		<![CDATA[
+		select * 
+		from calendar
+		where calenno=#{calenNO}
+		]]>
+	</select>	
+	<!-- 특정글 수정 -->
+	<update id="updateCalendar" parameterType="com.mycom.auction.calendar.domain.Calendar">
+		<![CDATA[
+		update calendar 
+		set calentitle=#{calenTitle},calenstart=#{calenStart} ,calenend=#{calenEnd}
+		where calenno=#{calenNo}
+		]]>
+	</update>
+	
+	<!-- 삭제 완료 -->
+	<delete id="deleteCalendar" 
+	        parameterType="java.lang.Integer">
+		<![CDATA[
+		delete from calendar
+		where calenno=#{calenNO}
+		]]>
+	</delete>
+	
+	
+	<!--   -->
+	<!-- 글등록 -->
+	<insert id="insertCalendar" parameterType="com.mycom.auction.calendar.domain.Calendar">
+	<selectKey resultType="java.lang.Integer" keyProperty="calenNo" order="BEFORE">
+	    	select SEQ_CAL.NEXTVAL from dual
+	    </selectKey>
+	<![CDATA[
+	 insert into calendar(calenno,calentitle,calenstart,calenend)
+	 values(#{calenNo},#{calenTitle},#{calenStart},#{calenEnd})	
+	]]>
+	</insert>
+	
+	<!--   -->
+	<!-- 글등록:article테이블에 등록 -->
+	<insert id="insertnewCalendar2" parameterType="java.util.Map">
+		<selectKey resultType="java.lang.Integer" keyProperty="calenno" order="BEFORE">
+	    	select SEQ_CAL.NEXTVAL from dual
+	    </selectKey>
+	<![CDATA[
+	 insert into calendar(calenno,calentitle,calenstart,calenend)
+	 values(#{calenno},#{title},#{start},#{end})	
+	]]>
+	</insert>
+</mapper>
+  <!-- resultMap선언 -->
+	<!-- modelConfig.xml에서
+	     GoodsVO클래스를  별칭(alias)으로 goodsResult이라고 설정
+	  	<typeAlias type="com.ourcom.goods.domain.GoodsVO" alias="goodVO"/>
+
+	    ImageFileVO클래스를   별칭(alias)으로 goodsResult이라고 설정	                                     
+	    <typeAlias type="com.ourcom.goods.domain.ImageFileVO" alias="imageFileVO"/>-->	                                     
+	<!-- <resultMap type="calendarVO"  
+	           id="calendarResult">
+		<result property="필드명"  column="컬럼명"/>	
+		<result property="1No"  column="calendarno"/>	
+		<result property="title"  column="title"/>	
+		<result property="content"  column="content"/>	
+		<result property="writeDate"  column="writedate"/>	
+		<result property="memberId"  column="memberid"/>	
+	</resultMap> -->
+ 
+ 
+	<!-- select요소 :select쿼리문실행 
+	     id속성 : unique해야한다. 각 요소를 구분하기 위한 용도 -->
+	<!-- 전체 게시물수 조회 -->
+	

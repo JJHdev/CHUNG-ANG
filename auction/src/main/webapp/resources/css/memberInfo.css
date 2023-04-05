@@ -1,0 +1,135 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0px solid silver;
+}
+
+img {
+  width: 100px;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1rem;
+  color: #999;
+  letter-spacing: 0.1px;
+}
+
+h2 {
+  font-size: 2.4rem;
+  line-height: 2.4rem;
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif;
+}
+
+a:link { color: #666; text-decoration: none;}
+a:visited { color: #666;}
+a:hover { color: #000000;}
+a:active { color: #000000;}
+
+button {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  padding: 10px 30px;
+  border: 1px solid #ccc;
+  background: white;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: crimson;
+  color: white;
+  cursor: pointer;
+}
+
+/* start */
+
+.info-c input::placeholder {
+  color: #bbb;
+}
+
+.info-c> div {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.info-c td {
+  color: #222;
+}
+
+.info-t {
+  width: 500px;
+  border-collapse: collapse;
+  border-top: 3px solid #bbb;
+}
+
+.info-c table tr td {
+  padding: 1rem 0;
+}
+
+.info-c table tr td {
+  border-bottom: 1px solid #ccc;
+}
+
+.info-c input {
+  height: 35px;
+  padding: 0 10px;
+  border: 1px solid silver;
+}
+
+.info-c select {
+  width: 120px;
+  height: 35px;
+  padding: 0 2px;
+  border: 1px solid silver;
+}
+
+.info-c button {
+  width: 150px;
+  height: 35px;
+  padding: 0 5px;
+  font-size: 0.8rem;
+}
+
+.info-c button:hover {
+  background: #000000;
+}
+
+.info-t tr> :nth-child(1), .join-t2 tr>:nth-child(1), .join-t3 tr>:nth-child(1) {
+  width: 150px;
+}
+
+.info-t tr> :nth-child(2) {
+  width: 140px;
+}
+
+.info-t tr> :nth-child(3) {
+  width: 30px;
+  text-align: center;
+}
+
+.info-t tr> :nth-child(4) {
+  width: 160px;
+}
+
+.info-t tr> :nth-child(5) {
+  width: 140px;
+}
+
+.info-t input {
+  width: 140px;
+  height: 35px;
+  padding: 0 10px;
+  border: 1px solid silver;
+}
+
+.info-btn {
+	text-align: center;
+}

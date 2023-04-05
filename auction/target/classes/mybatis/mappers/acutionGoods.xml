@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="mapper.auctionGoods">
+ 
+ 
+ <!-- 	<resultMap type="productDTO" id="productDTOResult">
+	   <result property="goods" column="goods" />
+	   <result property="goodsName" column="goodsName" />
+	   <result property="color" column="color" />
+	   <result property="goodsContent"   column="goodsContent" />
+	   <result property="firstPrice" column="firstPrice" />
+	   <result property="imageNo"  column="imageNo" />
+	   <result property="releaseDate"  column="releaseDate" />
+	   <result property="goodsSize"  column="goodsSize" />
+	   <result property="image"  column="image" />
+	</resultMap>
+	
+	<resultMap type="product" id="productResult">
+		<result property="sellNo"  column="sellNo"/>	
+		<result property="itemSize"  column="itemSize"/>	
+		<result property="desiredSellPrice"  column="desiredSellPrice"/>	
+		<result property="quantity"  column="quantity"/>	
+		<result property="goodsGrade"  column="goodsGrade"/>	
+		<result property="id"  column="id"/>	
+		<result property="startTime"  column="startTime"/>	
+		<result property="endTime"  column="endTime"/>	
+		<result property="goods"  column="goods"/>	
+		<result property="vailDate"  column="vailDate"/>	
+	</resultMap> -->
+	
+	
+ 
+	<insert id="insertNewGoods" parameterType="java.util.Map">
+	<![CDATA[
+		insert into product(goods,goodsName,firstPrice,releaseDate,color,goodsContent)
+		values(#{goods},#{goodsName},#{firstPrice},#{releaseDate},#{color},#{goodsContent})
+	]]>
+	</insert>
+
+
+	<insert id="insertGoodsImageFile"  parameterType="com.mycom.auction.goods.domain.ProductDTO">
+	   <selectKey resultType="int" keyProperty="imageNo" order="BEFORE"> 
+ 		select SEQ_GOODS_IMAGE.nextval from dual
+	   </selectKey>
+	<![CDATA[
+			insert into productimage(goods,image,imageNo)
+			values(#{goods},#{image},#{imageNo})
+	]]>
+	</insert>
+	
+	
+	<insert id="insertGoodsSizeFile"  parameterType="java.util.Map">
+	<![CDATA[
+			insert into productSize(goods,goodssize)
+			values(#{goods},#{goodsSize})
+	]]>
+	</insert>
+	
+	
+	<select id="selectGoodsAllInfo" parameterType="java.lang.String" resultType="com.mycom.auction.goods.domain.ProductDTO">
+	 <![CDATA[			
+		select goods,goodsName,firstPrice,releaseDate,color,goodsContent
+		from product
+		order by releaseDate desc
+	 ]]>	
+	</select>
+	
+	
+	 <select id="selectImageInfo"  parameterType="java.lang.String" resultType="com.mycom.auction.goods.domain.ProductDTO">
+	  <![CDATA[		
+		SELECT goods, image, imageNo
+		FROM productimage
+		WHERE goods = #{goods} AND imageNo = (
+		  SELECT MIN(imageNo) FROM productimage WHERE goods = #{goods})
+		order by imageNo asc
+	  ]]>
+	</select>
+	
+		
+	<select id="selectGoodsInfo" parameterType="java.lang.String" resultType="com.mycom.auction.goods.domain.ProductDTO">
+	 <![CDATA[			
+		select goods,goodsName,firstPrice,releaseDate,color,goodsContent
+		from product
+		where goods=#{goods}
+	 ]]>	
+	</select>
+	
+	
+	<select id="selectImageAllInfo" parameterType="java.lang.String" resultType="com.mycom.auction.goods.domain.ProductDTO">
+	 <![CDATA[			
+		SELECT goods, image, imageNo
+		FROM productimage
+		where goods=#{goods}
+		order by imageNo asc
+	 ]]>	
+	</select>
+	
+		<select id="selectSizeAllInfo" parameterType="java.lang.String" resultType="com.mycom.auction.goods.domain.ProductDTO">
+	 <![CDATA[			
+		SELECT goods,goodssize
+		FROM productsize
+		where goods=#{goods}
+	 ]]>	
+	</select>
+	
+	 <select id="selectGoodsSize" parameterType="com.mycom.auction.goods.domain.ProductDTO" resultType="com.mycom.auction.goodsSell.domain.Product">
+	 <![CDATA[			
+		select sellNo,itemSize,desiredSellPrice,quantity,goodsGrade,id,startTime,endTime,goods,vailDate
+		from productSell
+		where goods =#{goods} and itemSize=#{goodsSize} and goodsGrade = 2
+	 ]]>	
+	</select>
+	
+	 <select id="sellNoGoodsSearch" parameterType="int" resultType="com.mycom.auction.goods.domain.ProductPurchaseDTO">
+	 <![CDATA[			
+		select sellNo,goodsSize,desiredPurPrice,purchaseNo,goodsName,id,desireQuantity
+		from productPurchase
+		where sellNo =#{sellNo}
+		order by desiredPurPrice desc
+	 ]]>	
+	</select>
+	
+	<select id="selectMessageList" parameterType="String" resultType="com.mycom.auction.goods.domain.ProductFinally">
+	 <![CDATA[			
+		select messageNo,title,content,sendTime,sendId,receiveId,purchaseNo,sellNo
+		from productFinally
+		where receiveId=#{id}
+	 ]]>	
+	</select>
+	
+	
+	<select id="selectPurList" parameterType="com.mycom.auction.goods.domain.ProductFinally" resultType="com.mycom.auction.goods.domain.ProductPurchaseDTO">
+	 <![CDATA[			
+		select sellNo,goodsSize,desiredPurPrice,purchaseNo,goodsName,id,desireQuantity
+		from productPurchase
+		where purchaseNo=#{purchaseNo}
+	 ]]>	
+	</select>
+	
+	<select id="selectSellList" parameterType="com.mycom.auction.goods.domain.ProductFinally" resultType="com.mycom.auction.goods.domain.ProductPurchaseDTO">
+	 <![CDATA[			
+		select sellNo,goodsSize,desiredPurPrice,purchaseNo,goodsName,id,desireQuantity
+		from productPurchase
+		where sellNo =#{sellNo} and 
+	 ]]>	
+	</select>
+	
+	
+</mapper>    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
