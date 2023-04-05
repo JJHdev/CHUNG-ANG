@@ -42,7 +42,6 @@ public class ProductServiceImpl implements ProductService{
 	public List<ImageFileVO> productImageList(int num) throws Exception {
 		return productRepository.productImageSelect(num);
 	}
-
 	//판매 상품 상세조회
 	@Override
 	public Product productDetail(int num) throws Exception {
