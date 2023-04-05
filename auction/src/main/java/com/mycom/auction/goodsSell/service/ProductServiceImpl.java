@@ -48,7 +48,6 @@ public class ProductServiceImpl implements ProductService{
 	public Product productDetail(int num) throws Exception {
 		return productRepository.productSelectOne(num);
 	}
-
 	//판매 상품 등급 변경
 	@Override
 	public int goodsGradeChange(Map gradeChangeMap) throws Exception {
