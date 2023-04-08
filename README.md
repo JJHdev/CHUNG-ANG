@@ -101,8 +101,6 @@
 </div>
 </details>
 
-</br>
-
 <details>
 <summary><b>Ajax를 이용한 HTML데이터 넣기</b></summary>
 <div markdown="1">
