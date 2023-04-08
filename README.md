@@ -62,8 +62,6 @@
 </div>
 </details>
 
-</br>
-
 <details>
 <summary><b>Geoserver업로드 라이브러리 만들기</b></summary>
 <div markdown="1">
@@ -93,8 +91,6 @@
 </div>
 </details>
 
-</br>
-
 <details>
 <summary><b>DB데이터 수정하기</b></summary>
 <div markdown="1">
@@ -116,8 +112,6 @@
 
 </div>
 </details>
-
-</br>
 
 <details>
 <summary><b>OpenLayer 코드 정리</b></summary>
