@@ -103,13 +103,6 @@
 
 </br>
 
-
-
-
-
-
-
-
 <details>
 <summary><b>OpenLayer 코드 정리</b></summary>
 <div markdown="1">
@@ -130,3 +123,20 @@
 </details>
 
 </br>
+
+<details>
+<summary><b>Geoserver업로드 라이브러리 만들기</b></summary>
+<div markdown="1">
+  
+##### 4.2.6 Python을 이용하여 shp파일 생성시 자동으로 Jar파일 실행
+![파이썬 shp파일 업로드 체크](https://user-images.githubusercontent.com/116694081/230743107-bf0533c8-3cb4-4536-9384-01c529127e59.png)
+
+##### 4.2.6 Geoserver업로드 구현 코드
+![Jar파일 내용](https://user-images.githubusercontent.com/116694081/230743085-5d36177c-d3a8-4997-92c4-317614aa179d.png)
+
+##### 4.2.6 Runnable Jar 구현라이브러리
+![Jar파일](https://user-images.githubusercontent.com/116694081/230743095-7be0fdf4-53dc-412a-9d34-fdea0d9ece21.png)
+  
+</div>
+</details>
+
