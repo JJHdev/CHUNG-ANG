@@ -65,13 +65,29 @@
 </br>
 
 <details>
+<summary><b>Geoserver업로드 라이브러리 만들기</b></summary>
+<div markdown="1">
+  
+##### 4.2.2 Python을 이용하여 shp파일 생성시 자동으로 Jar파일 실행
+![파이썬 shp파일 업로드 체크](https://user-images.githubusercontent.com/116694081/230743107-bf0533c8-3cb4-4536-9384-01c529127e59.png)
+
+##### 4.2.2 Geoserver업로드 구현 코드
+![Jar파일 내용](https://user-images.githubusercontent.com/116694081/230743085-5d36177c-d3a8-4997-92c4-317614aa179d.png)
+
+##### 4.2.2 Runnable Jar 구현라이브러리
+![Jar파일](https://user-images.githubusercontent.com/116694081/230743095-7be0fdf4-53dc-412a-9d34-fdea0d9ece21.png)
+  
+</div>
+</details>
+
+<details>
 <summary><b>MyBatis forEach문이용 컬럼 136개 만들</b></summary>
 <div markdown="1">
   
-##### 4.2.2 MyBatis에 파라미터 배열로 넘기기
+##### 4.2.3 MyBatis에 파라미터 배열로 넘기기
 ![배열로파라미터 넘기고](https://user-images.githubusercontent.com/116694081/230078262-bafc0650-0ac5-45ea-976f-24782837e86b.png)
 
-##### 4.2.2 MyBatis의 forEach문 이용 컬럼 136개 만들기
+##### 4.2.3 MyBatis의 forEach문 이용 컬럼 136개 만들기
 ![MyBatis136개 컬럼구현(배열받기)](https://user-images.githubusercontent.com/116694081/230077902-c5fc88d0-5966-44a2-be6b-53826c8b1a2c.png)
   
 </div>
@@ -83,7 +99,7 @@
 <summary><b>DB데이터 수정하기</b></summary>
 <div markdown="1">
   
-##### 4.2.3 Controller에서 데이터가 있을 경우와 없을 경우 데이터 구분하여 각 방식에 맞게 데이터 수정
+##### 4.2.4 Controller에서 데이터가 있을 경우와 없을 경우 데이터 구분하여 각 방식에 맞게 데이터 수정
 ![데이터없을경우있을경우구분](https://user-images.githubusercontent.com/116694081/230078230-a35effe9-5d11-46c3-ba03-bec1d3905e2b.png)
  
 </div>
@@ -95,7 +111,7 @@
 <summary><b>Ajax를 이용한 HTML데이터 넣기</b></summary>
 <div markdown="1">
   
-##### 4.2.4 Ajax데이터 if와 each문 이용하여 모든 데이터 넣기 
+##### 4.2.5 Ajax데이터 if와 each문 이용하여 모든 데이터 넣기 
 ![if문과 each문을 이용 Ajax값넣기](https://user-images.githubusercontent.com/116694081/230077842-ae6d14c9-661d-4153-8668-a5aac2b53555.png)
 
 </div>
@@ -107,35 +123,17 @@
 <summary><b>OpenLayer 코드 정리</b></summary>
 <div markdown="1">
   
-##### 4.2.5 2중배열과 forEach문을 이용하여 OpenLayer여러개 만들기 
+##### 4.2.6 2중배열과 forEach문을 이용하여 OpenLayer여러개 만들기 
 ![2중배열을이용한forEach문으로 지도만들기](https://user-images.githubusercontent.com/116694081/230077712-32431ca7-03b2-447c-916d-cec7bd8ef77c.png)
 
-##### 4.2.5 Range를 이용하여 OpenLayers Opacity조절
+##### 4.2.6 Range를 이용하여 OpenLayers Opacity조절
 ![Range이용한Opacity조절](https://user-images.githubusercontent.com/116694081/230078195-45b31077-b014-4513-9cf6-bb44054b1171.png)
 
-##### 4.2.5 OpenLayers 만들기 (레이어 in 레이어)
+##### 4.2.6 OpenLayers 만들기 (레이어 in 레이어)
 ![OpenLayers레이어에 레이어겹치기](https://user-images.githubusercontent.com/116694081/230077971-bfe6333f-ffce-4a41-917a-7a110c2ad607.png)
 
-##### 4.2.5 OpenLayers 만들기 (레이어 set 레이어)
+##### 4.2.6 OpenLayers 만들기 (레이어 set 레이어)
 ![OpenLayers에서 객체로 지도 겹치기](https://user-images.githubusercontent.com/116694081/230078060-4c91e399-8a44-4b29-a7e1-4d1e9388018f.png)
-  
-</div>
-</details>
-
-</br>
-
-<details>
-<summary><b>Geoserver업로드 라이브러리 만들기</b></summary>
-<div markdown="1">
-  
-##### 4.2.6 Python을 이용하여 shp파일 생성시 자동으로 Jar파일 실행
-![파이썬 shp파일 업로드 체크](https://user-images.githubusercontent.com/116694081/230743107-bf0533c8-3cb4-4536-9384-01c529127e59.png)
-
-##### 4.2.6 Geoserver업로드 구현 코드
-![Jar파일 내용](https://user-images.githubusercontent.com/116694081/230743085-5d36177c-d3a8-4997-92c4-317614aa179d.png)
-
-##### 4.2.6 Runnable Jar 구현라이브러리
-![Jar파일](https://user-images.githubusercontent.com/116694081/230743095-7be0fdf4-53dc-412a-9d34-fdea0d9ece21.png)
   
 </div>
 </details>
