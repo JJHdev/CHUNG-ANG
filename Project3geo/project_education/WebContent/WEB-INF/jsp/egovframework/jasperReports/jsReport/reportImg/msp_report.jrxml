@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="msp_report" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="94b59d35-2f48-4709-a714-118f8129e2be">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="251" splitType="Stretch">
+			<frame>
+				<reportElement x="-20" y="-20" width="842" height="60" uuid="f34a28e0-c2ac-4bc6-ae0b-680d818b563d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textField pattern="MMMMM dd, yyyy">
+					<reportElement x="740" y="20" width="100" height="20" uuid="72cc1e53-f6e9-4946-b36d-28e0881f59c2"/>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd kk:mm").format(new java.util.Date())]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="10" y="20" width="340" height="20" uuid="f679b415-5b83-495b-915a-9c46529ea0d4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="15"/>
+					</textElement>
+					<textFieldExpression><![CDATA["생태계기반 해양공간분석 및 의사결정 지원 시스템"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="320" y="20" width="100" height="20" uuid="bbd1b145-bc9d-4b89-b0d6-0067edeaa498"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["임시"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

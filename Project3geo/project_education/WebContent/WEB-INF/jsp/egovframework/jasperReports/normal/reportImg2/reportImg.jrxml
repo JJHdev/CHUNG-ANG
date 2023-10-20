@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportImg" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a2b885b3-aebe-4c33-9432-19ac6b1047a8">
+	<parameter name="sradarField" class="java.lang.String"/>
+	<parameter name="sradarCity" class="java.lang.String"/>
+	<parameter name="Parameter1" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<title>
+		<band height="79" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="595" height="79" backcolor="#566DCF" uuid="4f954a14-a199-4c48-885c-575f494076d4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
+				</reportElement>
+				<frame>
+					<reportElement x="0" y="0" width="37" height="79" uuid="e5a0bc76-f5ba-4b96-99f9-7f40a709269d">
+						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+						<property name="com.jaspersoft.layout.grid.y" value="-1"/>
+						<property name="com.jaspersoft.layout.grid.weight.x" value="0.07"/>
+						<property name="com.jaspersoft.layout.grid.weight.y" value="0.07"/>
+						<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
+						<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
+						<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
+					</reportElement>
+				</frame>
+				<frame>
+					<reportElement x="37" y="0" width="522" height="79" uuid="080dc8ce-220f-457a-8442-4fa5fe839bf4"/>
+					<frame>
+						<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="0" y="59" width="522" height="20" backcolor="#566DCF" uuid="418ca08d-3ecb-4e97-ab35-6f7395969ac8">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
+							<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						</reportElement>
+						<frame>
+							<reportElement x="0" y="0" width="261" height="20" uuid="9611b45b-c87a-4687-96c7-ec39d0ac3e13"/>
+							<textField>
+								<reportElement x="0" y="0" width="261" height="20" forecolor="#98A5D4" uuid="e6ea2f84-8a2a-49ab-a508-362b85b6798f">
+									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+								</reportElement>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="NotoSansKR"/>
+									<paragraph leftIndent="0"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$P{sradarField} + " / " + $P{sradarCity}]]></textFieldExpression>
+							</textField>
+						</frame>
+						<frame>
+							<reportElement x="261" y="0" width="261" height="20" uuid="75cf5e43-aee0-4191-9d06-2371b0d1dc8c"/>
+							<textField>
+								<reportElement x="0" y="0" width="261" height="20" forecolor="#98A5D4" uuid="ae00a63a-fb92-4a4e-9131-662e7f205591">
+									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+									<property name="com.jaspersoft.studio.unit.spacingAfter" value="px"/>
+									<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+								</reportElement>
+								<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+									<font fontName="NotoSansKR"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+							</textField>
+						</frame>
+					</frame>
+					<staticText>
+						<reportElement mode="Opaque" x="0" y="0" width="522" height="59" forecolor="#FFFFFF" backcolor="#566DCF" uuid="2475da2a-3950-40e8-b0f5-ae6ee2741fae"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="NotoSansKR" size="26" isBold="true"/>
+						</textElement>
+						<text><![CDATA[S-RADAR]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="559" y="0" width="36" height="79" uuid="565095a2-4d75-4f07-a850-1b57a374022a">
+						<property name="com.jaspersoft.layout.grid.x" value="-1"/>
+						<property name="com.jaspersoft.layout.grid.y" value="-1"/>
+						<property name="com.jaspersoft.layout.grid.weight.x" value="0.07"/>
+						<property name="com.jaspersoft.layout.grid.weight.y" value="0.07"/>
+						<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
+						<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
+						<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
+					</reportElement>
+					<image scaleImage="FillFrame" isLazy="true">
+						<reportElement x="0" y="0" width="36" height="79" uuid="81468094-3f63-460f-9573-c7c37a8ea5a3"/>
+						<imageExpression><![CDATA["/images/sRadarResources/login/shape-1.png"]]></imageExpression>
+					</image>
+				</frame>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="650" splitType="Prevent">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement x="37" y="13" width="250" height="200" uuid="8eae6bd2-d0ea-4311-8206-bd0ce616cad6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="250" height="25" forecolor="#FFFFFF" backcolor="#566DCF" uuid="8c96dcd8-0f35-40a2-81a5-51044d386b79">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="NotoSansKR" isBold="true"/>
+					</textElement>
+					<text><![CDATA[정책변수 및 최종변수 그래프]]></text>
+				</staticText>
+				<componentElement>
+					<reportElement x="0" y="30" width="250" height="172" uuid="efd033b6-01dd-43cf-b641-bce3393938c3">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<cvc:customvisualization xmlns:cvc="http://www.jaspersoft.com/cvcomponent" xsi:schemaLocation="http://www.jaspersoft.com/cvcomponent http://www.jaspersoft.com/cvcomponent/component.xsd">
+						<cvc:itemProperty name="module" value="rxGovR1"/>
+						<cvc:itemProperty name="script" value="/Users/seonghyunryu/JaspersoftWorkspace/MyReports/CVC/repotImg/reportImg.min.js"/>
+					</cvc:customvisualization>
+				</componentElement>
+			</frame>
+			<frame>
+				<reportElement x="307" y="13" width="250" height="200" uuid="7abc99d7-7491-4f1b-ad4c-13cd813397be">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="250" height="25" forecolor="#FFFFFF" backcolor="#566DCF" uuid="a1261f23-a17a-46ef-a33a-d4e97ebaf9b8">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="NotoSansKR" isBold="true"/>
+					</textElement>
+					<text><![CDATA[정책변수별 상관계수]]></text>
+				</staticText>
+				<componentElement>
+					<reportElement x="0" y="30" width="250" height="172" uuid="e3e90e68-c4e6-4536-bf93-cd4485f2a0c4">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<cvc:customvisualization xmlns:cvc="http://www.jaspersoft.com/cvcomponent" xsi:schemaLocation="http://www.jaspersoft.com/cvcomponent http://www.jaspersoft.com/cvcomponent/component.xsd">
+						<cvc:itemProperty name="module" value="rxGovR2"/>
+						<cvc:itemProperty name="script" value="/Users/seonghyunryu/JaspersoftWorkspace/MyReports/CVC/repotImg/reportImg.min.js"/>
+					</cvc:customvisualization>
+				</componentElement>
+			</frame>
+			<frame>
+				<reportElement x="37" y="221" width="520" height="200" uuid="e14807ef-f422-4c9c-9e6b-eadd376a3d98"/>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="520" height="25" forecolor="#FFFFFF" backcolor="#566DCF" uuid="5b13c106-81b6-4a91-9f6d-cce460243c13">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="NotoSansKR" isBold="true"/>
+					</textElement>
+					<text><![CDATA[정책효과 변화 양상]]></text>
+				</staticText>
+				<componentElement>
+					<reportElement x="0" y="30" width="520" height="170" uuid="36697fc1-4528-4849-839e-89736bd33f29">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<cvc:customvisualization xmlns:cvc="http://www.jaspersoft.com/cvcomponent" xsi:schemaLocation="http://www.jaspersoft.com/cvcomponent http://www.jaspersoft.com/cvcomponent/component.xsd">
+						<cvc:itemProperty name="module" value="rxGovR3"/>
+						<cvc:itemProperty name="script" value="/Users/seonghyunryu/JaspersoftWorkspace/MyReports/CVC/repotImg/reportImg.min.js"/>
+					</cvc:customvisualization>
+				</componentElement>
+			</frame>
+			<frame>
+				<reportElement x="37" y="428" width="520" height="193" uuid="7e2a9355-3e87-4338-81da-6b48120b25f5">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="520" height="25" forecolor="#FFFFFF" backcolor="#566DCF" uuid="7209a3b3-6657-4cec-a7e5-c1fc1faceafd">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="NotoSansKR" isBold="true"/>
+					</textElement>
+					<text><![CDATA[도시 안전등급]]></text>
+				</staticText>
+				<componentElement>
+					<reportElement x="0" y="28" width="250" height="162" uuid="2cd90179-e539-47d0-9c79-a640180cd3ba">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<cvc:customvisualization xmlns:cvc="http://www.jaspersoft.com/cvcomponent" xsi:schemaLocation="http://www.jaspersoft.com/cvcomponent http://www.jaspersoft.com/cvcomponent/component.xsd">
+						<cvc:itemProperty name="module" value="rxGovR4"/>
+						<cvc:itemProperty name="script" value="/Users/seonghyunryu/JaspersoftWorkspace/MyReports/CVC/repotImg/reportImg.min.js"/>
+					</cvc:customvisualization>
+				</componentElement>
+				<componentElement>
+					<reportElement x="270" y="28" width="250" height="162" uuid="0512704e-f442-4ab3-addb-3177465718a6">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<cvc:customvisualization xmlns:cvc="http://www.jaspersoft.com/cvcomponent" xsi:schemaLocation="http://www.jaspersoft.com/cvcomponent http://www.jaspersoft.com/cvcomponent/component.xsd">
+						<cvc:itemProperty name="module" value="rxGovR5"/>
+						<cvc:itemProperty name="script" value="/Users/seonghyunryu/JaspersoftWorkspace/MyReports/CVC/repotImg/reportImg.min.js"/>
+					</cvc:customvisualization>
+				</componentElement>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="55">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement x="0" y="0" width="595" height="55" uuid="5218e1db-e65d-48d6-af64-c18c8a31a7d0">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+				</reportElement>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="595" height="55" forecolor="#FFFFFF" backcolor="#566DCF" uuid="d9944fa9-6135-48a9-9c79-e36b71077db3">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="NotoSansKR" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PAGE FOOTER]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageFooter>
+</jasperReport>

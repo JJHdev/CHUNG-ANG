@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+/* ************* common ************** */
+input[type="text"],
+input[type="password"],
+input[type="number"],
+select,
+button,
+textarea {
+	z-index:0; position:relative; border:1px solid #bdbdbd; border-radius:4px;	
+	height:35px; padding:0 0 0 12px;
+	font-size:15px; line-height:35px; color:#808080; font-weight:400;
+	background-color:#fff !important; background-image:none;
+	width:100%;
+	-webkit-appearance: none; /*모바일에서 입체효과 없애기*/
+	-moz-appearance: none;
+	appearance: none;
+	-webkit-box-shadow:0 0 0 1000px transparent inset;
+}
+input::-webkit-input-placeholder {color:#999 !important;} /*크롬,사파리*/
+input::-moz-placeholder {color:#999 !important;} /*파폭*/
+input::-ms-input-placeholder {color:#999 !important;} /*ie*/
+input:focus,select:focus,textarea:focus {z-index:1; outline:none !important; border:1px solid #bdbdbd !important; background-color:#fff;}
+/* .input-wrap.include-calendar input:focus {border:1px solid #999 !important;} */
+/* .input-wrap.include-calendar button:focus {border:1px solid #999 !important;} */
+
+select {
+	cursor:pointer; color:#808080;
+	background-color:#fff !important;
+	-webkit-appearance: none; /*모바일에서 입체효과 없애기*/
+	-moz-appearance: none;
+	appearance: none;
+	position:relative;
+	/* z-index:1; */
+	background-image:url(/images/ebi/arrow-down.jpg);
+	background-position:calc(100% - 17px) center;
+	background-repeat:no-repeat;
+}
+/* select:after { */
+	/* content:"\e902"; display:block; */
+	/* position:absolute; top:0; right:17px; */
+	/* font-family:'Epic' !important; font-size:8px; color:#808080; z-index:3; */
+/* } */
+
+select::-ms-expand {display:none;} /*ie 없애기*/
+/* form[class^="form-"] textarea {width:100% !important; height:120px !important; resize:none;} */
+input:read-only {background-color:#f7f7f7 !important; cursor:default; color:#888;}
+input:-moz-read-only {background-color:#eee !important;}
+input:read-only:focus {border:1px solid #ccc !important;}
+input:-moz-read-only:focus {border:1px solid #ccc !important;}
+textarea {line-height:1.8; max-width:100%; min-width:100%;}
+textarea:disabled {background:#f9f9f9 !important;}
+button {cursor:pointer; padding-right:12px;}

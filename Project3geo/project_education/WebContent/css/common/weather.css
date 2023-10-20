@@ -1,0 +1,189 @@
+@charset "utf-8";
+
+.map-wrap>div.map .inWrap .inBox .wide-map{
+	background: #ffffff;
+}
+
+.map-wrap>div.map .inWrap>article.map-all>div {
+	background: #ffffff;
+}
+
+.ol-custom-overviewmap .ol-overviewmap-map {
+	width: 300px;
+	height: 165px;
+	margin: -1px;
+}
+
+.ol-custom-overviewmap .ol-overviewmap-box {
+	border: 2px solid red;
+}
+
+.map-wrap>div.map .inWrap>article.plus-minus>div.bar-zone .in {
+    width: 6px;
+    height: 85%;
+    display: inline-block;
+    margin-top: 10px;
+    background: #dbdbdb;
+    border: none;
+}
+
+.map-wrap>div.display .listWrap article .bar-zone .bar {
+    border: none;
+}
+.plus-minus{
+	z-index: 1;	
+}
+
+.map-all{
+	z-index: 1;
+}
+
+.plus-minus .ui-state-default {
+	display: block;
+    z-index: 3;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin-left: -2px;
+    border: 4px solid rgb(255, 255, 255);
+    border-radius: 50%;
+    background: rgb(0, 129, 238);
+    box-shadow: rgba(22, 29, 37, 0.1) 1px 1px 0px 0px;
+}
+
+.listWrap .ui-state-default {
+	display: block;
+    z-index: 3;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 4px solid rgb(255, 255, 255);
+    border-radius: 50%;
+    background: rgb(0, 129, 238);
+    box-shadow: rgba(22, 29, 37, 0.1) 1px 1px 0px 0px;
+	top: -7.6px;
+    margin-left: -10px;
+}
+
+.ui-slider-range.ui-corner-all.ui-widget-header.ui-slider-range-min {
+    background-color: #007fe8;
+}
+
+.listWrap article.off .ui-slider-range.ui-corner-all.ui-widget-header.ui-slider-range-min {
+    background-color: #3d3833;
+}
+
+.listWrap article.off .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+	background-color: #3d3833;
+}
+
+.day-3hour-wrap>div.part-btn ul li a.on {background:#808080; color:#fff; border:1px solid #808080;}
+
+.map-wrap>div.display .listWrap article.on .spectrum-zone .spectrum{
+	    background: linear-gradient(
+					90deg
+					, #d0d0d0 0%
+					, #601660 18.12%
+					, #161660 31.95%
+					, #166060 49.74%
+					, #166016 66%
+					, #606016 84.71%
+					, #601616 100%
+					);
+}
+
+.day-3hour-wrap>div.part-date .dayWrap>div ul li {
+	width: 70.6px;
+}
+
+.day-3hour-wrap>div.part-date .dayWrap>div {
+	width: auto;
+}
+
+/*bar-point weather_type : 하단버튼 끝*/
+.day0-09 {width:3.1%;}
+.day0-12 {width:8.2%;}
+.day0-15 {width:13.3%;}
+.day0-18 {width:18.4%;}
+.day0-21 {width:23.5%;}
+.day1-00 {width:28.6%;}
+.day1-03 {width:33.7%;}
+.day1-06 {width:38.8%;}
+.day1-09 {width:43.9%;}
+.day1-12 {width:49%;}
+.day1-15 {width:54.1%;}
+.day1-18 {width:59.2%;}
+.day1-21 {width:64.3%;}
+.day2-00 {width:69.4%;}
+.day2-03 {width:74.5%;}
+.day2-06 {width:79.6%;}
+.day2-09 {width:84.7%;}
+.day2-12 {width:89.8%;}
+.day2-15 {width:94.9%;}
+.day2-18 {width:100%;}
+
+/* 3시간 단위 -> 1시간 단위 변경 */
+/* .day0-09 {width:3.1%;}
+.day0-10 {width:4.9%;}
+.day0-11 {width:6.1%;}
+.day0-12 {width:8.2%;}
+.day0-13 {width:9.9%;}
+.day0-14 {width:11.2%;}
+.day0-15 {width:13.3%;}
+.day0-16 {width:14.9%;}
+.day0-17 {width:16.3%;}
+.day0-18 {width:18.4%;}
+.day0-19 {width:20.1%;}
+.day0-20 {width:21.9%;}
+.day0-21 {width:23.5%;}
+.day0-22 {width:25.3%;}
+.day0-23 {width:27.1%;}
+.day1-00 {width:28.6%;}
+.day1-01 {width:30.2%;}
+.day1-02 {width:31.8%;}
+.day1-03 {width:33.7%;}
+.day1-04 {width:35.3%;}
+.day1-05 {width:36.7%;}
+.day1-06 {width:38.8%;}
+.day1-07 {width:40.3%;}
+.day1-08 {width:41.9%;}
+.day1-09 {width:43.9%;}
+.day1-10 {width:45.9%;}
+.day1-11 {width:47.1%;}
+.day1-12 {width:49%;}
+.day1-13 {width:51.1%;}
+.day1-14 {width:52.8%;}
+.day1-15 {width:54.1%;}
+.day1-16 {width:55.9%;}
+.day1-17 {width:57.1%;}
+.day1-18 {width:59.2%;}
+.day1-19 {width:61.2%;}
+.day1-20 {width:62.9%;}
+.day1-21 {width:64.3%;}
+.day1-22 {width:66.1%;}
+.day1-23 {width:67.9%;}
+.day2-00 {width:69.4%;}
+.day2-01 {width:71%;}
+.day2-02 {width:72.8%;}
+.day2-03 {width:74.5%;}
+.day2-04 {width:76%;}
+.day2-05 {width:77.9%;}
+.day2-06 {width:79.6%;}
+.day2-07 {width:81.5%;}
+.day2-08 {width:83.1%;}
+.day2-09 {width:84.7%;}
+.day2-10 {width:86.3%;}
+.day2-11 {width:87.9%;}
+.day2-12 {width:89.8%;}
+.day2-13 {width:91%;}
+.day2-14 {width:92.9%;}
+.day2-15 {width:94.9%;}
+.day2-16 {width:96.7%;}
+.day2-17 {width:98.4%;}
+.day2-18 {width:100%;}
+ */
+.day-3hour-wrap>div.part-date .dayWrap{
+	width:102%;
+}
+
+
