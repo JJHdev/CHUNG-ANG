@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">  
+
+<configuration>
+	<typeAliases>
+	
+	
+	
+	<typeAlias type="com.mycom.auction.calendar.domain.Calendar" alias="calendar"/>
+	
+	
+	<typeAlias type="com.mycom.auction.review.domain.ReviewDTO" alias="reviewDTO"/>
+	  <typeAlias type="com.mycom.auction.review.domain.ReviewFileVO" alias="reviewFileVO"/>
+	
+	
+  
+  	<typeAlias type="com.mycom.auction.offerboard.domain.OfferBoard" alias="offerBoard"/>
+  
+  	<typeAlias type="com.mycom.auction.member.domain.Member" alias="member"/>
+		<typeAlias type="com.mycom.auction.member.domain.User" alias="user"/>
+		<typeAlias type="com.mycom.auction.member.domain.Criteria" alias="criteria"/>
+  
+  		<typeAlias type="com.mycom.auction.offerboard.domain.OfferBoard" alias="offerBoard"/>	
+ 		 <typeAlias type="com.mycom.auction.calendar.domain.Calendar" alias="calendar" />
+      
+  
+
+	  <typeAlias type="com.mycom.auction.goods.domain.ProductDTO" alias="productDTO"/>	
+	  <typeAlias type="com.mycom.auction.goods.domain.ProductPurchaseDTO" alias="productPurchaseDTO"/>	
+	  <typeAlias type="com.mycom.auction.goodsSell.domain.Product" alias="product"/>
+	  <typeAlias type="com.mycom.auction.goodsSell.domain.ImageFileVO" alias="imageFileVO"/>                                   
+	  <typeAlias type="com.mycom.auction.goodsSell.domain.ProductPurchaseDTO" alias="productPurchaseDTO"/>                                   
+	</typeAliases>
+</configuration>

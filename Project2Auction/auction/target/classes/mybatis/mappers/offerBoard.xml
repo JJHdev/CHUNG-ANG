@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="mapper.offerBoard">
+ 
+ <resultMap type="offerBoard" id="offerResult">
+ 
+ <!-- <result property="필드명"  column="컬럼명"/>	 -->
+		<result property="offerno"  column="offerno"/>	
+		<result property="id"  column="id"/>	
+		<result property="offertitle"  column="offertitle"/>	
+		<result property="offerpoint"  column="offerpoint"/>	
+		<result property="pay"  column="pay"/>
+		<result property="wttime"  column="wttime"/>
+		<result property="offercontent"  column="offercontent"/>
+		<result property="viewcnt"  column="viewcnt"/>
+ 		<result property="offercnt"  column="offercnt"/>
+ 		<result property="starttime"  column="starttime"/>
+ 
+ </resultMap>
+	<!-- 전체 게시물수 조회 -->
+	<select id="total" resultType="int">
+	  <![CDATA[		
+		select count(offerno) from offerboard
+	  ]]>
+	</select>
+	
+	<!-- 구인글 인서트문 -->
+	<insert id="insertoffer" parameterType="com.mycom.auction.offerboard.domain.OfferBoard">
+	<!-- 	 <selectKey resultType="Integer" keyProperty="offerno" order="BEFORE"> 
+ 		select seq_offerboard.nextval from dual 
+	   </selectKey> -->
+		 <![CDATA[		
+			insert into offerboard(offerno,id,offertitle,offerpoint,pay,wttime,offercontent,viewcnt,starttime)
+			values(seq_offerboard.nextval,#{id},#{offertitle},#{offerpoint},#{pay},sysdate,#{offercontent},0,#{starttime})
+		  ]]>
+	
+	</insert>
+	
+ 
+ 	<!-- 구인게시판 전체 목록보기 -->
+ 	<select id="offerAllList" resultType="offerBoard">
+	 	<![CDATA[
+			select * from(select s.*, row_number()over(order by s.offerno desc) as num from offerboard s)
+			where num>#{start} and num<=#{end}
+			order by offerno desc
+		]]>
+	</select>
+	
+	<!-- 특정글 번호로 찾는 상세 정보 조회 -->
+		<select id="offerDetail" resultType="offerBoard" parameterType="int"> 
+		
+	 	<![CDATA[
+		 	select offerno,id,offertitle,offerpoint,pay,wttime,offercontent,viewcnt,starttime
+			from offerboard 
+			where offerno=#{offerno}
+		]]>
+	</select>
+	
+	
+ </mapper>

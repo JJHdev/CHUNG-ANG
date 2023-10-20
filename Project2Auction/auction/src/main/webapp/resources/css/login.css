@@ -1,0 +1,102 @@
+@charset "EUC-KR";
+* {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        border: 0px solid silver;
+    }
+    body {
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 0.9rem;
+        line-height: 1.2rem;
+        color: #333;
+        letter-spacing: 0.1px;
+    }
+h2 {
+        font-size: 2.4rem;
+        line-height: 3.1rem;
+        text-transform: uppercase;
+    }
+h5 {
+        font-size: 0.85rem;
+        line-height: 1rem;
+        margin-bottom: 1rem;
+    }
+a:link {
+        color: #999;
+        text-decoration: none;
+    }
+
+    a:visited {
+        color: #999;
+    }
+
+    a:hover {
+        color: #999;
+    }
+button {
+        font-size: 14px;
+        background: #eebd07;
+        color: #333;
+        font-weight: bold;
+        margin-top: 1.5rem;
+    }
+    button:hover {
+        background: #000;
+        cursor: pointer;
+        color: #fff;
+        transition: 0.7s;
+    }
+.login h2 {
+        width: 400px;
+        padding: 50px 0;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .login h5 {
+        width: 400px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .loginpage {
+        width: 800px;
+        padding: 50px 50px;
+        margin: 0 auto;
+
+    }
+    .loginpage>div {
+        width: 400px;
+        margin: 0 auto;
+        padding: 3rem 0;
+        background: #fff;
+    }
+    .logform {
+        padding: 1rem 20px;
+        margin-bottom: 5px;
+        width: 100%;
+        border: 1px solid #ccc;
+    }
+    .loginpage div>div {
+        padding: 0 30px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+    .loginpage div>div:hover {
+        color: #000;
+
+    }
+    .loginbnt {
+        width: 100%;
+        padding: 15px;
+        background: #555;
+        color: #fff;
+        border: none;
+        margin: 10px 0;
+        transition: 0.5s;
+    }
+    .loginbnt:hover {
+        background: #000;
+        color: #fff;
+    } 

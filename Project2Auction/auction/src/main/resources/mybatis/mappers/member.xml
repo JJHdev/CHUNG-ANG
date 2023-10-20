@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.member">
+
+ <!-- 회원가입 -->
+ <insert id="memberJoin" parameterType="member">
+ <![CDATA[
+ 	insert into member(id,password,name,phone1,phone2,phone3,email1,email2,gender,birthyear,birthmonth,birthday,zipcode,roadaddress,jibunaddress,detailaddress,register,grade)
+	values(#{id},#{password},#{name},#{phone1},#{phone2},#{phone3},#{email1},#{email2},#{gender},#{birthyear},#{birthmonth},#{birthday},#{zipcode},#{roadaddress},#{jibunaddress},#{detailaddress},sysdate,1)
+ ]]>
+</insert>
+  <!-- 회원상세조회-->
+ <select id="getMember" resultType="member" parameterType="string">
+ <![CDATA[
+ 	select * from member where id=#{id}
+ ]]>
+ </select>
+ <!-- 회원목록조회-->
+ <select id="getMemberList" resultType="member">
+ <![CDATA[
+ 	select * from member
+ ]]>
+ </select>
+<!-- 전체 회원수 조회-->
+ <select id="totalMember" resultType="int" parameterType="criteria">
+ <![CDATA[
+ 	select count(*) from member
+ ]]>
+  <if test="keyword != null">
+    where grade > 0 <include refid="criteria"></include>
+  </if>
+ </select>
+ <!-- 회원목록조회(페이징+검색)-->
+  <select id="getMemberListPaging" resultType="member" parameterType="criteria">
+ <![CDATA[
+ 	SELECT id,password,name,phone1,phone2,phone3,email1,email2,gender,birthyear,birthmonth,birthday,zipcode, roadaddress,jibunaddress,detailaddress,register,grade
+	FROM (
+	SELECT  
+	ROWNUM RN,id,password,name,phone1,phone2,phone3,email1,email2,gender,birthyear,birthmonth,birthday,zipcode, roadaddress,jibunaddress,detailaddress,register,grade
+	FROM member
+	WHERE ROWNUM <= #{pageNum} * #{amount}
+  ]]>
+	 <if test="keyword != null">
+       <include refid="criteria"></include> 
+     </if>
+  <![CDATA[   
+	)
+	WHERE RN > (#{pageNum} -1) * #{amount}
+  ]]>
+ </select>
+ <!-- 검색조건문 -->
+ <sql id="criteria">
+    <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+         <foreach collection="typeArr" item="type">
+             <trim prefix="OR">
+              <choose>
+               <when test="type == 'I'.toString()">
+                    id like '%'||#{keyword}||'%' 
+               </when>
+               <when test="type == 'N'.toString()">
+                    name like '%'||#{keyword}||'%' 
+               </when>
+              </choose>
+             </trim>
+          </foreach>
+    </trim>
+  </sql>
+ <!-- 회원정보수정 -->
+ <update id="memberUpdate" parameterType="member">
+ <![CDATA[
+ 	update member set password=#{password},name=#{name},phone1=#{phone1},phone2=#{phone2},phone3=#{phone3},email1=#{email1},email2=#{email2},zipcode=#{zipcode},roadaddress=#{roadaddress},jibunaddress=#{jibunaddress},detailaddress=#{detailaddress},grade=#{grade}
+ 	where id=#{id}
+ ]]>
+ </update>
+ <!-- 회원탈퇴 -->
+ <delete id="memberDelete" parameterType="String">
+ <![CDATA[
+ 	delete from member where id=#{id}
+ ]]>
+ </delete>
+ <!-- 로그인 -->
+ <select id="memberLogin" parameterType="member" resultType="member">
+  <![CDATA[
+ 	select * from member where id=#{id} and password=#{password}
+ ]]>
+ </select>
+ <!-- 아이디찾기 -->
+ <select id="memberFindId" parameterType="member" resultType="member">
+  <![CDATA[
+ 	select * from member where name=#{name} and phone1=#{phone1} and phone2=#{phone2} and phone3=#{phone3}
+ ]]>
+ </select>
+ <!-- 비밀번호찾기 -->
+ <select id="memberFindPwd" parameterType="member" resultType="member">
+  <![CDATA[
+ 	select * from member where id=#{id} and name=#{name} and phone1=#{phone1} and phone2=#{phone2} and phone3=#{phone3}
+ ]]>
+ </select>
+ <!-- 아이디 중복 체크 -->
+ <select id="idChk" resultType="int">
+ <![CDATA[
+ 	select count(*) from member where id=#{id}
+ ]]>
+</select>
+ 
+</mapper>   
