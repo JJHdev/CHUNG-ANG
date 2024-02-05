@@ -1,0 +1,73 @@
+# 2. eclipse 설치 java타입
+
+1. {} 범위를 block이라고 한다. /*범위를 표현*/
+2. 절대주소 : 변하지 않는 주소 / 상대주소 : 상황에따라 부분적으로 변하는 주소.
+3. 메모장 주소. public class Jjh{ public static void main(String[] args){ System.out.println("jjh~!"); } }
+4. 명령프롬프트 cd로 주소 변경 후 javac 파일이름.java -. 명령프롬프트 java 파일이름.
+5. Eclipse 다운로드.(공부시 2020년 03월 사용) -. window → Preferences → 환경 설정 화면, 폰트, 라인넘버표시, Encoding(Text Editors → Spelling) Other(UTF-8) 사용 -. Workspace도 UTF-8사용(UTF8은 전 서계 언어를 표현을 잘해준다.)
+6. eclipse(project, class 생성) > 저장을 하면 컴파일 되는 것 (class파일 만들어졌다.) > ctrl+f11 > run > // 주석문 > /**/ 다중라인 주석문
+7. package : 꾸러미 (회원테이블이 있다면 DML의 모음집.) MVC패턴에서의 구분 등, 폴더형태로 구분되어있음. class : package 의 하위단위 메소드 : class안에서 사용 되는 함수 Void : 결과값이 없다.
+8. : 콜론 ; 세미콜론 , 컴마 . 점 / 슬러쉬 \or 원화 백슬러쉬 () 시작과 끝을 표현 → method명() {} [] → 배열명[] /배열 : 변수들이 여러개 있을때 말함. 변수명 : 데이터를 저장하는것, 메모리의 주소 값 public static void main(String[] args)
+    - main메소드
+    - String 배열 사용
+    - args 변수 사용
+9. String / "문자열 출력" character / '알파벳 기호 출력'
+    - / "String"과 "String"을 연결해주는 연결 연산자. -. String name ="홍길동"; (name = 변수) -. 변수는 메모리상에 붙여진 이름 -. 변수선언및 초기값 할당 문법 →데이터타입(Syntax) 변수명=값; -. 맨처음에 선언된것을 초기값을 할당 한다. 데이터에 저장 된다.
+10. 단축키 syso누르고(ctrl+space bar) > 시스템 아웃프린트
+11. String : 문자 (전화번호) int : 숫자 (더하기,빼기,나누기 되는 숫자) boolean : 논리
+12. Car(String model) Car라는 생성자에 문자열 사용(메소드) 리턴타입 메소드이름 ([매개변수선언,...])
+13. local : 지역 "변수" (강남 반장이 될려면 강남안에서만 선언하면 된다.) field : 전역 "변수" (전체 선언해야한다.)
+14. 강제형변환 : int height = (int)170.5; // (0를 넣어서 값의 분실이 일어남 : 연필은 필통에 넣을수 있지만 빨대에는 담을수 없다.
+15. 리터럴혈변환 : 값 자체를 리터럴이라고 한다.
+16. required 필수적이다 uppercase 대문자 lowercase 소문자 Quotes 큰따옴표
+17. 기본 타입 : (byte, /short, char/,int ,long) (float, double) (boolean) 참조 타입 : 배열, 클래스, 인터페이스
+
+교육 코드
+
+package pro1;
+public class Ex01 {
+
+	public static void main(String[] args) {
+		String name = "장정현";
+		int age = 30;
+		double height1 = 170.5;
+		int height2 = (int)170.5;
+		// (강제형변환타입)변수명
+		// 실수타입의 value를 int타입으로 강제형변환하면서 값의 손실이 발생.
+		float height3 = 170.3F;
+		// 리터럴형변환 F, f
+		// 실수 : float, double(기본)
+		byte weight =50;
+		// 정수: byte(1byte), short(2byte), int(기본)(4byte), long(8byte)
+
+		byte weight1; //변수 선언
+		weight1 = 50; //초기화 시킨다.
+		// 변수선언 문법 > 데이터타입 변수명;
+		// 값할당 문법 > 변수명 =값;
+		System.out.println("(한달전)몸무게:"+weight1);
+		weight1=55;
+		//
+		System.out.println("(오늘)몸무게:"+weight1);
+
+		float height4 = (float)170.4;
+		char sex = 'w';
+		String phoneNumber = "010-123-4103";
+		boolean isWoman =true; //true 또는 false 표현
+
+		System.out.println("이름:"+name);
+		System.out.println("나이:"+age);
+		System.out.println("한국나이:"+(age+1)); //""때문에 Sting+Sting 연결 연산자로 되어 ()로 묶어줘야한다.
+		// "한국나이:"+"30"
+		// "한국나이:30"
+		// "한국나이:30"+"1"
+		// "한국나이:301"
+		// print(),println() 안에서 문자열이 먼저나오면 자동으로 문자열 결합이 된다.
+		System.out.println("(double)키:"+height1);
+		System.out.println("(int)키:"+height2);
+		System.out.println("(float)키:"+height3);
+		System.out.println("(float)키:"+height4);
+		System.out.println("성별:"+sex);
+		System.out.println("전화번호:"+phoneNumber);
+		System.out.println("여성입니까?: "+isWoman);
+	}
+}
