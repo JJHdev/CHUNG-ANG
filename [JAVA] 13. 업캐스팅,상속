@@ -1,0 +1,210 @@
+### 1. super
+
+- super(매개변수값); : 부모의 생성자 호출
+- super.필드명; : 부모 필드 호출
+- super.부모메소드(); : 부모 메소드 호출
+
+부모``` void method1(){} void method2(){}
+
+```java
+ 자식```
+void method2(){} // Overriding
+void method3(){
+	method2();  // 재정의된 호출
+    super.method2();  // 부모메소드 호출
+}
+```
+
+### 2. 자동타입변환
+
+- 상속시 바로 위의 부모가 아니더라도 상속 계층의 상위면 자동타입변환 가능.
+
+### 3. 1단, 2단 상속
+
+```java
+조상클래스
+package cho07;
+//이 클래스는 기계에 대해 정의한 클래스다.
+public class B_Machine01 {
+	//field
+	private String company;				//제조회사
+	private String model;				//모델명
+	private String color;				//색상
+	private int price;					//가격
+	private String nation;				//생산국가
+	private String productDate;			//생산일
+	//constructor
+	public B_Machine01() {}
+	public B_Machine01(String company, String model, String color,int price,String nation,String productDate ) {
+		this.company=company;
+		this.model=model;
+		this.color=color;
+		this.price=price;
+		this.nation=nation;
+		this.productDate=productDate;
+	}
+	//method
+	//전원을 키다.
+	public void powerOn() {
+		System.out.println("powerOn()-전원을 켭니다.");
+	}			
+	//전원을 끄다.
+	public String sound() {
+		return "끼기긱기긱(기계음)";
+	}		
+	//소리가 난다.
+	public void powerOff() {
+		System.out.println("powerOff()-전원을 끕니다.");
+	}
+	//object의 toString():을 오버라이딩 해서 사용
+	//object의 toString(): 객체의 정보를 해시코드 문자열형으로 제공
+	//이 클래스의 toString(): 객체의 필드의 값을 문자열형으로 제공
+	@Override
+	public String toString() {
+		return "B_Machine01 [company=" + company + ", model=" + model + ", color=" + color + ", price=" + price
+				+ ", nation=" + nation + ", productDate=" + productDate + ", sound()=" + sound() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}
+}
+
+phone 클래스
+package cho07;
+
+public class B_Phone01 extends B_Machine01{
+
+	//field
+	private String company;				//제조회사
+	private String model;				//모델명
+	private String color;				//색상
+	private int price;					//가격
+	private String nation;				//생산국가
+	private String productDate;			//생산일
+	private String telecom;		//통신사.
+	
+	//constructor
+	//기본생성자
+	public B_Phone01() {};
+	//os, telecom의 매개변수를 받는 생성자
+	public B_Phone01(String company, String model, String color,int price,String nation,String productDate,String telecom) {
+		this.company=company;
+		this.model=model;
+		this.color=color;
+		this.price=price;
+		this.nation=nation;
+		this.productDate=productDate;
+		this.telecom=telecom;
+	};
+	//method
+	//메세지 보내가 받기 phone만의 메소드
+	public String takeMessge() {
+		return "Phone로 메세지를 받았습니다..";
+	}
+	public String sendMessge() {
+		return "Phone로 메세지를 보냈습니다.";
+	} 
+	// 매개변수
+	// 부모클래스 Machine01의 sound를 오버라이딩
+	@Override
+	public String sound() {
+		return "따르릉 따르릉";
+	}
+	@Override
+	public String toString() {
+		return "B_Phone01 [company=" + company + ", model=" + model + ", color=" + color + ", price=" + price
+				+ ", nation=" + nation + ", productDate=" + productDate + ", telecom=" + telecom + ", takeMessge()="
+				+ takeMessge() + ", sendMessge()=" + sendMessge() + ", sound()=" + sound() + ", toString()="
+				+ super.toString() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+	}
+}
+
+SmartPhone 클래스
+package cho07;
+
+public class B_SmartPhone01 extends B_Phone01 {
+
+	//field
+	private String company;				//제조회사
+	private String model;				//모델명
+	private String color;				//색상
+	private int price;					//가격
+	private String nation;				//생산국가
+	private String productDate;			//생산일
+	private String telecom;		//통신사.
+	private String os;      //os 모델
+	
+	//constructor
+	//스마트폰의 기본생성자.
+	public B_SmartPhone01 () {}
+	public B_SmartPhone01 (String company, String model, String color,int price,String nation,String productDate,String telecom,String os) {
+		super();
+		this.company=company;
+		this.model=model;
+		this.color=color;
+		this.price=price;
+		this.nation=nation;
+		this.productDate=productDate;
+		this.telecom=telecom;
+		this.os=os;
+	}
+	//method
+	//스마트폰의 인터넷 기능
+	public String internet() {
+		return "인터넷에 접속합니다.";
+	}
+	//스마트폰의 카메라모드
+	public void camara() {}
+	
+	@Override
+	// 조상클래스 Machine01의 sound를 오버라이딩
+	public String sound() {
+		return "따단 따라라란 따라란";
+	}
+	@Override
+	public String toString() {
+		return "B_SmartPhone01 [company=" + company + ", model=" + model + ", color=" + color + ", price=" + price
+				+ ", nation=" + nation + ", productDate=" + productDate + ", telecom=" + telecom + ", os=" + os
+				+ ", internet()=" + internet() + ", sound()=" + sound() + ", takeMessge()=" + takeMessge()
+				+ ", sendMessge()=" + sendMessge() + ", toString()=" + super.toString() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
+	}
+}
+```
+
+### 4. 업캐스팅
+
+동물 = new 포유류 포유류 = new 사람
+
+부모클래스타입 참조변수 = new 자식클래스 조상클래스타입 참조변수 = new 부모클래스 조상클래스타입 참조변수 = new 자식클래스
+
+4-1. 메소드 선언
+
+> 조상클래스타입 참조변수 = new 부모클래스
+> 
+
+`> 부모클래스에서만 선언된 메소드는 호출이 안된다. (조상클래스에서 가진 기능이 아니기 때문에)
+
+>논리순서 → 조상클래스에서 이 메소드가 있나? 있구나 이걸 실행해야지 근데 부모클래스야 너는 없어? 그러면 조상클래스 실행할게.
+→ 있니?(재정의) 그러면 재정의 된걸로 할게 
+
+> 근데 부모클래스에만 있는걸 호출 하면 조상클래스에 가야하는데 못가서 컴파일러 에러가 뜬다.`
+
+> 부모클래스타입 참조변수 = new 자식클래스
+> 
+
+`> 자식클래스에서만 선언된 메소드는 호출이 안된다. (부모클래스에서 가진 기능이 아니기 때문에)
+
+>논리순서 → 부모클래스에서 이 메소드가 있나? 있구나 이걸 실행해야지 근데 자식클래스야 너는 없어? 그러면 부모클래스 실행할게.
+→ 있니?(재정의) 그러면 재정의 된걸로 할게 
+
+> 근데 자식클래스에만 있는걸 호출 하면 부모클래스에 가야하는데 못가서 컴파일러 에러가 뜬다.`
+
+> 조상클래스타입 참조변수 = new 자식클래스
+> 
+
+`> 부모,자식클래스에서만 선언된 메소드는 호출이 안된다. (조상클래스에서 가진 기능이 아니기 때문에)
+
+>논리순서 → 조상클래스에서 이 메소드가 있나? 있구나 이걸 실행해야지 근데 부모클래스야 너는 없어? 그러면 조상클래스 실행할게.
+→ 있니?(재정의) 그러면 부모클래스에서 재정의 된걸로 할게 
+→ 어 근데 자식클래스야 너는 있니?(재정의) 있구나 자식클래스에서 재정의 된걸로 할게 
+
+> 근데 부모,자식클래스에만 있는걸 호출 하면 조상클래스에 가야하는데 못가서 컴파일러 에러가 뜬다.`
