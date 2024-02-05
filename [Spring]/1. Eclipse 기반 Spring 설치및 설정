@@ -1,0 +1,108 @@
+# 1. Eclipse 기반 Spring 설치및 설정
+
+스프링 프로그램 설치
+
+- 웹용 이클립스 버전확인 - Version: 2020-03 (4.15.0)
+=> 별도로 워크스페이스 지정할 것이기 때문에 기존에 받았던 웹용 이클립스버전 추가설치
+(2020-03 Eclipse IDE for Enterprise Java Developers : eclipse-jee-2020-03-R-incubation-win32-x86_64 활용)
+- c드라이브 springStudy 생성
+
+> 웹용이클립스 압축파일 옮겨서 풀기 > eclipse폴더 sptingStudy로 옮김 > 이름변경 eclipse_spring
+wk폴더생성
+이클립스 실행 > 워크스페이스 스프링용으로(springStudy>wk) 지정
+> 
+- window > preferences > general
+
+> appearance > font설정
+editors > text editors > spelling > encoding > UTF-8
+editors > web browser > use external web browser 선택 + chrome
+editors > workspace > text file encoding > UTF-8
+> 
+- window > preferences > web
+
+> CSS, HTML, JSP files > encoding UTF-8설정
+> 
+- window > preferences > xml
+
+> xml files > encoding UTF-8확인
+> 
+- help > eclipse marketplace
+
+> sts 검색 > spring tools 3 3.9.14release install > confirm (install anyway)
+> 
+
+(help > install new software 주소를 통해 직접 다운받을 수도 있음)
+
+- window > perspective > open perspective 통해 java도 가능
+- [JAVA클릭 후] file > new > other > spring > spring legacy project >
+project name : spring1 지정 / spring MVC project > enter a toplevelpackage : com.mycom.myapp
+- window > show view > other > server > servers open
+- servers > click link > apache > tomcat v9.0
+
+> directory browse : C:\Program Files\Apache Software Foundation\Tomcat 9.0
+JRE : jdk1.8.0_121 (jre도 가능)
+> 
+- window > show view > console
+- package explorer > servers > servers.xml > 하단 source탭 클릭
+
+> 63line port="8087" (※ java에서는 80으로 설정했었음 / tomcat은 8087)
+=> port="8083"으로 변경
+=> 포트번호 옆에 URIEncoding="UTF-8"
+> 
+- package explorer > servers > web.xml
+
+> ctrl+F : setCharacterEncoding (507line 필터 / 603line 필터매핑) 주석해제
+> 
+- servers 더블클릭 > overview > ports > tomcat admin port : 8005 설정 > 상단 save > server start 올라가는지 확인
+- spring1 > pom.xml 11line 변경 : <java-version>1.8</java-version>
+
+> spring1 우클릭 > maven > update project
+spring1 우클릭 > build path > configure build path > libraries 탭
+JRE 1.6 선택 > remove
+add library > JRE system library > workspave default JRE (1.8.0_121)
+> 
+- servers 우클릭 add and remove > spring1 add
+
+> server start (콘솔에 INFO : org.springframework 확인)
+인터넷 창 http://localhost:8083/myapp/
+> 
+- ----------spring 실행중 오류 발생 대처 ----------------------------
+spring에서 jar파일을 pom.xml에서 설정한 대로 받아오는대 잘 못받아와서 에러가 뜨는경우가 있다 이럴경우에는
+-. 1번. 프로젝트 오른쪽 클릭 -> maven > update project
+-. 2번. C:\Users\wlrwk\.m2\repository 여기 주소로 가면 spring에서 받은 jar파일이 있는데 삭제 후 spring을 다시 호출하면 다시 불러들인다. -> 프로젝트 오른쪽 클릭 -> maven > update project
+- ---------------------------단독서버로 이관하여 배포 및 실행------------------------------
+WAR 생성 -> 이관하여 배포 -> 실행
+톰캣 단독서버 실행하기.
+1. 톰캣 설치폴더 들어간 후 conf -> server.xml 열기 -> 63번째 라인쯤
+<Connector port="8088" protocol="HTTP/1.1"
+connectionTimeout="20000"
+redirectPort="8443" /> 에서 포트번호 확인 후
+2. 프로젝트 오른쪽 클릭 -> export -> warfile
+2-1) destination ( 2번위치에 지정한다.) -> 3번역할임. 이걸 하면 3번은 안해도 된다.
+2-2) exprot source files 체크하면 소스내용이 다보이고 체크안하면 클래스파일만 보인다.
+-> finish
+3. webapps 폴더 들어간 후 WAR 파일을 넣어줘야 한다. (이관)
+4. 3번위치에 war파일이 생성되면 이클립스 닫은 후 -> 톰캣 bin -> start up 실행하면 3번에
+폴더가 압축 풀린것을 볼수 있다. (배포)
+5. http://localhost:8088/(압축풀어진 폴더명으로)memberBoard/
+으로 검색하면 볼수있는것을 볼수있다.
+- ------------------ 이름없이 보는 방법 -------------
+서버를 셧다운 후
+6. webapps -> ROOT -> 이름을 변경 강의에서는 ROOT_original 변경
+1. 이클립스 킨후 war 파일 만드는 것과 같이 하고 destination 에서 같은 위치에
+이름을 ROOT로 변경하고 저장한다.
+2. 다시 서버를 start up을 해서 배포한다. 그러면
+http://localhost:8088/ 실행해서 킬수있는것을 볼수있다.
+
+---
+
+spring
+
+1. pom.wml : 각종 라이브등록 (최초의 한번만 호출)
+2. web.wml : client의 요청을 url로 전달받아야 한다.
+3. DispatcherServlet이 client의 요청을 제어한다.
+- > root-context.xml
+-> servlet-context.xml에서는 전달받은 요청url에 따른 담당컨트롤을 호출하여 비즈니스 로직수행, 모델, view지정,
+지정된 view를 DispatcherServlet에 반환 컨트롤러가 보내온 view명을 토대로 view검색
+처리 결과가 포함된 view를 DispatcherServlet에 다시한번 환반화고 최종결과를 client에 출력한다.
+web.wml -> root-context -> servletcontext ->homeController -> servletcontext
