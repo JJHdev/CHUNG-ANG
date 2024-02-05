@@ -1,0 +1,42 @@
+# 5. 참조변수와 배열
+
+# 
+
+1. for : 반복되는 횟수가 예상되어질 경우 사용 while : 반복되는 횟수가 예상하기 힘들 경우 사용
+2. break : 아예 반복문을 벗어 날 경우 continue : 지금 진행하는 반복문만 벗어 날 경우
+3. 연산자. 3-1) 논리연산자 : (&&,||,&,|,^,!) 논리곱(And,&&) 나열된 모든 조건이 true여야만 true 논리합(or, ||) 나열된 한가지 조건이 true여도 true 배타적 논리합(^) 논리부정(!) -. 피연산자는 boolean만 사용
+    1. 증감연산자. -. 변수의 값을 1증가 시키거나(++) 1감소(--) 시키는 연산자 -. 증감 연산자가 변수 뒤에 있으면 다른 연산자 먼저 처리 후 증감 연산자 처리 ++(--)변수 : 전치 변수++(--) : 후치→ x++을 하게 된다면, 다음 x가 등장하기 전까지 연산되지 않는다. (다른 변수에 넣고 진행하면 연산X)
+4. S로 시작하는건 클래스고 클래스를 통해서 새롭게 만들어야 한다. -. 클래스를 사용시 타입명도 똑같이 써야한다. -. import는 외부에서 해당 사용내용을 가져오겠다. 라는 뜻이다. import.java.util.Scanner; 자바에서 util안의 패키지에서 Scanner클래스를 가져오겠다라는 뜻이다.
+    1. Scanner sc = new Scanner(System.in); String scv = sc.nextLine(); System.out.println(scv); /* Scanner 클래스의 객체를 이용하여 콘솔을 통해 user로 부터 문자열을 입력 받기 * 문법 > 타입 참조변수명 = new 클래스명(참조변수) * new Scanner(Systen.in)은 Scanner클래스의 개체를 생성한다 * Scanner Sc =는 * 생성된 Scanner클래스의 객체를 참조 sc변수에 저장한다. * sc.nextLine()는 * 참조변수 sc를 통해 Scanner클래스의 * nextLine()메서드를 호출하여 실행한다 * enter단위로 읽는다. * String inputSrting = 는 * user로 부터 콘솔로 입력받은 문자열을 * String타입 inputSrting변수에 저장한다. */
+    
+5. 참조변수 -. 클래스는 객체를 생성하고 -. 생성한 객체를 통해 -. 해당 클래스의 필드(변수)와 메서드에 접근한다. -. 객체 생성 : new 클래스명(); -. 객체를 담기위한 참조변수 선언 : 데이터타입(주로 클래스가 들어감) 변수명; -. 타입 참조변수명 = new 클래스명(); →객체생성 및 생성한 객체를 참조변수에 할당. -. 기존에는 스텍영역에 저장되었다면 new 선언은 힙영역에 저장
+
+```java
+★★★★★   	
+		String str1 = "홍길동";
+   	String str2 = "홍길동";
+   	// str1과 str2 는 주소지가 동일하다. (같은 주소에 사는 홍길동 2명)
+   	System.out.println("str1="+str1);
+   	System.out.println("str2="+str2);
+   	System.out.println("str1==str2의결과="+(str1==str2));//true
+   	System.out.println("------------");
+   	
+   	String str3 = new String("홍길동");
+   	String str4 = new String("홍길동");
+   	// str3 과 str4는 주소지가 다르다. (다른 주소지에 사는 홍길동 2명)
+   	System.out.println("str3="+str3);
+   	System.out.println("str4="+str4);
+   	System.out.println("str3==str4의결과="+(str3==str4));//false
+   	
+   	// 기준문자열.메서드명(비교문자열) : 메서드호출 
+   	System.out.println("기준문자열.메서드명(비교문자열)="+ str3.equals(str4));//true
+   	// 참조변수 str3의 값이 참조변수 str4에 저장된 값과 일치하니?
+   	// ==는 주소지를 참고로 비교하고, equals는 문자의 모양만 비교한다.
+   	System.out.println("------------");
+```
+
+★★★★★
+
+1. String타입 -. 문자열 리터럴 동일하다면 String 객체 공유 -. String 496p 참조.
+2. 참조변수 String str1 = new String("김"); 스텍영역에 str1 저장공간이 생기고 힙영역에 new String("김"); 생긴다. 그 스텍영역에 str1저장공간에는 힙영역에 있는 new String("김");의 주소를 반영한다. ("김")을 저장하는게 아니라 그 주소를 저장.
+1. 배열 (149p~ 170p) -. 같은 타입의 데이터를 한공간(연속된)공간에 저장하는 자료구조. -. 책으로 보면서 하는게 훨씬더 이해하기 쉽
