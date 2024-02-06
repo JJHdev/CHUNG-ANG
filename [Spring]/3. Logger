@@ -1,0 +1,72 @@
+# 3. Logger
+
+ 1. Logger 클래스는 log4j를 지원하는 핵심클래스로서, 아래와 같은 레벨이 있다. 로그출력여부는 레벨에 따라 결정된다.
+
+logger.trace("trace");
+레벨
+FATAL - 조기 종료를 유발하는 심각한 오류가 발생하는 상태를 뜻함
+ERROR - 기타 런타임오류 or 예기치 않는 상태
+WARN  - 사용되지 않는 api사용
+바람직하지 않거나 예기치 않은 런타임 발생상황
+INFO  - 정보제공용 aptpwl
+DEBUG - 디버그 용도
+TRACE - 가장 하위 로깅 레벨, 모든 로그에 대한 상세한 정보
+레벨은 TRACE< DEBUG< INFO< WARN <ERROR <FATAL
+예) Info레벨 이상으로 출력을 원하면 Info, Warn,ERROR,FATAL로그까지 출력
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+<!-- Appenders appender요소는 전달받은 로그 정보를 출력할 위치(console, db, 파일)fmf rufwjdgksms zmffotm
+ConsoleAppender클래스는 console에 로그정보를 출력  -->
+<!-- layout요소는 로그정보의 출력패턴을 설정 PatternLayout클래스는 로그정보를 사용자가 설정한 패턴에 따라 기록 -->
+	<!-- Appenders -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- <param name="ConversionPattern" value="%-5p: %c - %m%n" /> 원본 -->
+<!-- 		 %d : 로깅이벤트가 발생한 시간. 여기에서는 yyy-MM-dd HH:mm:ss형식으로 설정
+			 %C : 클래스명
+			 %c : 카테고리
+			 %F : 로깅이 발생한 파일명
+			 %L : 로깅내용이 발생한 코드 라인수
+			 %m : 로그내용
+			 %n : 줄바꿈 개행 등 -->
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"  />
+		</layout>
+	</appender>
+	
+	<!-- Application Loggers -->	
+	<!--<logger name="실제 로그 기능을 수행하는 객체"> -->
+	<logger name="com.mycom.app">
+		<!-- 로그출력여부는 레벨에 따라 결정된다. 여기에서는 info 레벨 수준으로 결정 -->
+		<level value="info" />
+	</logger>
+	
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.beans">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.context">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.springframework.web">
+		<level value="info" />
+	</logger>
+
+	<!-- Root Logger : 최상위 로거를 설정-->
+	<root>
+		<priority value="warn" />
+		<appender-ref ref="console" />
+	</root>
+	
+</log4j:configuration>
