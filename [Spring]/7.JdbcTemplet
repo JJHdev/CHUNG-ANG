@@ -1,0 +1,62 @@
+# 7.JdbcTemplet
+
+1. JdbcTemplet
+
+JdbcTemplate  : 스프링이 제공하는 JdbcTemplate을 사용
+
+a. 장점 
+
+1.간단한 설정
+
+2. JdbcTemplate은 템플릿 콜백 패턴을 사용해서, JDBC를 직접 사용할 때 발생하는 대부분의 반복 작업을 처리해준다.
+개발자는 SQL을 작성하고, 전달할 파라미터 정의 + 응답 값 매핑만 하면 됨.
+아래 반복 작업을 대신해줌.
+커넥션 획득
+statement를 준비하고 실행
+결과를 반복하도록 루프를 실행
+Connetion, Statement, ResultSet 종료
+트랜잭션을 위한 Connection 동기화
+예외 발생 시, 스프링 예외 변환기 실행
+
+  가장 간단하게 SQL을 사용하기 위해서는 JdbcTemplate을 사용하면 됨.
+  JdbcTemplate의 최대 단점은 동적 쿼리 작성 문제를 해결하지 못한다. 이 부분은 굉장히 번거롭다.  동적 쿼리 작성을 해결하기 위해 MyBatis 사용.
+
+b. JDBC 단점
+
+- 동적 SQL을 해결하기 어렵다.
+- 동적 SQL은 MyBatis이용해서 처리할 수 있다.
+
+c. JDBC 주요 메서드
+
+- update() : insert,update,delete쿼리실행
+- query() : select쿼리실행. 다중행 조회. 실행 결과가 List 형태로 반환됨.
+- queryForObject : 단일행조회. 실행 결과는 하나의 객체만 반환됨.
+
+- DataSource객체가 필요한 이유
+    - 스프링 JDBC가 JDBC API를 사용하여 DB에 접속하려면
+    -> 드라이버로딩 -> DB에 접속하여 -> 커넥션 객체를 받아와야 한다.
+    따라서 dataSource를 DB에 연결해야 하기 때문에 DataSource객체를 bean으로 등록해야 한다.
+
+DAO에서는 아래와 같이 코드를 작성해야한다.
+
+private jdbcTemplate jdbcTemplate;
+
+@AutoWired
+public void setDataSource(DataSourece dataSourece){
+this.jdbcTemplate = new jdbcTemplate(dataSource);
+}
+
+bean으로 등록해둔 dataSource를 이용하여 jdbcTemplate클래스 객체를 자동주입시켜야 한다.
+여기에서는 servlet-context.xml에서 아래와 같이 설정
+
+
+<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<beans:property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+	<beans:property name="url" value="jdbc:mysql://localhost:3306/spdb?serverTimezone=UTC&characterEncoding=utf8"/>
+	<beans:property name="username" value="spuser"/>
+	<beans:property name="password" value="sppw"/>
+</beans:bean>
+
+<beans:bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+	<beans:property name="dataSource" ref="dataSource"/>
+</beans:bean>
