@@ -1,0 +1,111 @@
+# 6.  ModelAttribute&Redirect/forward
+
+1. ModelArrtibute
+    1. ModelArrtibute를 지정하면 그 컨트롤러에서 페이지 이동시 속성값도 같이 이동하게 된다. 
+    
+    ```java
+    //---메서드 레벨의 @ModelAttribute 개념실습 시작----
+    	//reqMethod17 밖에서 m1,m2 설정해도 reqMethod17로 들어가면 속성값 m1,m2가 셋팅되어 들어간다.
+    	//컨트롤러의 요청 메서드가 호출되고
+    	//View를 리턴하기전에
+    	// @ModelAttribute으로 선언되 메서드를 호출하여
+    	// 반환받은 값을 view의 모델로 넘긴다. 
+    	@GetMapping("/testModelAttribute")
+    	public String reqMethod17(){
+    		return "test/resultView";
+    	}
+    	//@ModelAttribute("모델명(속성명)")
+    	@ModelAttribute("m1")
+    	public String setM1() {
+    		return "m1이란다~";
+    	}
+    	//@ModelAttribute메서드에서 모델명이 지정되지 않고 내부에서 지정해주는 방식.
+    	@ModelAttribute
+    	public void setM2(Model model) {
+    		model.addAttribute("m2","m2이란다짜란짜짠");
+    	}
+    ```
+    
+    ```java
+    // 요청주소~컨패/addmember 
+    	//memberFrm2.jsp가 보인다.
+    	@GetMapping("/addmember")
+    	public String showMemberFrm(@ModelAttribute("NewMember")Member member) {
+    		logger.info("Member member"+member.toString());
+    		return "test/memberFrm2";
+    	}
+    	@ModelAttribute
+    	public void addAttributes(Model model) {
+    		model.addAttribute("addMember","신규회원등록");
+    	}
+    	@PostMapping("/addmember")
+    	public String newMemberInfo(Model model,@ModelAttribute("NewMember")Member member) {
+    		logger.info("Member member"+member.toString());
+    		model.addAttribute("member",member);
+    		return "test/memberInfo2";
+    	}
+    ```
+    
+    1. Redirect, forward
+        
+        요청 메서드에서 view지정
+        view redirection (뷰 리다이렉션)
+        
+        - 사용자 요청을 하면 요청에 따라 현재 뷰에서 다른 뷰페이지로 이동
+        => 페이지 강제 이동
+        @ReqiestMapping("최초의 요청url")
+        public String 요청메서드명() {
+        return redirect:요청url; or
+        return forward:요청url;
+        }
+        1. redirect방식
+            - browser의 요청 url이 변경 되면서 최종 응답 view페이지로 강제 이동
+            - 최초의 요청 후에 다시 요청을 생성하게 된다. 기존의 요청 url은 더이상 유효하지 않게 된다.
+            사용 예) 데이터에(db(insert,delete,update),session) 변화가 생기는 요청
+            로그인요청, 회원가입, 게시글 등록
+        2. forward방식
+            - borwser의 최초요청 url이 유지되면서 최종 응답 view페이지로 강제 이동
+            - 최초요청 url이 유지되므로 기존의 요청 url은 유효하다.
+            => 웹브라우저는 다른 페이지로 이동했는지 알 수 없다.
+            => 또 다른 요청 url을 알수 없다.
+            사용 예) 데이터에(db(select)) 변화가 적거나 없는 요청
+            목록조회, 검색 등
+            
+    2. DB연동
+        1. pom.xml > dependencies 맨아래에 끝나기 전에 아래 코드 넣기
+        
+        ```java
+        <dependency>
+        		    <groupId>mysql</groupId>
+        		    <artifactId>mysql-connector-java</artifactId>
+        		    <version>5.1.49</version>
+        		</dependency>를
+        8.0.24 버전으로 업그레이드 후
+        
+        <dependency>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-jdbc</artifactId>
+                    <version>${org.springframework-version}</version>
+               </dependency>
+               <dependency>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-dbcp2</artifactId>
+                    <version>2.9.0</version>
+               </dependency>
+        ```
+        
+        b.  servlet-context.xml에서 맨아래에 beansLbeans끝나기 전에 입력하기
+
+<!-- 데이터베이스 환경설정 -->
+<!-- <beans:bean id="dataSource"  이코드는 절대 변경하면 안된다. -->
+<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+       <beans:property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>  
+       <beans:property name="url" value="jdbc:mysql://localhost:DBMS포트번호(3306)/DB스키마?serverTimezone=UTC&amp;characterEncoding=utf8"/> 
+       <beans:property name="username" value="~~~"/> 
+       <beans:property name="password" value="~~~~~"/>  
+   </beans:bean>
+
+   <beans:bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
+       <beans:property name="dataSource" ref="dataSource"/>
+   </beans:bean>
+
