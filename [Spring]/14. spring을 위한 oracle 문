@@ -1,0 +1,65 @@
+# 14. spring을 위한 oracle 문
+
+1. system 계정에 접속한뒤 아래 구문 실행 (table space 있다는 가정 하에 진행) 없을 경우
+    
+    위에 txt 파일 참조.
+    
+
+```sql
+-- 계정생성
+-- 계정생성 권한을 가진 계정접속해서 작업 ex)system
+create user spuser
+identified by sppw
+default tablespace myts
+temporary tablespace temp;
+
+-- 권한부여하기 connect, resource, view 
+grant connect, resource, create view
+to spuser;
+
+-- table 삭제
+drop table article;
+
+-- 여기서 부터는 spuser에서 진행
+CREATE TABLE article(
+ articleno number(4)        constraint  pk_article_no       primary key,
+ title     varchar2(120)    constraint  nn_article_title    not null,
+ content   varchar2(2000)   constraint  nn_article_content  not null,
+ writeDate date             default SYSDATE,
+ writerid    varchar2(30)
+);
+
+-- 시퀀스 삭제
+drop SEQUENCE seq_article;
+---- 시퀀스 생성
+create SEQUENCE seq_article
+start with 1
+increment by 1;
+
+-- 시퀀스 생성 명령
+시퀀스명.curval   -- 현재값
+시퀀스명.nextval   -- 다음값
+
+-- 더미데이터
+insert into article(articleno,title,content,writeDate,writerid)
+values(seq_article.nextval,'제목1','내용1',sysdate,'adminid');
+insert into article(articleno,title,content,writeDate,writerid)
+values(seq_article.nextval,'제목2','내용2',sysdate-90,'hongid');
+insert into article(articleno,title,content,writeDate,writerid)
+values(seq_article.nextval,'제목3','내용3',sysdate-80,'hongid');
+
+-- 날짜 100일전 변경
+update article
+set writeDate=writeDate-100
+where articleno=1;
+
+-- 전체조회 & commit
+select * from article;
+select articleno from article where articleno=1;
+select title from article where articleno=1;
+select count(*) from article;
+
+commit;
+```
+
+.
