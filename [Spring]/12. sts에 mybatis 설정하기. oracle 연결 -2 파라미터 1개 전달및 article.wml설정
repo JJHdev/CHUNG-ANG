@@ -1,0 +1,90 @@
+# 12. sts에 mybatis 설정하기. oracle 연결 -2 파라미터 1개 전달및 article.wml설정
+
+1.  src/main/resources/mybatis/model ⇒ New ⇒ xml파일 만들고 파일명은 (**modelConfig)**
+    
+    으로 한 후 안에 내용 입력하기
+    
+    ```xml
+    <!DOCTYPE configuration    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+       "http://mybatis.org/dtd/mybatis-3-config.dtd">
+    ```
+    
+
+1. 14번 sql문과 같이 sts에서도 변경하기. (jdbc.properties)
+2. classpath:mybatis/mappers/*.xml 경로에 xml 파일 만들기 (1개의 table에 1개의 xml)
+    1. 본 교육에서는 article.xml로 만들었음⇒ template ⇒ finish
+    2. 아래와 같은 코드를 만든 xml 파일에 넣기 (사용예시)
+    
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="mapper.article">
+    	<!-- select요소 select 쿼리문 실행 
+    			id속성 = unique해야한다. (각 요소를 구분하기 위한 용도로 사용)	-->
+    	<!-- 전체 게시물수 조회 -->
+    	<select id="totalCnt" resultType="java.lang.Integer">
+    		<![CDATA[
+    		select count(*) from article
+    		]]>
+    	</select>
+    	
+    	<select id="getArticleNo" resultType="java.lang.Integer" parameterType="java.lang.String">
+    		<![CDATA[
+    		select articleno from article where articleno=#{no}
+    		]]>
+    	</select>
+    	
+    	<select id="titleByNo" resultType="java.lang.String" parameterType="java.lang.String">
+    		<![CDATA[
+    		select title from article where articleno=#{no}
+    		]]>
+    	</select>
+    	
+    </mapper>
+    ```
+    
+
+1. Repository에서 전달하는 방법
+    
+    ```java
+    package com.ourcom.app3.repository;
+    
+    import org.apache.ibatis.session.SqlSession;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.stereotype.Repository;
+    
+    @Repository
+    public class ArticleRepository {
+    	/*
+    	 * action-mybatis.xml에서  
+     * 	 <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+    	    <constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+    	 </bean>
+    	 */
+    	
+    	 @Autowired 
+    	 private SqlSession sqlSession;
+    	
+    		/* action-mybatis.xml에서 실행하고자 하는 쿼리를 가진 문서는 아래와 같이 설정하였다. 
+    		 * <property name="mapperLocations" value="classpath:mybatis/mappers/*.xml" />
+    		 * */
+    	 public int getTotalCnt() {
+    		 int cnt = sqlSession.selectOne("mapper.article.totalCnt");
+    		return cnt;
+    	 }
+    	 
+    	 public int getAriticleNo(int no) {
+    		 int cnt = sqlSession.selectOne("mapper.article.getArticleNo",no);
+    		return cnt;
+    	 }
+    	 
+    	 //파라미터 조회하고자 하는 글번호
+    	 public String getTitleNo(int no) {
+    		 String title = sqlSession.selectOne("mapper.article.titleByNo",no);
+    		 return title;
+    	 }
+    }
+    ```
+    
+
+.
