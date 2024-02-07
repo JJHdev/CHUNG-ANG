@@ -1,0 +1,7 @@
+# 10. Spring 전체적인 순서
+
+1. 클라이언트에게 파라미터를 받는다. (Controller)
+2. Controller 를 생성한다. (어노테이션 Controller 붙이기, 생성자 생성시 / @Autowired 생성하기)
+3. Service에 보내준다. ( 어노테이션 Service 붙이기)
+4. Repository에 보내준다. (문법은 9번에 총 정리하여 작성했음) , RowMapper 사용
+5. public class MemberRowMapper implements RowMapper<Member> 와 같은 형식으로 RowMapper 만들기
