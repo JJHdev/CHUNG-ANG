@@ -1,0 +1,155 @@
+# 11. sts에 mybatis 설정하기./ oracle 연결 -1
+
+1. java_spring ⇒ sts파일에 Spring3로 파일명 바꾼 후 파일 옮긴후 설정한 내용 그대로 복사 붙여넣기해서 이동했음.
+2. 위에 주소에서 Apache commons BeanUtils 다운받기 (1.9.4버전 클릭 ⇒ Maven 복사하기 ⇒ sts에서 pom.xml에서 dependencies 끝나기전에 붙여넣기.
+3. 2번 붙여넣기 한곳 아래에다가 
+
+```sql
+<dependency>
+         <groupId>commons-dbcp</groupId>
+         <artifactId>commons-dbcp</artifactId>
+         <version>1.2.2</version>
+      </dependency>
+      <dependency>
+         <groupId>cglib</groupId>
+         <artifactId>cglib-nodep</artifactId>
+         <version>2.2</version>
+      </dependency>
+      <dependency>
+         <groupId>org.mybatis</groupId>
+         <artifactId>mybatis</artifactId>
+         <version>3.1.0</version>
+      </dependency>
+      <dependency>
+         <groupId>org.mybatis</groupId>
+         <artifactId>mybatis-spring</artifactId>
+         <version>1.1.0</version>
+      </dependency>
+```
+
+위의 내용을 추가하기.
+
+추가하면 아래와 같은 코드가 입력되고 maven에 아래와 같이 jar파일이 추가된다.
+
+![화면 캡처 2023-02-20 162753.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fc3bf1db-0f01-440f-9f34-657753fa10fa/%ED%99%94%EB%A9%B4_%EC%BA%A1%EC%B2%98_2023-02-20_162753.png)
+
+```sql
+<!-- 데이터 소스 관련 라이브러리 등록 -->
+		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+		<dependency>
+		    <groupId>commons-beanutils</groupId>
+		    <artifactId>commons-beanutils</artifactId>
+		    <version>1.9.4</version>
+		</dependency>
+		
+		<dependency>
+         <groupId>commons-dbcp</groupId>
+         <artifactId>commons-dbcp</artifactId>
+         <version>1.2.2</version>
+      </dependency>
+      <dependency>
+         <groupId>cglib</groupId>
+         <artifactId>cglib-nodep</artifactId>
+         <version>2.2</version>
+      </dependency>
+      
+      <!-- mybatis관련 라이브러리등록 -->
+      <dependency>
+         <groupId>org.mybatis</groupId>
+         <artifactId>mybatis</artifactId>
+         <version>3.1.0</version>
+      </dependency>
+      <dependency>
+         <groupId>org.mybatis</groupId>
+         <artifactId>mybatis-spring</artifactId>
+         <version>1.1.0</version>
+      </dependency>
+```
+
+1. web.xml에서 맨처음(contextConfigLocation) 설정을 다음과 같이 바꿔주기 
+
+```sql
+<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<!-- <param-value>/WEB-INF/spring/root-context.xml</param-value> -->
+		<param-value>/WEB-INF/spring/action-mybatis.xml</param-value>
+	</context-param>
+```
+
+1. (mybatis 설정 )
+    1. 그 후 WEB_INF에 ⇒ spring ⇒ New ⇒ Other ⇒ Xml ⇒ XML File ⇒ Next 파일명을 action-mybatis으로 하고 Next ⇒ Create Xml file from an Wml template ⇒ Next ⇒ Finish
+    2.  root-context.wml에서 왼쪽 아래에 namespaces로 체크하여 설정할수 있다.
+2. 5번에서 만든 mybats에서 아래와 같이 추가하기.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
+ xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans">
+ 
+ <bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+   <property name="locations">
+   		<value>/WEB-INF/config/jdbc/jdbc.properties</value>
+   </property>
+ </bean>
+ 
+ </beans>
+```
+
+1. /WEB-INF/config/jdbc/jdbc.properties 폴더및 파일 만들기.
+    1. config 폴더 만들기
+    2. jdbc 폴더 만들기 
+    3. 확장자명 properties(New⇒ Orher⇒ General⇒Untitled Text File) 로 한후 맨위 카테고리에서 File ⇒ Save us ⇒ 위에 경로에서 파일명을 jdbc.properties로 해서 저장하면 생긴다. 
+2. action-mybatis에서 다시 추가하기 6번에 추가한 부분 아래에다가 아래와 같은 내용 입력
+    
+    아래는 총 내용을 정리하여 옮긴것임.
+    
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
+ xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans">
+ 
+ <bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+   <property name="locations">
+   		<value>/WEB-INF/config/jdbc/jdbc.properties</value>
+   </property>
+ </bean>
+ 
+	<bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
+	     <property name="driverClassName" value="${jdbc.driverClassName}"/>  
+	     <property name="url" value="${jdbc.url}"/> 
+	     <property name="username" value="${jdbc.username}"/> 
+	     <property name="password" value="${jdbc.password}"/>  
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="dataSource" ref="dataSource" />
+      <!-- <property name="configLocation" value="classpath:mybatis/model/modelConfig.xml" /> -->
+      <property name="mapperLocations" value="classpath:mybatis/mappers/*.xml" />
+   </bean>
+
+	 <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+	    <constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+	 </bean>
+ 
+ </beans>
+```
+
+1. 7번에서 만든 jdbc.properties파일에 아래와 같이 넣기 (공백있으면 안되며, 띄어쓰기가 있으면 안된다.)
+
+```xml
+jdbc.driverClassName=oracle.jdbc.OracleDriver
+jdbc.url=jdbc:oracle:thin:@localhost:1521/xe
+jdbc.username=scott
+jdbc.password=tiger
+```
+
+1.  src/main/resources/ ⇒ 에서 mybatis/model/modelConfig.xml &
+    
+                                                   mybatis/mappers/*.xml 만들기.
+    
+    1.  src/main/resources/ 에서 폴더 mybatis > mappers&model 폴더 각 만들기
