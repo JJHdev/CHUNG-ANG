@@ -1,0 +1,20 @@
+# 8.Mysql 구문
+
+1.실습 진행
+
+ mysql에서 DB 작성
+
+-- 데이터베이스 생성
+create database 데이터베이스명  default character set utf8;
+
+-- USER생성 및 권한 부여
+-- 호스트가 localhost인 경우 localhost에서 해당 계정으로 접근
+create user '계정명'@'localhost'  identified by '비번';
+grant all  privileges on 데이터베이스명.*  to '계정명'@'localhost';
+
+-- 호스트가 %인 경우 모든 호스트에서 해당 계정으로 접근
+/* MySQL에서는 localhost와 다른 호스트를 구분하므로 
+ 사용자 계정을 생성할 때는 localhost용 계정과 
+ 외부에서 접근할 때 사용할 계정을   각 각 생성해야 한다*/
+create user '계정명'@'%' identified by '비번';
+grant all  privileges on 데이터베이스명.*  to '계정명'@'%';
