@@ -1,0 +1,23 @@
+# 23. SVN
+
+1. https://www.visualsvn.com/downloads/ 주소로 들어가서  **VisualSVN Server([VisualSVN Server 5.1.3 (64-bit)](https://www.visualsvn.com/files/VisualSVN-Server-5.1.3-x64.msi)) 파일 받기**
+2. 파일 설치하기 (next) use secure connection 포트번호 설정하기 (강의에서는 안겹치게 81로 함) > next > next > install > finish 
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/57e508c8-3976-4082-bef9-68bf91ec48eb/Untitled.png)
+
+1. User > create > User name() / password() / confirm password() 나의 정보 넣기
+2. Repository > create new repository(작업공간 만들기) > next > Repository Name (이름설정) > next > 권한 설정  >  next > 이 설정은 중요하니 저장해놓기 
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/10c062e7-178c-4ebc-95ad-14d9c2194bf2/Untitled.png)
+
+1. svn server > properties > network > server name을 ip주소 기입하기
+2. eclipse > help > new install software > add > name = sva / location =https://download.eclipse.org/technology/subversive/4.8/release/latest/   (svc 다운주소)
+
+입력 하기 > 전부체크해서 next > 설치하기.
+
+1. window > show view 에서 svn 설치된것을 확인 할수 있다 > svn repositories 
+2. help > install new software > add > (name : svn connector / location: https://osspit.org/eclipse/subversive-connectors/  or https://community.polarion.com/projects/subversive/download/eclipse/6.0/update-site/     >> 전체선택 후 next > next  > finish
+3. window > preference > team > svn > svn connector > get connector 에 추가된것을 볼수 있다. 
+4. svn repository > new repository location > url에는 svn://172.30.1.55:81/svn/res 입력하기 (선생님 주소)
+5. 공유할 프로젝트를 오른쪽 클릭 > team > share project > svn > use existing re~ > 주소 등 확인 후 next > comment 작성하기 > 
+6. svn repository에서 check out으로 project에 내보낼수 있다.
