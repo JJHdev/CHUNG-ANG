@@ -1,0 +1,113 @@
+# 19.tiles를 이용한 module사용법
+
+1. tiles는 module를 쉽게 작성해주는 방법을 제공한다. 관련 디펜던씨로는 (pom.xml추가)
+
+```xml
+<!-- tiles라이브러리   	layout화면 템플릿	 -->
+		<dependency>
+         <groupId>org.apache.tiles</groupId>
+         <artifactId>tiles-core</artifactId>
+         <version>2.2.2</version>
+        </dependency>
+        <dependency>
+         <groupId>org.apache.tiles</groupId>
+         <artifactId>tiles-jsp</artifactId>
+         <version>2.2.2</version>
+        </dependency>
+        <dependency>
+         <groupId>org.apache.tiles</groupId>
+         <artifactId>tiles-servlet</artifactId>
+         <version>2.2.2</version>
+     </dependency>
+```
+
+1. servlet-context에서는 기존에 사용하던 경로방식을 지우고 새로운 경로로 작성하는데 아래와 같이 작성한다.
+
+```xml
+<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!-- view설정 
+		 - 컨트롤러에서 설정한 view이름으로  실제 사용할 뷰를 선택하는 ViewResolver객체를 설정
+		   prefix+view명+suffix
+		 - 예) 컨트롤러에서 설정한 view이름이 "home"이라면
+		 	   prefix+view명+suffix  
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>-->
+	
+	<!-- tiles설정-->
+	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>classpath:tiles/*.xml</beans:value>
+			</beans:list>
+		</beans:property>
+		<beans:property name="preparerFactoryClass" value="org.springframework.web.servlet.view.tiles2.SpringBeanPreparerFactory"/>
+	</beans:bean> 
+	
+	<!-- tiles관련 Bean등록-->
+	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver"> 
+		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/> 
+	</beans:bean>
+```
+
+1. 관련 경로 설정을 하기위해서는 src/main/resources/에서 tiles폴더를 만든 후 tiles_파일명.xml을 만들어서 경로 설정을 한다. ⇒ 맨위에 는 무조건 들어가야하는 문구이다. (환경설정) 그 아래에는 mapping 설정 
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<!-- 글관련 화면 -->
+<!-- 
+	<definition 
+	      name="정의명.여기에서는 모든 definition요소의 기본골격을 의미" 
+	      template="실제로 존재하는 view문서의 경로와 파일명">     -->
+	      
+<tiles-definitions>
+
+	<definition name="baseLayout" template="/WEB-INF/views/common/layout.jsp">
+		<put-attribute name="title"  value="Spring Web Application"/>
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+		<put-attribute name="body"   value=""/>
+		<put-attribute name="side"   value="/WEB-INF/views/common/side.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
+	</definition>
+
+	<definition name="/article/addForm" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/article/addForm.jsp"/>
+	</definition>
+	
+	<definition name="/article/main"  extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/article/main.jsp"/>
+	</definition>
+	
+	<definition name="/main" extends="baseLayout">
+		<put-attribute name="body"   value="/WEB-INF/views/main.jsp"/>
+	</definition>
+	
+</tiles-definitions>
+```
+
+1. controller에서 경로를 설정 시 return문에서 definition에서 name속성과 맞춰서 사용해줄수 있다.
+
+```java
+@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public String home(Locale locale, Model model,HttpSession session) throws Exception {
+		//HttpSession session = request.getSession();
+		//session.removeAttribute("admin_mode");
+		//session.removeAttribute("my_page");
+		session.setAttribute("isLogOn",true);  //세션에 값저장하기
+		session.setAttribute("AUTHORUSER_ID","hongid");  
+		//session.setAttribute("side_menu","admin_mode");  //관리자모드로 설정
+		//session.setAttribute("side_menu","my_page");  //로그인한 유저
+		//ession.setAttribute("속성명",값);  //세션에 값저장하기
+		//${속성명}  //세션에 값가져오기-jsp
+		Map<String,List<GoodsVO>> goodsMap = goodsService.listGoods();
+		model.addAttribute("goodsMap", goodsMap);
+		return "/main";
+	}
+```
+
+.
