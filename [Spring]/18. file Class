@@ -1,0 +1,193 @@
+# 18. file Class
+
+1.파일 경로와 길이
+
+```java
+package ex;
+
+import java.io.File;
+import java.io.IOException;
+
+public class FileEx01 {
+
+	public static void main(String[] args) {
+		
+	// 현재의 project 폴더에서  filefolder est.txt  파일을 객체로 생성한다.
+    // 는 이스케이프 문자로 인식되므로 \\ -> \ 로 사용
+    //File file = new File("C:\\test폴더\\test.txt");
+    File file = new File(".\\test폴더2\\test.txt");
+
+    // 경로에 파일이 존재하면
+    if(file.exists()){
+       
+        try{
+           System.out.println("상위폴더getParent:"+file.getParent());   
+           System.out.println("파일이름getName:"+file.getName());
+           System.out.println("-------------------------------");
+           /*getPath() : File에 입력된 경로 리턴
+                                          전달한 경로가 상대경로라면 getPath()도 상대경로를 리턴
+         *getAbsolutePath() : File에 입력된 절대 경로 리턴
+         *           현재 실행 중인 Workding directory에 File에 전달한 경로를 조합하여 절대 경로를 리턴 
+         *           예) JavaProject\.\test폴더2\test.txt   
+         *getCanonicalPath() : Resolved된 절대 경로 리턴
+         *           ./, ../와 같은 경로를 정리하고 리턴  
+            *           예) JavaProject\test폴더2\test.txt   */
+            System.out.println("파일경로getPath=>"+file.getPath());
+            System.out.println("파일절대경로getAbsolutePath=>"+ file.getAbsolutePath()); 
+            System.out.println("getCanonicalPath=>"+file.getCanonicalPath());
+            System.out.println("-------------------------------");
+            
+           //파일의 쓰기/읽기 권한 체크
+           if(file.canWrite()) System.out.println(file.getName() + "은 사용불가");
+           if(file.canRead()) System.out.println(file.getName()+ "은 읽을 수 있다");
+           System.out.println("-------------------------------");
+           
+            //객체의 파일, 폴더 여부 체크
+            if(file.isFile()){
+                System.out.println(file.getName()+"은 파일.");
+            }else if(file.isDirectory()){
+                System.out.println(file.getName()+"은 폴더.");
+            }else{
+                System.out.println(file.getName()+"은 파일도 폴더도 아니라네.");
+            }
+           
+            // 파일 내용 길이
+            System.out.println(file.getName()+"의 길이는 "+file.length());
+       
+        }catch(IOException e){
+            System.err.println(e);
+        }
+   
+    }else{
+        System.out.println("파일을 찾을 수 없습니다. ");
+    }
+	
+}
+}
+```
+
+1. 현재 폴더를 기준으로 같은 경로에 무슨파일이 있는지?
+
+```java
+package ex;
+
+import java.io.File;
+
+public class FileEx02 {
+	public static void main(String[] args) {
+	       
+        //프로젝트 현재 폴더를 객체로 생성
+        File file = new File(".");
+       
+        //file이 존재하고 폴더라면
+        if(file.exists() && file.isDirectory()){
+           
+            //폴더의 파일/폴더 목록을 문자열 배열로 반환
+            String[] fList = file.list();
+           
+            for(int i=0; i<fList.length; i++)
+                System.out.println("["+i+"]번째=>"+fList[i]);
+        }else{
+            System.out.println("해당 경로는 폴더가 아닙니다.");
+        }//if문
+    }
+}
+```
+
+1. 현재 하드웨어 (디스크용량 파악하는 메소드)
+
+```java
+package ex;
+
+import java.io.File;
+
+public class FileEx03 {
+	   public static void main(String arg[]){
+	       
+	        String drive;
+	        double totalSpace, usedSpace, freeSpace, usableSpace;
+	       
+	        //하드디스크의 루트 드라이버들을 배열로 반환.
+	        File[] roots = File.listRoots();
+	       
+	        for(File root : roots){
+	           
+	            //root드라이버의 절대 경로
+	            drive = root.getAbsolutePath();
+	           
+	            //하드디스크 전체 용량
+	            totalSpace = root.getTotalSpace() / Math.pow(1024, 3);
+	            //사용가능한 디스크 용량
+	            usableSpace = root.getUsableSpace() / Math.pow(1024,3);
+	            //여유 디스크 용량
+	            freeSpace = root.getFreeSpace() / Math.pow(1024,3);
+	            //사용한 디스크 용량
+	            usedSpace = totalSpace - usableSpace;
+	           
+	            System.out.println("하드 디스크 드라이버 : " + drive);
+	            System.out.println("총 디스크 용량 : " + totalSpace + "GB");
+	            System.out.println("사용 가능한 디스크 용량 : " + usableSpace + "GB");
+	            System.out.println("여유 디스크 용량 : " + freeSpace + "GB");
+	            System.out.println("사용한 디스크 용량 : " + usedSpace+"GB");
+	           
+	        }
+	    }   
+}
+```
+
+1. 경로에 있는 파일 복사하여 새파일 만들기
+
+```java
+package ex;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
+
+public class FileEx04 {
+	 public static void main(String[] args){ 
+		   
+	        FileInputStream fis = null;
+	        FileOutputStream fos = null;
+	        Date now = null;
+	       
+	        try{
+	            //"FileStreamSample.txt" FileInputStream객체 생성
+	            //"copyFile.txt"파일에 FileOutputStream객체 생성
+	            //데이터 출력시 현재 데이터의 마지막에 추가.
+	            fis = new FileInputStream("C:\\test폴더\\test.txt");
+	            fos = new FileOutputStream("copytest.txt");
+	            //fis = new FileInputStream("C:\\webstudy\\pg\\commons-fileupload-1.3.3.jar");
+	            //fos = new FileOutputStream("1.jar", true);
+	           
+	            int i = 0;
+	            now = new Date();
+	            long start = now.getTime();//복사시작시간
+	           
+	            //FileInputStream에서 데이터를 1바이트씩 읽어오기
+	            while((i=fis.read())!=-1){
+	                // FileOutputStream에 읽은 데이터를 출력한다.
+	                fos.write(i);
+	            }
+	           
+	            now = new Date();
+	            long end = now.getTime();//복사종료시간
+	           
+	            System.out.println("복사시간:" +(end-start));
+	           
+	        }catch(Exception e){
+	            e.printStackTrace();
+	       
+	        }finally{
+	           
+	            //FileInputStream, FileOutputStream을 닫기
+	            if(fis != null) try{fis.close();}catch(IOException e){}
+	            if(fos != null) try{fos.close();}catch(IOException e){}
+	           
+	        }
+	    }
+}
+```
+
+.
