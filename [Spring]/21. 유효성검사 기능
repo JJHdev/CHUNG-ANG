@@ -1,0 +1,84 @@
+# 21. 유효성검사 기능
+
+1. spring에서 유효성검사 기능 을 사용할려면 아래와 같이 디펜던씨 추가하기
+    
+    ```xml
+    <!--  Validation 유효성검사  폼데이터 값에 대한 유효성 검사 JSR 380 Validation(JAVA Bean Validation 2.0)
+             특정 도메인 클래스의 멤버변수, 필드에 대한 유효성 검사 제약사항 애너테이션을 선언하여 해당 값이 올바른지 검증하는 방식
+             JSR- 303 Validation (JAVA Bean Validation 1.0방식)
+             JSR- 349 Validation (JAVA Bean Validation 1.1방식)
+             JSR- 380 Validation (JAVA Bean Validation 2.0방식)
+       -->
+       <dependency>
+             <groupId>javax.validation</groupId>
+             <artifactId>validation-api</artifactId>
+             <version>2.0.1.Final</version>   
+       </dependency>   
+       
+       <dependency>
+               <groupId>org.hibernate</groupId>
+           <artifactId>hibernate-validator</artifactId>
+               <version>5.2.1.Final</version>
+       </dependency>
+       <dependency>
+           <groupId>org.hibernate</groupId>
+           <artifactId>hibernate-validator-annotation-processor</artifactId>
+           <version>5.2.1.Final</version>
+       </dependency>
+    ```
+    
+2. servlet-context에서 등록 한다.
+    
+    ```xml
+    <!-- 빈 등록 -->
+    	<beans:bean id= "messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+          <beans:property name="basename" value="messages"/>  
+          <beans:property name="defaultEncoding" value="UTF-8" />
+       </beans:bean>
+       
+       <beans:bean id="validator" 
+                class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+    ```
+    
+3. 폼에서 간단한 작성예시로는
+    
+    ```java
+    <h3>ex01  Validatrion(유효성검사) </h3>
+    	 <form:form method="post" modelAttribute="goodsvo">
+    	 	* 상품명(goods_title) : <form:input path="goods_title"/><form:errors path="goods_title"/>
+    	 	<br/><br/>
+    	 	* 상품가격 (Goods_PRICE) : <form:input path="goods_price"/><form:errors path="goods_price"/>
+    	 	<br/><br/>
+    	 	<input type="submit" value="확인">
+    	 	<input type="reset" value="취소">
+    	 </form:form>
+    ```
+    
+4. 관련 내용
+
+```
+@NotNull
+@DecimalMax(value=값, inclusive=true|false)
+value=값, inclusive=true|false 지정한 값이하 허용
+value=값, inclusive=true|false 지정한 값미만 허용
+@DecimalMin(value=값, inclusive=true|false)
+value=값, inclusive=true|false 지정한 값이상 허용
+value=값, inclusive=true|false 지정한 값초과 허용
+@Digit(integer=정수자릿수, fraction=실수자릿수)
+지정한 자릿수의 숫자가 아니면 오류발생@AssertTrue : true가 아니면 오류발생
+@AssertFalse : false가 아니면 오류발생
+
+```
+
+1. DTO에서 등록방법
+    
+    ```java
+    @Size(min=1, max=10, message="1자`최대 10자")
+    	private String goods_title;
+    	
+    	@Max(5) 
+    	@Min(0) 
+    	private int goods_price;
+    ```
+    
+    .
