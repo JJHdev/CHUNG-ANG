@@ -1,0 +1,21 @@
+# 17. image Db연동하여 입력 & 출력
+
+1. Oracle image용 DDL 입력문
+
+```sql
+DROP TABLE article_image;
+--  image 관련 DB 생성
+CREATE TABLE article_image(
+ image_id number(20)        constraint  pk_image_id       primary key, --이미지번호
+ articleno number(4)        constraint  nn_image_articleno     not null, -- 글번호 (article.articleno테이블의 fk)
+ filename     varchar2(100)    constraint  nn_image_filename    not null, -- 파일이름
+ memberid    varchar2(40),  -- 작성자
+ creDate  date   default SYSDATE -- 이미지 등록일
+);
+-- 시퀀스 삭제
+drop SEQUENCE seq_article_image;
+-- 시퀀스 생성
+create SEQUENCE seq_article_image;
+```
+
+.
