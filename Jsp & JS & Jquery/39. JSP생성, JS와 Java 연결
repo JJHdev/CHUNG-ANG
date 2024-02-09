@@ -1,0 +1,212 @@
+# 39. JSP생성, JS와 Java 연결
+
+## 1. jsp선언방법 3가지
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Javascripy선언</title>
+
+	<style>javascript보다 style먼저 선언</style>
+
+	<script src="js/first.js"></script>
+	<script>
+		alert('head태그안의 스크립트-internal방식');
+	</script>
+</head>
+
+<body>
+	<div id="i1">아무글</div>
+	<script>
+		//스크립트 한 줄 주석문
+		/*스크립트 다중 주석문
+			id가 i1인 요소 내부에 text 출력
+			속성명=값
+			id가 i1인 요소 내부 ='body태그안의 스크립트- internal방식';
+			document객체.속성명=값
+			document객체.getElementById();
+			→ alert('body태그안의 스크립트-internal방식');
+			→ window.alert(document.getElementById("i1"));//object HTML
+			window.alert(document.getElementById("i1").id );//id는 id가 i1인 요소의 id속성의 값을 가져온다.
+			window.alert(document.getElementById("i1").innerText ); //id가 i1인 요소의 내부text를 가져오기
+		*/
+	/*
+		자바의클래스에서는
+		클래스 참조변수명 = new 클래스명();
+		참조변수명.필드명;
+		참조변수명.필드명=값;
+
+		그런데 private 필드명 이면 위의 작업불가하니
+		참조변수명.메서드명();
+		참조변수명.get필드명()을 사용하여 해당클래스 객체의 필드값 가져오기
+		참조변수명.set필드명()을 사용하여 해당클래스 객체의 필드값 설정하기.
+
+		자바스크립트에서는
+		객체.필드명;
+		객체.필드명=값;
+		객체.(함수명)메서드명();*/
+		document.getElementById("i1").innerText //여기에서는 html div요소의 innertext속성값 가져오기.
+		document.getElementById("i1").innerText='값'; //여기에서는 html div요소의 innertext속성값을 설정하겠다..
+			window.alert(document.getElementById("i1").innerText ='body태그안의 스크립트- internal방식');
+	</script>
+
+<span style="display:inline-block; background:olive; width:20" onmouseover="alert('h2')" >span요소1 </span>
+<span style="display:inline-block; background:pink; width:20" onmouseout="alert('h3')">span요소2</span>
+
+<form>
+	<input type="button"  id="btn1" value="클릭btn1" onclick="alert('hi!')">
+</form>
+
+<hr/>
+	<h2>javascript선언</h2>
+		<p>web문서에 동적효과, 유효성검사등</p>
+	<h2>javascript의 선언방식 3가지(p190)</h2>
+<xmp>
+    ●internal방식:HTML문서안의 HEAD요소에 STYLE선언
+     -문법
+      <head>
+        <script>
+          코드작성
+          function 함수명(매개변수리스트){코드}
+        </script>
+      </head>
+
+        <body>
+        <script>
+          코드작성
+          function 함수명(매개변수리스트){코드}
+        </script>
+      </body>
+
+    ●external방식:HTML문서밖에서 별도의 CSS문서
+     -문법
+      <head>
+       <!--  css스타일 <link rel="stylesheet"  href="경로/파일명.css">-->
+       <script src="경로/파일.js"> </script>
+      </head>
+
+    ●inline방식:특정요소에 STYLE속성을 이용
+     -문법
+     <!-- css스타일 <태그명 style="css속성명:값;css속성명:값;"></태그명>-->
+      <태그명 onClick="함수명(매개변수리스트)"></태그명>
+	</xmp>
+	</body>
+</html>
+
+```
+
+## 2-1. 연결하는 form jsp문서
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>form01 문서</title>
+</head>
+<body>
+	<form name="frm1" id="fim1" method="get"  action="ok.jsp">
+		이름: <input type="text" name="mname" id="mname" size="10" maxlength="10" autofocus="autofocus"><br/>
+		비번: <input type= "password" name="mpwd" id="mpwd"><br/>
+		좋아하는 동물: <small>다중선택가능</small>
+			<input type="checkbox" id="animals1" name="animals"  value="lion">사자
+			<input type="checkbox" id="animals2" name="animals" value="tiger">호랭이
+			<input type="checkbox" id="animals3" name="animals" value="rabbit">토깽이
+			<input type="checkbox" id="animals4" name="animals" value="dog">멍멍이
+		<input type="submit" name="submit" id="submit"><br/>
+	</form>
+</body>
+</html>
+
+```
+
+## 2-2. 연결된 jsp문서
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.Enumeration, java.util.Map"   %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ok</title>
+</head>
+<body>
+	<h3>ok.jsp문서</h3>
+	<h4>form01문서에서 user가 입력한 데이터를 받아서 처리하는 서버측 페이지이다.</h4>
+	<% /*한줄 주석문*/
+			// Scriptlet(시크립트릿) 자바코드를 실행
+		/*?mname=hong&mpwd=1234
+		    파라미터명이 mname의 값을 가져와 변수에 저장
+		    타입 변수명 = 객체참조변수명.메서드명(); 이용
+				String[] animals ={"lion","tiger","rabbit","dog"};
+	          for(String a  : animals ){
+	        	  System.out.println(a);
+	          }*/
+				String mname = request.getParameter("mname");
+		    String mpwd = request.getParameter("mpwd");
+	%>
+
+	<!-- html 주석문 -->
+	<%-- jsp주석문 Expression표현식(<%=%>) 브라우저화면에 출력 --%>
+	<!-- 유저가 입력한 데이터 -->
+	<ul>
+		<li>이름: <%=mname %></li>
+		<li>비번: <%=mpwd %></li>
+		<li> 좋아하는 동물 :
+		<% String[] animals = request.getParameterValues("animals");
+
+		if(animals!=null){
+		    	for(int i=0; i<animals.length; i++){
+	        	  System.out.println(animals[i]); //콘솔출력
+	        	  //out객체는 system에 있는 객체와 다른것이다.
+	        	  out.print(animals[i]+"<br/>"); //브라우저화면에 출력
+		    	}//for 끝
+		}//if의 끝
+		    	%>
+		</li>
+	</ul>
+
+	<hr/>
+	<%
+	Enumeration<String> paraEnum = request.getParameterNames();
+	while(paraEnum.hasMoreElements()){
+	String name1 = 	paraEnum.nextElement();
+	  System.out.println(name1); //콘솔출력
+
+	  out.print(name1+"<br/>"); //브라우저화면에 출력
+	}
+	%>
+
+	<hr/>
+	*request.getParameterMap()이용<br>
+	=> 웹 브라우저가 전송한 파라미터의  Map을 가져오기<br>
+	map참조변수명.put(Object key명,Object value)=> Map에 value저장<br>
+	map참조변수명.get(Object key명)=> Map에서 value가져오기
+
+	<%
+	/*parameter명의 데이터타입은 String,
+    파라미터의 value타입은 String[].
+  String[]이유는 하나의 파라미터에 여러 개의 값이 들어올 수 있으므로 배열처리한다  */
+
+	Map<String,String[]> paramMap = request.getParameterMap();
+
+	String[] animals1 = paramMap.get("animals");
+
+	for(int i=0 ; i<animals1.length ; i++){
+	 System.out.println(animals1[i]); //콘솔출력
+	 out.println(animals1[i]+"<br/>");//브라우저화면에 출력
+	}
+	%>
+</body>
+</html>
+
+```
+
+.
