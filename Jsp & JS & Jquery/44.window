@@ -1,0 +1,156 @@
+# 44.**window**
+
+## 1-1. window객체 사용방법
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	   <script>
+      //confirm에서 사용할 함수
+      function f_confirm(){
+         //alert("f_confirm()호출성공");
+         //확인을 선택하면 true리턴, 취소선택시 false리턴
+         //id가 result인 요소내부에 출력
+         let r = confirm('성인입니까?');
+         window.document.getElementById("result").innerHTML=r;
+      }
+
+      //prompt에서 사용할 함수
+      function f_prompt(){
+         //prompt('출력할 메세지','초기값') 초기값 없이도 시작할수 있지만 숫자를 유도하기위한 예시로 숫자 넣어주면 좋음(placeholder못씀)
+         //prompt('출력할 메세지','초기값')
+         //내용을 입력하면 입력하는 값을 리턴
+         //id가 result인 요소내부에 출력
+         let inputAge=parseInt(prompt('나이를 숫자로 입력하세요',"1"));
+         let text="";
+         text+="입력한 나이:" + inputAge;
+         text+="<br>만 나이:" + (inputAge-1);
+
+         window.document.getElementById("result").innerHTML=text;
+      }
+   </script>
+
+   <hr>
+
+      <div id=result></div>
+      <button type="button" onClick="alert('경고메세지 전달~')">window.alert()</button>
+      <button type="button" onClick="f_confirm()">confirm()</button>
+      <button type="button" onClick="f_prompt()">prompt()</button>
+
+   <h2>Window객체</h2>
+   <hr>
+
+   <pre>
+   > window객체는 BOM(Browser Object Model)에서 가장 최상위 객체
+    ex) window.하위객체 //계층구조적으로 사용
+        window.location
+        window.history
+        window.document
+        window.document.forms
+        window.document.forms[].text
+
+       ---------
+       js에서 정수로 변환
+       parseInt(String) : 문자열을 정수의 number로 변환.
+       parseFloat(String) : 문자열을 실수의 number로 변환.
+
+   *alert는 경고를 한다. 경고만 하고 확인누르면 끝난다.
+   *confirm 확인절차를 진행한다. 다시한번 물어보는 창이 뜨고 확인과 취소를 갖는다. 확인true 취소는 false 리턴
+   *prompt 즉각적인 유저 입력칸이 있고 확인과 취소를 갖는 창이 뜬다이 뜬다.유저의 내용을 입력받을 수 있는 방법들중 하나이다.
+   => 세가지 다 그냥 메소드만 적었지만 window가 생략된 것이다. 정석은 window.alert(), window.confirm(), window.prompt()
+      </pre>
+
+</body>
+</html>
+
+```
+
+## 1-2. window객체 사용방법2
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <meta charset="UTF-8">
+ <title></title>
+ <link rel="stylesheet" href="<https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css>"/>
+ <style></style>
+ <script>
+ let win;
+ //새창열기
+ function openWin(){
+	// window.open(url,창이름);
+	 //window.open("");//비어있는 새 window객체가 생성
+	 //window.open("<http://naver.com>");//지정한 사이트있는 새 window객체가 생성
+	 //window.open("j_String.jsp");//지정한 문서가 있는 새 window객체가 생성
+	 //생성된 window객체를 변수 win에 저장
+	win=window.open("j_String.jsp","nw","width=50,height=50");//지정한 문서가 있는 새 window객체가 생성
+ }
+
+ //창크기조절
+ function f_resizeTo(){	 win.resizeTo(100,100); }
+ function f_resizeBy(){	 win.resizeBy(100,100); }
+
+ //창위치조절
+ function f_moveTo(){	 win.moveTo(100,100); }
+
+ //매개변수 dir에는 숫자,문자,객체
+ //매개변수 dir에는 object HTMLButtonElement
+ //dir.type=>매개변수 dir에 저장된  HTMLButtonElement의 type속성의 값을 가져오기
+ //dir.id  =>매개변수 dir에 저장된  HTMLButtonElement의     id속성의 값을 가져오기
+ function f_moveBy1(dir){
+	 //alert(dir.id);
+
+	 switch(dir.id) {
+	  case 'up':	win.moveBy(0,-100);//위방향으로 이동
+	    				break;
+	  case 'right': win.moveBy(100,0);  //오른쪽방향으로 이동
+	    				break;
+	  case 'down': win.moveBy(0,100); //아래방향으로 이동
+							break;
+	  case 'left': win.moveBy(-100,0); //왼쪽방향으로 이동
+							break;
+	}
+
+ }
+
+ </script>
+</head>
+<body>
+<h2>window객체</h2>
+<button type="button" onmouseover="openWin();">새창열기</button>
+<button type="button" onclick="f_moveTo();">moveTo(100,100)</button>
+<button type="button" onclick="f_moveBy1(this);" id="up">위방향</button>
+<button type="button" onclick="f_moveBy1(this);" id="right">오른쪽방향</button>
+<button type="button" onclick="f_moveBy1(this);" id="down">아래방향</button>
+<button type="button" onclick="f_moveBy1(this);" id="left">왼쪽방향</button>
+<br/>
+<button type="button" onclick="f_resizeTo();">resizeTo(100,100)</button>
+<button type="button" onclick="f_resizeBy();">resizeBy(100,100)</button>
+<hr/>
+<pre>
+  resizeTo(가로크기px,세로사이즈px):절대사이즈
+  resizeBy(가로크기px,세로사이즈px):상대사이즈.기존크기에 대하여 크기가 변경
+
+  moveTo(x축좌표,y축좌표): 지정된 위치로 이동
+  moveBy(x축좌표,y축좌표): 현재위치를 기준으로 이동
+  ★this=> 여기에서는 이벤트가 발생한 객체를 의미
+</pre>
+<hr/>
+
+</body>
+</html>
+
+```
+
+.
