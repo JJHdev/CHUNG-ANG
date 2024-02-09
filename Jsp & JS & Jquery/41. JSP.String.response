@@ -1,0 +1,199 @@
+# 41. JSP.String.response
+
+## 1. jsp에서의 String문법
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <meta charset="UTF-8">
+ <title>j_String.jsp</title>
+ <style></style>
+ <script>
+
+ </script>
+</head>
+<body>
+	<h2>String</h2>
+<hr/>let text = "Apple, Banana, Kiwi";<hr/>
+<p id="demo"></p>
+
+<button type="button" onclick="fsubstring();">fsubstring</button>
+<button type="button" onclick="fsubstr();">fsubstr</button>
+<button type="button" onclick="freplace();">freplace</button>
+<button type="button" onclick="fcharat();">fcharat</button>
+<button type="button" onclick="fsplit();">fsplit</button>
+<button type="button" onclick="findexof();">findexof</button>
+<button type="button" onclick="flastIndexof();">flastIndexof</button>
+
+<script>
+
+let text1 = "Apple, Banana, Kiwi";
+  function fsubstring() {
+    let part1 = text1.substring(7,10);
+    //let part1 = text1.substring(7);
+    //let part1 = text1.substring(-1);
+    //let part1 = text1.substring(-12,-6);
+  document.getElementById("demo").innerHTML = part1;
+}
+
+let text2 = "Apple, Banana, Kiwi";
+  function freplace() {
+    let part2 = text2.replace("Banana","aaaaa");
+  document.getElementById("demo").innerHTML = part2;
+}
+
+let text3 = "Apple, Banana, Kiwi";
+  function fsubstr() {
+    let part3 = text3.substr(7,10);
+    //let part3 = text3.substr(7);
+    //let part3 = text3.substr(-1);
+    //let part3 = text3.substr(-12,-6);
+  document.getElementById("demo").innerHTML = part3;
+}
+
+let text4 = "Please visit Microsoft and Microsoft!";
+  function fcharat() {
+    let len =text4.length;
+    //let part4 = text4.charAt(len-10);
+  let part4 = text4.charAt(8);
+    //let part4 = text4.charAt(-1);
+    //let part = text.charAt(-12,-6);
+  document.getElementById("demo").innerHTML = part4;
+}
+
+let text5 = "Please, visit, Microsoft, and, Microsoft!";
+function fsplit(){
+	const myArray = text5.split(",");
+	document.getElementById("demo").innerHTML =myArray[myArray.length-1];
+	console.log(typeof myArray);
+	console.log(myArray.length);
+}
+
+function findexof(){
+    let text6 = "Hello world, welcome to the universe.";
+    //let result = text6.indexOf("welcome");//10
+    let result = text6.indexOf("welcome");//-1
+  document.getElementById("demo").innerHTML = result;
+      if(result!=-1){
+          alert("찾았다.")
+        }else{
+          alert("단어가 없습니다.")
+        }}
+
+function flastIndexof(){
+    let text7 = "Hello world, welcome to the universe welcome.";
+    //let result = text7.lastIndexOf("welcome");//10
+    let result = text7.lastIndexOf("welcome");//-1
+	document.getElementById("demo").innerHTML = result;
+}
+
+</script>
+</body>
+</html>
+
+```
+
+## 2. response 응답경로
+
+- response01 → response02 → response03
+- `action이동 a href(유저선택)`
+- `response.getredirct (01 > 03으로 이동)`
+
+### 2-1. response01
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>회원가입</h1>
+	<form  name="form" id="form"  method="get" action="T_response02.jsp">
+
+<fieldset>
+	<legend>필수 입력 사항</legend>
+				<table>
+						<tr>
+									<td>ID</td>
+									<td><input type="text"  name="ID" id="ID" required="required"  placeholder="아이디 10글자 이내" ></td>
+									<td><button>중복 확인</button></td>
+						</tr>
+						<tr>
+									<td>비밀번호 </td>
+									<td><input type="password" name="pwd" id="pwd1"  required="required" placeholder="영문,숫자,특수문자 포함 8자 이상"></td>
+						</tr>
+
+						<tr>
+								<td>비밀번호 확인 </td>
+								<td><input type="password" name="pwd" id="pwd2"  required="required" ></td>
+						</tr>
+				</table>
+	</form>
+</body>
+</html>
+
+```
+
+### 2-2. response02
+
+- response.sendRedirect("T_response03.jsp?ID="+ID1+"&pwd="+pwd1); // 01페이지의 속성과 값을 03으로 전달하는 방법
+- <a href="T_response03.jsp?ID=<%=ID1 %>&pwd=+<%=pwd1%>">T_response03.jsp </a> // 01페이지의 속성과 값을 03으로 전달하는 방법
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.Enumeration, java.util.Map"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>T_response02</title>
+</head>
+<body>
+		<%
+  	String ID1 = request.getParameter("ID");
+  	String pwd1 = request.getParameter("pwd");
+  	out.write("ID="+ID1);
+  	out.write("pwd="+pwd1);
+
+   response.sendRedirect("T_response03.jsp?ID="+ID1+"&pwd="+pwd1); // 01페이지의 속성과 값을 03으로 전달하는 방법
+	%>
+
+  	<a  href="T_response03.jsp?ID=<%=ID1 %>&pwd=+<%=pwd1%>">T_response03.jsp </a> // 01페이지의 속성과 값을 03으로 전달하는 방법
+</body>
+</html>
+
+```
+
+### 2-3. response03
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ 	03월드
+ 	<%
+ 	  String ID2 = request.getParameter("ID");
+  	String pwd2 = request.getParameter("pwd");
+
+  	out.write("ID="+ID2);
+  	out.write("pwd="+pwd2);
+  	%>
+  	</body>
+</html>
+
+```
+
+.
