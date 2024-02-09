@@ -1,0 +1,166 @@
+# 42.**forward.date**
+
+## 1. forward, param 문법 (액션태그)
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.Enumeration, java.util.Map"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>forward02</title>
+</head>
+<body>
+		<%
+
+  	String ID1 = request.getParameter("ID");
+  	String pwd1 = request.getParameter("pwd");
+
+  	out.write("ID="+ID1);
+  	out.write("pwd="+pwd1);
+
+   //response.sendRedirect("forward03.jsp?ID="+ID1+"&pwd="+pwd1); // 01페이지의 속성과 값을 03으로 전달못한다.
+	%>
+
+	<%-- <jsp:forward page="경로및 파일명"></jsp:forward>
+					<jsp:param value="파라미터값" name="파라미터명"/>
+					<jsp:param value="파라미터값" name="파라미터명"/>
+
+					참고 : forward하는 또 다른 방법(559p 35~37)
+					RequestDispatcher dispatcher = request.getRequestDispatcher("이동할 페이지");
+					dispatcher.forward(SevletRequest객체,SevletResponse객체);
+		 --%>
+	<jsp:forward page="forward03.jsp">
+	<jsp:param value="<%=ID1%>" name="ID"/>
+	<jsp:param value="<%=pwd1%>" name="pwd"/>
+	</jsp:forward>
+
+	<hr/>
+  	<a  href="forward03.jsp?ID=<%=ID1 %>&pwd=+<%=pwd1%>">forward03.jsp </a>
+</body>
+</html>
+
+```
+
+## 2-1. Date(JSP) 문법
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <meta charset="UTF-8">
+ <title>Date객체</title>
+ <link rel="stylesheet" href="<https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css>"/>
+ <style></style>
+ <script>
+
+ </script>
+</head>
+<body>
+	<h2>Date객체</h2>
+<pre>
+getFullYear()=>Get year as a four digit number(yyyy)
+getMonth()=>Get month as a number(0-11)
+getDay()=>Get weekday as a number(0-6)
+</pre>
+   <hr/>
+<script>
+document.write("<pre>");
+
+//파라미터가 없는 생성자를 이용한 날짜객체생성
+let today = new Date();
+document.writeln("new Date()="+today);
+
+document.writeln("getFullYear()=>"+today.getFullYear());
+document.writeln("getMonth()=>"+(today.getMonth()+1));
+document.writeln("getDate()=>"+today.getDate());
+document.writeln("getDay()=>"+today.getDay());//요일
+document.writeln("getHours()=>"+today.getHours());
+document.writeln("getMinutes()=>"+today.getMinutes());
+document.writeln("getSeconds()=>"+today.getSeconds());
+document.writeln("getMilliseconds()	=>"+today.getMilliseconds()	);
+document.writeln("getTime()=>"+today.getTime());
+
+let day="";
+switch (today.getDay()) {
+case 0:
+  day = "Sunday";  break;
+case 1:
+  day = "Monday";  break;
+case 2:
+   day = "Tuesday";  break;
+case 3:
+  day = "Wednesday";  break;
+case 4:
+  day = "Thursday";  break;
+case 5:
+  day = "Friday";  break;
+case 6:
+  day = "Saturday";
+}
+document.writeln("문자요일day="+day);
+
+document.writeln("<hr/>");
+
+//파라미터가 있는 생성자를 이용한 날짜객체생성
+let theDay = new Date('December 17, 2020 03:24:59');
+document.writeln("new Date('December 17, 2020 03:24:59')="+theDay);
+
+document.write("</pre>");
+</script>
+</body>
+</html>
+
+```
+
+## 2-2. Date (java)
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <meta charset="UTF-8">
+ <title>Date객체</title>
+ <link rel="stylesheet" href="<https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css>"/>
+ <style></style>
+ <script>
+
+ </script>
+</head>
+<body>
+	<h2>Date객체:날짜출력하기</h2>
+<pre>
+js의 Date객체는 자동적으로 toString()가 호출되어  String으로 형변환하여 출력된다
+getFullYear()=>Get year as a four digit number(yyyy)
+getMonth()=>Get month as a number(0-11)
+getDay()=>Get weekday as a number(0-6)
+
+</pre>
+   <hr/>
+<script>
+document.write("<pre>");
+
+//파라미터가 없는 생성자를 이용한 날짜객체생성
+let today = new Date();
+document.writeln("new Date()="+today);
+document.writeln("new Date()="+today.getFullYear());
+document.writeln("new Date().toDateString()="+today.toDateString());
+
+document.writeln("new Date().toString()="+today.toString());
+document.writeln("new Date().toString().toUpperCase()="+today.toString().toUpperCase());
+
+document.writeln("<hr/>");
+
+document.write("</pre>");
+</script>
+</body>
+</html>
+
+```
+
+.
