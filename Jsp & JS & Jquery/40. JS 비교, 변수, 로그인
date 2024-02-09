@@ -1,0 +1,378 @@
+# 40. JS 비교, 변수, 로그인
+
+## 1. oupput 방법
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>J_output.jsp</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="<https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css>">
+      <style>
+
+      </style>
+      <script>
+
+      </script>
+    </head>
+    <body>
+    <h2>Output</h2>
+    <pre>
+    	window.alert(); 경고창
+    	객체.innerText = 해당태그 내부의 글자. html태그도 글자취급
+    	객체.innerHTML = 해당태그 내부의 글자와 html.html태그는 적용
+    	console.log() => 콘솔에 출력.
+    	document.write() => document에 출력 .html태그는 적용
+    </pre>
+    <p id="demo"></p>
+    <script>
+    	console.log("콘솔에 출력")
+    	document.getElementById("demo").innerText="innerText속성으로 출력";
+    	alert(document.getElementById("demo").innerText);
+    	document.getElementById("demo").innerHTML="<em>innerHTML속성으로 출력</em>";
+    	document.write("document객체의 write()로 출력");
+    	document.write("두번째로 출력");
+
+    	</script>
+
+    </body>
+</html>
+
+```
+
+## 2. js variable 방법
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>변수(variable)</h2>
+	<pre>
+		*자바스크립 변수선언 4가지 방법
+		x 변수명;
+		var 변수명; => 재선언 가능하여 긴 소스 여러사람과 작업시 문제발생확률이 있어 위험하다.
+														변수선언과 초기화를 나눌때 변수선언 한건 아래에 있어도 자동적으로 맨위로
+														올라가게 된다. (호이스팅)
+														javaScript는 초기화를 제외한 선언만 호이스팅한다.
+
+		let 변수명; => 재선언 불가능.
+		const 변수명; => 값 재할당 불가. (constant)상수로서 초기값을 할당 후에는 값을 다시 할당할 수 없다.
+
+		참고 >hoisting
+	            인터프리터가 코드실행을 하기 전 변수(함수)선언을 코드의 최상단으로 끌어올림.
+	            = &lt; 이것은 > &gt; 이것은 <
+
+	            *entity<br/>
+	           < 은 &lt;
+	           > 은  &gt;
+	           공백은 &nbsp;
+	           복사 &copy;
+	           더블쿼터 &quot;
+	           싱클쿼터  &apos;
+	</pre>
+	<hr/>
+
+	<script>
+
+	 a=10;
+	 b=90;
+	 c=a+b;
+	 document.writeln("c="+c);
+	 document.writeln("<hr/>");
+
+	 var a1=10;
+	 var b1;//undefined
+	 var c1=a1+b1;
+	 b1=90;
+	 document.writeln("var c1="+c1); //nan
+	 document.writeln("<hr/>");
+
+	 let a2=10;
+	 let b2;
+	 b2=90;
+	 let c2=a2+b2;
+	 document.writeln("let c2="+c2);
+	 document.writeln("<hr/>");
+
+	 const a3=10;
+	 const b3=90;
+	 const c3=a3+b3;
+	 document.writeln("const c3="+c3);
+	 document.writeln("<hr/>");
+
+	</script>
+
+</body>
+</html>
+
+```
+
+## 3. js prerator 방법
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style></style>
+<script></script>
+
+</head>
+<body>
+	<h2>연산자(prerator>)</h2>
+	<pre>
+	 	비교연산자
+	 	A== 10
+		A=== 10
+		A!= 10
+		A!== 10
+		A>= 10
+		A> 10
+		A<= 10
+		A< 10
+
+		=== 는 값과 타입까지 같이 본다.
+		!== 는 값과 타입까지 같이 본다.
+	</pre>
+	<hr/>
+
+	<script>
+	document.write("<pre>");
+
+	let a =100;
+	let a1 ="100";
+	let b = 100;
+	document.writeln("a>b의 결과 =" +(a>b));
+	document.write("<hr/>");
+	document.writeln("a==b의 결과 =" +(a==b));
+	document.writeln("a===b의 결과 =" +(a===b));
+	document.writeln("a1==b의 결과 =" +(a1==b));
+	document.writeln("a1===b의 결과 =" +(a1===b));
+	document.write("<hr/>");
+	document.writeln("a!=b의 결과 =" +(a!=b));
+	document.writeln("a!==b의 결과 =" +(a!==b));
+	document.writeln("a1!=b의 결과 =" +(a1!=b));
+	document.writeln("a1!==b의 결과 =" +(a1!==b));
+
+	//자바스크립트에서는 문자 " ", ' '
+	/*
+	String str1 ="홍";
+	String str2 ="홍";
+	syso(str1==srt2);  //ture
+	syso(str1.equals(str2));  //ture
+
+	String str3 = new String("길동");
+	String str4 = new String("길동");
+	syso(str3==srt4); //false
+	syso(str3.equals(str4)); //ture
+	*/
+
+	document.write("</pre>");
+
+	</script>
+
+</body>
+</html>
+
+```
+
+## 4. 중요 ★★★★★ jsp request객체 사용방법
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>requestInfo(p73)</title>
+</head>
+<body>
+	<h2>request객체(p73)</h2>
+	<p></p>
+
+	<http://www.localhost/8088/pro1/S_requsetInfo.jsp>
+
+	<hr/>
+		<ul>
+			<li>getRemoteAddr(): <%=request.getRemoteAddr()%></li>
+			<li>getContentLength(): <%=request.getContentLength() %></li>
+			<li>getCharacterEncoding(): <%=request.getCharacterEncoding() %></li>
+			<li>getContentType(): <%=request.getContentType() %></li>
+			<li>getProtocol(): <%=request.getProtocol() %></li>
+			<li>getMethod(): <%=request.getMethod() %></li>
+			<li>getRequestURI(): <%=request.getRequestURI()%></li>
+			<li>getContextPath(): <%=request.getContextPath() %></li>
+			<li>getServerName(): <%=request.getServerName() %></li>
+			<li>getServerPort(): <%=request.getServerPort() %></li>
+			<li>getRequestURI(): <%=request.getRequestURI() %></li>
+		</ul>
+
+</body>
+</html>
+
+```
+
+## 5. jsp form복습및 response객체 사용방법
+
+### 5-1. form 양
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>회원가입</h1>
+	<form  name="form" id="form"  method="get" action="ZZZok.jsp">
+
+<fieldset>
+	<legend>필수 입력 사항</legend>
+				<table>
+						<tr>
+									<td>ID</td>
+									<td><input type="text"  name="ID" id="ID" required="required"  placeholder="아이디 10글자 이내" ></td>
+									<td><button>중복 확인</button></td>
+						</tr>
+
+						<tr>
+									<td>비밀번호 </td>
+									<td><input type="password" name="pwd" id="pwd1"  required="required" placeholder="영문,숫자,특수문자 포함 8자 이상"></td>
+						</tr>
+
+						<tr>
+								<td>비밀번호 확인 </td>
+								<td><input type="password" name="pwd" id="pwd2"  required="required" ></td>
+						</tr>
+
+						<tr>
+								<td>Email</td>
+								<td><input type="email" name="email" id="email" ></td>
+							   <td>	<select name="loc" id="loc" >
+							      		  <option value="0" >직접입력</option>
+							      			<option value="newyork">뉴욕</option>
+							      			<option value="seoul">서울</option>
+												</select>
+							</td>
+						</tr>
+
+				</table>
+</fieldset>
+
+	<fieldset>
+			<legend>추가정보</legend>
+
+				프로필사진
+				<input type="file" name="file" id="file">
+				<br/>
+
+				성별 :
+				<input type="radio" name="sex" id="m" value="male"> 남자
+				<input type="radio" name="sex" id="w" value="woman"> 여자
+			<br/>
+
+			  생년월일:
+			  <input type="date" name="birth" id="birth" >
+			  <br/>
+
+			  취미:
+			  <input type="checkbox" name="ho1" id="a1" value="a">야구
+				<input type="checkbox" name="ho2" id="a2" value="b">농구
+				<input type="checkbox" name="ho3" id="a3" value="c">축구
+				<input type="checkbox" name="ho4" id="a4" value="d">공부
+				<input type="checkbox" name="ho5" id="a5" value="e">음악감상
+				<input type="checkbox" name="ho6" id="a6" value="f">기타
+				<textarea cols="10" rows="1"></textarea>
+			<br/>
+
+				자기소개
+				<br/>
+				<textarea cols="100" rows="10"></textarea>
+			</fieldset>
+			<br/>
+			<input type="submit" value="로그인">
+			<button type="submit">회원가입</button>
+			<button type="reset">다시입력</button>
+			<button type="button">이전으로</button>
+	</form>
+</body>
+</html>
+
+```
+
+### 5-2. 서버측 페이지
+
+- 연동페이지는 그냥 로그인 성공 실패로만 작성했다.
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.Enumeration, java.util.Map"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+		<%
+	/*parameter명의 데이터타입은 String,
+    파라미터의 value타입은 String[].
+  String[]이유는 하나의 파라미터에 여러 개의 값이 들어올 수 있으므로 배열처리한다  */
+
+	/*Map<String,String[]> paramMap2 = request.getParameterMap();
+	Enumeration<String> enum2 = request.getParameterNames();
+
+			while(enum2.hasMoreElements()){
+				String	keyname =enum2.nextElement();
+				String[] values3 =paramMap2.get(keyname)	;
+			for(String a : values3){
+			 	System.out.println(a); //콘솔출력
+
+				 out.println("keyname값 = "+keyname+" "+ " "+"values값= "+a+"<hr/>");//브라우저화면에 출력
+			}
+		}*/
+	%>
+
+  1. user가 입력한 정보 id와 비밀번호를 가져오기
+  2. 일치여부비교
+  3. 결과에 따른 페이지이동 또는 출력
+	<%/*
+ 이 jsp에서 user가 입력한 정보를 받아서 처리하는 서브측 페이지이다.
+ user가 입력한 정보 id와 비밀번호를 받아서
+ (원칙적으로는 db의 회원테이블에 저장된) 회원의 id와 비밀번호와 비교하겠다.
+ 여기에서는 임시로 회원테이블의 회원 id는 hong, 비번은 qwer라고 가정하고 진행.
+
+ 일치하면 로그인성고! 메세지가 있는 페이지로 이동
+ 실패하면 로그인 실패! 메세지를 출력
+  */
+  String id = request.getParameter("ID");
+
+  	if ((id!=null) && id.equals("hong")){
+  		response.sendRedirect("<http://localhost:8088/pro1/zok.jsp>");
+  	} else{
+  		response.sendRedirect("<http://localhost:8088/pro1/zfalse.jsp>");
+  	}
+	%>
+
+</body>
+</html>
+
+```
+
+.
