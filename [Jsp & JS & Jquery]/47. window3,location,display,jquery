@@ -1,0 +1,277 @@
+# 47.**window3,location,display,jquery**
+
+## 1. window와 data.tolocaleTimeString(); 이용하여 현재시간 표현
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <meta charset="UTF-8">
+ <title></title>
+ <link rel="stylesheet" href="<https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css>"/>
+ <style></style>
+ <script>
+
+ </script>
+</head>
+<body onload="startTime()">
+<h1>The Window Object</h1>
+<h2>The setInterval() and clearInterval() Methods</h2>
+<pre>
+ setInterval(function, milliseconds):일정 시간을 간격으로 특정함수를 반복 호출
+  -파라미터 function은 호출하고자하는 함수명. 함수명뒤에 ()를 쓰지x
+  -파라미터 milliseconds는 밀리세컨드 단위. 일정 시간을 간격
+  -참고 1ms=1/1000초 =>  1000ms=1초
+ clearInterval() : setInterval()로 설정한 timer를 clear.
+</pre>
+
+<!-- 시간이 출력되는 영역 -->
+<p id="demo">1초뒤 시간출력</p>
+
+<button onclick="myStopFunction()">Stop time</button>
+
+<script>
+//1000ms(1초)뒤에   myTimer함수를 호출
+const myInterval = setInterval(myTimer, 1000);
+
+//1초 단위로 시간을 id가 demo인 영역내부에 출력
+function myTimer() {
+  const date = new Date();
+  document.getElementById("demo").innerHTML = date.toLocaleTimeString();
+}
+
+function myStopFunction() {
+    clearInterval(myInterval);//1초 단위로 시간을 출력하는 함수를 clear
+}
+</script>
+
+<hr/>
+<h2>The setTimeout Method</h2>
+<pre>
+ setTimeout(function, milliseconds):일정 시간뒤에 특정함수를 호출실행
+  -파라미터 function은 호출하고자하는 함수명. 함수명뒤에 ()를 쓰지x
+  -파라미터 milliseconds는 밀리세컨드 단위.
+  -참고 1ms=1/1000초 =>  1000ms=1초
+ clearTimeout() : setTimeout()로 설정한 timer를 clear.
+</pre>
+
+<p id="demo1">1초뒤 시간보임</p>
+
+<script>
+function startTime() {
+  const date1 = new Date();
+  document.getElementById("demo1").innerHTML = date1.toLocaleTimeString();
+  setTimeout(function() {startTime()}, 1000);
+}
+</script>
+
+</body>
+</html>
+
+```
+
+## 2. location 이용
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <meta charset="UTF-8">
+ <title></title>
+ <link rel="stylesheet" href="<https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css>"/>
+ <style></style>
+ <script>
+ </script>
+</head>
+<body>
+
+<ul>js이용
+
+ <li>location객체의 href속성이용:
+  <button type="button"
+         onclick="javascript:location.href='<http://www.naver.com>';">
+        네이버로 이동</button>
+ </li>
+
+ <li>DOM이용:
+  <button type="button" onclick="changeURL()">네이트로 이동하고 싶으면 클릭 후 아래a태그를 클릭</button>
+ </li>
+
+ <li>
+  <button type="button" onclick="location.reload()">location.reload 새로고침</button>
+ </li>
+
+ <li>
+  <button type="button" onclick="location.replace('V_Object.jsp')">location.replace 뒤로가기 없는. 주소 새창가기</button>
+ </li>
+
+ <li>
+  <button type="button" onclick="location.assign('V_Object.jsp')">location.assign 주소 현재창가기</button>
+ </li>
+
+</ul>
+
+*a태그이용:
+<a href="<http://www.naver.com>" target="_self" id="i1">네이버로 이동</a>
+<br/><br/>
+
+<hr/>
+*request.getRequestURL():<%=request.getRequestURL() %>
+
+<hr/>
+<script>
+ function changeURL(){
+   //location.href='<http://www.nate.com>';
+   //id가 i1요소에 접근=> a요소 =><a href="주소" target="~" id="i1">글자</a>
+   let obj=document.querySelector("a#i1");
+
+   //a요소 href값을      '<http://www.nate.com>'으로 변경
+   //<a href="<http://www.nate.com>" target="~" id="i1">글자</a>
+   obj.href='<http://www.nate.com>';
+
+   //a요소 tartget값을 '_blank'으로 변경
+   //<a href="<http://www.nate.com>" target="_blank" id="i1">글자</a>
+   obj.target='_blank';
+
+   //a요소 내부 글자를      'nate로 링크로 변경됨'으로 변경
+   obj.innerHTML='nate로 링크로 변경됨';
+
+ }
+
+<hr/>
+<h2>Location객체</h2>
+<pre>
+ -원래 Window객체의 location속성이지만 => winodw.location
+  Location객체로 분리해서 사용가능
+ -Location객체는 현재창의 URL에 대한 정보를 포함하고 있다.
+
+ -location.href=url : 지정주소로 이동.
+	 location.reload() :새로고침
+	 location.replace(url) : 지정주소로 이동. back불가.
+	 location.assign(url) : 지정주소로 이동. back가능.
+
+</pre>
+
+ document.write("<pre>");
+ document.writeln("프로토콜://ip주소:port/Contextpath/");
+ document.writeln("      현재 URL=>"+"<http://localhost:8088/pro1/j_Location.jsp>");
+ document.writeln("location.href=>"+location.href);
+ //location.href="<http://www.naver.com>";
+ document.write("</pre>");
+</script>
+
+ <hr><h2>history객체</h2><hr/>
+   <span onclick="history.back()" style="background-color:red" >history.back</span>
+   <span onclick="history.go(-1)" style="background-color:aqua;" >history.go(-1)</span>
+   <span onclick="history.forward()" style="background-color:fuchsia;" >history.forward</span>
+   <span onclick="history.go(1)" style="background-color:green;" >history.go(1)</span>
+
+</body>
+</html>
+
+```
+
+## 3. display,jquery(toggle)객체 사용
+
+- <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script> 이코드가 있어야 jquery쓸수가있다.
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <meta charset="UTF-8">
+ <title></title>
+ <link rel="stylesheet" href="<https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css>"/>
+ <script src="<https://code.jquery.com/jquery-3.6.3.min.js>"></script>
+ <style>
+.imgbox {
+  float:left;
+  text-align: center;
+  width: 120px;
+  border: 1px solid gray;
+  margin: 4px;
+  padding: 6px;
+}
+
+button {
+  width: 100%;
+}
+
+.clear {clear:both;} //float:left, float:right된 것을 해제
+</style>
+ <script>
+
+ </script>
+</head>
+<body>
+
+<div class="imgbox" id="imgbox1">jQuery<br>
+  <img src="./images/img_5terre.jpg" alt="Italy" id="img1" style="width:100%">
+  <button onclick="$('#img1').toggle();">toggle()</button>
+</div>
+
+<div class="imgbox" id="imgbox1">dispaly속성<br>
+  <img src="./images/img_5terre.jpg" alt="Italy" style="width:100%">
+  <button onclick="removeElement()">Remove</button>
+</div>
+
+<div class="imgbox" id="imgbox2">visibility속성<br>
+  <img src="./images/img_lights.jpg" alt="Lights" style="width:100%">
+  <button onclick="changeVisibility()">Hide</button>
+</div>
+
+<div class="imgbox">js로 style제어<br>
+  <img src="./images/img_forest.jpg" alt="Forest" style="width:100%">
+  <button onclick="resetElement()">Reset All</button>
+</div>
+
+<script>
+function removeElement() {
+  //$('#imgbox1').css("display","none");
+  document.getElementById("imgbox1").style.display = "none";
+}
+
+function changeVisibility() {
+  document.getElementById("imgbox2").style.visibility = "hidden";
+}
+
+function resetElement() {
+  document.getElementById("imgbox1").style.display = "block";
+  document.getElementById("imgbox2").style.visibility = "visible";
+}
+</script>
+
+<h2 class="clear">display:none과 visibility:hidden</h2>
+<pre>
+display:none     =>화면에 보이지x. 영역차지x
+display:block | inline | inline-block로 하면 화면에 보인다
+
+visibility:hidden=>화면에 보이지x. 영역차지o
+visibility:visible로 하면 화면에 보인다
+
+css에서는  선택자 {css속성명:값;}
+#imgbox1 {display:none;}
+#imgbox1 {display:block;}
+#imgbox2 {visibility:hidden;}
+#imgbox2 {visibility:visible;}
+
+Javascript에서 style은 객체로서 취급
+요소.style.css속성명=값;
+document.getElementById("imgbox1").style.display = "none";
+document.getElementById("imgbox1").style.display = "block";
+document.getElementById("imgbox2").style.visibility = "hidden";
+document.getElementById("imgbox2").style.visibility = "visible";
+</pre>
+<hr/>
+</body>
+</html>
+
+```
+
+.
