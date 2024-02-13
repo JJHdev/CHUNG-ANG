@@ -1,0 +1,92 @@
+# 46 .Jsp Db자료입력
+
+## 1. JSP에서 MYDB에 자료 입력 방법.
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import = "java.sql.*" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div>
+ 이문서는 user입력받아 처리하는 서버측 페이지 이다. user가 입력,선택한 data를 받아 MYsql
+ chap14 jspexam jsppw dept테이블에 입력.
+</div>
+<!--    <script>
+  let deptno = document.getElementById("deptno");
+  let dname = document.getElementById("dname");
+  let loc = document.getElementById("loc");
+  </script>  -->
+  <%
+  String strDeptno = request.getParameter("deptno");
+  int deptno = Integer.parseInt(strDeptno);
+  String dname =  request.getParameter("dname");
+  String loc =  request.getParameter("loc");
+  System.out.println("strDeptno= "+strDeptno);
+  System.out.println("dname= "+dname);
+  System.out.println("loc= "+loc);
+
+  String url ="jdbc:mysql://localhost:3306/chap14?"+
+	        "useUnicode=true&characterEncoding=utf8";
+	String user="jspexam";
+	String password="jsppw";
+  PreparedStatement stmt = null;
+  Connection conn =null;
+
+  try {
+	  Class.forName("com.mysql.jdbc.Driver");
+  } catch (ClassNotFoundException e) {
+    System.out.println("ClassNotFoundException 발생");
+    e.printStackTrace();
+  }
+
+  try {
+    conn = DriverManager.getConnection(url, user, password);
+  } catch (SQLException e) {
+    System.out.println("SQLException 발생");
+    e.printStackTrace();
+  }
+  System.out.println("2. connection succes");
+
+  String sql ="insert into dept(deptno,dname,loc) "+
+		          "values (?,?,?)";
+  try {
+    stmt= conn.prepareStatement(sql);
+  } catch (SQLException e1) {
+    e1.printStackTrace();
+  }
+
+  try {
+    stmt.setInt(1, deptno);
+    stmt.setString(2,dname);
+    stmt.setString(3,loc);
+    int resultCnt = stmt.executeUpdate();
+    System.out.println("QUERY실행결과로 받은 record수 ="+resultCnt);
+  } catch (SQLException e1) {
+    System.out.println("executeUpdate()실행관련 에러");
+    e1.printStackTrace();
+  }
+
+  try {
+    if(stmt != null) {
+      stmt.close();
+    }
+    if(conn != null) {
+      conn.close();
+    }
+  } catch (SQLException e) {
+    e.printStackTrace();
+    }
+  System.out.println("5. 자원반납 진행");
+  %>
+</body>
+</htm
+
+```
+
+.
