@@ -1,0 +1,274 @@
+# 45.window02,mysql연동
+
+## 1. window를 이용한 우편번호 검색하기.
+
+### 1-1 .form
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <meta charset="UTF-8">
+ <title></title>
+ <link rel="stylesheet" href="<https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css>"/>
+ <style></style>
+
+ <script>
+ let childwin;
+
+ function openWin(){
+	 childwin = window.open("W_childWindow.jsp","nw","width=600,height=600");
+ }
+
+ function closeWin(){
+	 childwin.close();
+ }
+
+ function selfcloseWin(){
+	 self.close();
+ }
+
+ </script>
+
+</head>
+<body>
+<h2>window객체</h2>
+
+<!-- <button type="button" onclick="openWin();">새창열기</button>
+<button type="button" onclick="closeWin();">자식창닫기</button>
+<button type="button" onclick="selfcloseWin();">창닫기</button> -->
+
+<form name="frm" id="frm" method="post"><br/>
+
+*주소 <input type="text" name="address1"   id="address1"><br/>
+*상세주소 <input type="text" name="address2" id="address2">
+*우편번호 <input type="text" name="zipcode1" id="zipcode1" size="3"> -
+<input type="text" name="zipcode2" id="zipcode2" size="3">
+<button type="button" value="우편번호찾기" name="btn_findZip"
+		id="btn_findZip" onclick="openWin()">우편번호 찾기.</button>
+
+</form>
+
+<hr/>
+	<pre>
+	* <http://127.0.0.1:8088/webpro/formEx/form01.jsp> 404error
+	* <http://localhost:8088/webPro/formEx/form01.jsp> 실제.
+	</pre>
+</body>
+</html>
+
+```
+
+1-2. child window
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <meta charset="UTF-8">
+ <title></title>
+ <link rel="stylesheet" href="<https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css>"/>
+ <style></style>
+ <script>
+  function findZip(obj){
+	  //alert(obj); 변수obj에는  객체 HTMLInputElement의 value속성의 값
+	  //1-1.클릭한 버튼의 글자를 가져와
+	  //=>클릭이벤트가 발생한 버튼객체의 value속성의 값을 가져오기
+
+	  //"서울시 강남구 역삼동 100번지 123-123"
+	  const myArray = obj.split(" ");
+		//alert(myArray);//서울시,강남구,역삼동
+
+		//1-2.문자열에서 추출
+	  //주소추출=>"서울시 강남구 역삼동"
+		let addr1=myArray[0]+" "+myArray[1]+" "+myArray[2];
+		//console.log(addr);////"서울시 강남구 역삼동"
+
+	  //상세주소추출=>"100번지"
+	  //let addr2 = ~~
+	 	let addr2=myArray[3];
+
+	  //우편번호 앞 추출=>"123"
+	  let zip1=obj.slice(-7,-4); //console.log(zip1);
+
+		//우편번호 뒤 추출=>"123"
+	  let zip2=obj.slice(-3); 	//console.log(zip2);
+
+		//2.j_window03.jsp의 폼에 출력한다
+		//=> 부모창의 문서안의 폼 하위 특정필드에 접근
+		// window.폼객체.하위객체
+		 //alert(opener.frm.address1); > 객체명나옴
+		//==> 특정필드 객체의 value송석의 값을 설정
+  		// window.폼객체.하위객체.value=값
+
+  		//계층구조를 이용하여 특정요소에 접근
+	  	opener.frm.address1.value=addr1;
+	  	opener.frm.address2.value=addr2;
+
+	  	//document객체의 getElementById()를 이용하여 특정요소에 접근
+	  	opener.document.getElementById("zipcode1").value=zip1; //id에 접근
+	  	//document객체의 getElementById()를 이용하여 특정요소에 접근
+  		opener.document.querySelector("#zipcode2").value=zip2; //id에 접근
+  }
+ </script>
+</head>
+<body>
+	<h2>j_childWinodw.jsp</h2>
+  <form name="zipCodeFrm" id="zipCodeFrm">
+  	<input type="button" id="btn1" value="서울시 강남구 역삼동 100번지 123-123" onclick="findZip(this.value);"/>
+  	<input type="button" id="btn2" value="서울시 송파구 잠실동 123번지 456-789" onclick="findZip(this.value);"/>
+  	<input type="button" id="btn3" value="서울시 구로구 온수동 100번지 111-111" onclick="findZip(this.value);"/>
+  	<input type="button" id="btn4" value="경기도 성남시 상평동 100번지 222-222" onclick="findZip(this.value);"/>
+  	<input type="button" id="btn5" value="서울시 강남구 면목동 100번지 333-333" onclick="findZip(this.value);"/>
+  	<input type="button" id="btn6" value="용인시 처인구 모현읍 1번지 555-555" onclick="findZip(this.value);"/>
+  </form>
+
+  <hr/>
+  <button type="button" onclick="self.close();">자신창닫기</button>
+  <button type="button" onclick="opener.close();">부모창닫기</button>
+
+</body>
+</html>
+
+```
+
+## 3. mysql db연동 가져오기.
+
+```
+<%@page import="javafx.beans.binding.StringBinding"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*,java.util.Date, java.io.*" %>
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>long data 가져오기</title>
+ <link href="<http://localhost:8087/webPro/css/table1.css>" rel="stylesheet">
+</head>
+
+<body>
+  <h2> long data 가져오기.(p398)</h2>
+  <P> resultSet에서 MEDIUMTEXT타입 값 읽어오기.</P>
+
+  <table id="table1">
+  <caption>부서목록</caption>
+  <thead>
+   <tr>
+    <th>회원ID</th>
+    <th>내용</th>
+   </thead>
+   <tbody>
+<%
+String url ="jdbc:mysql://localhost:3306/chap14?"+
+	      "useUnicode=true&characterEncoding=utf8";
+	String user="jspexam";
+	String password="jsppw";
+Connection conn=null;
+PreparedStatement stmt=null;
+ResultSet rs = null; //select쿼리문의 실행결과집합을 저장하기위한 변수선언 및 초기화
+Reader reader = null;
+String history =null;
+
+//1.JDBC Driver등록
+try {
+  Class.forName("com.mysql.jdbc.Driver");
+} catch (ClassNotFoundException e) {
+  System.out.println("ClassNotFoundException발생 e="+e);
+  e.printStackTrace();
+}
+System.out.println("1.JDBC Driver등록-성공");
+
+//2.연결 Connection얻기
+//DriverManager.getConnection(연결DB서버url, 접속user명, 비밀번호)
+try {
+  conn=DriverManager.getConnection(url, user, password);
+} catch (SQLException e) {
+  System.out.println("SQLException발생");
+  e.printStackTrace();
+}
+System.out.println("2.Connection얻기-성공");
+
+//3.객체준비-PreparedStatement객체
+try {
+  String sql =
+    "select memberid,history "+
+    "from member_history ";
+
+  stmt =conn.prepareStatement(sql);
+  System.out.println("3.PreparedStatement객체 생성");
+
+  //4.쿼리실행
+  rs = stmt.executeQuery();
+  System.out.println("4.쿼리문실행결과 : ");
+  while( rs.next() ) { //rs.next()는 다음행(new row)있으면 true리턴
+	  String memberid=rs.getString("memberid");//deptno컬럼의 값을 자바에서 int로 처리
+    /* history=rs.getString("history");//dname컬럼값 가져오기 */
+    reader = rs.getCharacterStream("history");
+
+    if(reader!=null){
+
+    	StringBuilder buff = new StringBuilder();// 읽은 데이터를 저장하는 임시메모리저장공간
+    	char[] ch = new char[512];
+    	int len = -1;
+    	//read()는 array에 있는 characters를 읽는다.
+    	//read()읽은 characters수를 리턴하고 stream의 끝(end)에 도달하면 -1를 리턴한다.
+    	// 아래 while은 가져올 데이터가 있는동안 실행하겠다.
+    	while ((len = reader.read(ch))!= -1){
+    		//읽어들인 문자열 개수만큼 임시기억장소인 buff의 첫번째 위치부터 추가.
+    		buff.append(ch, 0, len); //()
+    	}
+    	//임시기억장소인 StringBuilder타입을 ToString이용하여 String타입으로 변환.
+    	history=buff.toString(); //p 399 61라인
+    }
+
+%>
+    <%--테이블의 조회된 레코드수만큼 반복 start --%>
+    <tr>
+     <td><%=memberid %></td>
+     <td><%=history %></td>
+    </tr>
+<%
+  }//while끝
+
+} catch (SQLException e1) {
+  System.out.println("executeUpdate()실행관련 에러");
+  e1.printStackTrace();
+} catch(IOException e2) {
+	e2.printStackTrace();
+} finally{
+	if(reader !=null) {try{reader.close();} catch(IOException ex){}}
+}
+
+//5.자원반납
+try {
+  if(rs!=null) {
+    rs.close();
+  }
+  if(stmt!=null) {
+    stmt.close();
+  }
+  if(conn!=null) {
+    conn.close();
+  }
+} catch (SQLException e) {
+  e.printStackTrace();
+}
+System.out.println("5.자원반납완료");
+%>
+    <%--테이블의 조회된 레코드수만큼 반복 end --%>
+   </tbody>
+  </tbody>
+ </table>
+
+</body>
+</html>
+
+```
+
+.
