@@ -1,0 +1,376 @@
+# 49. **JQ domset 문법**
+
+## 1. JQ domset 문법
+
+- 1-1 set
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+  /* 클래스가 c1인 input요소에 포커스가 위치하면테두리 설정 */
+  input.c1:focus{border:3px solid green;}
+
+</style>
+<!-- download방식으로 jquery 방식 연동 -->
+<script src="js/jquery-3.6.3.min.js"></script>
+ <!-- CDN방식으로 JQuery연동 -->
+<!-- <script src="<https://code.jquery.com/jquery-2.2.4.js>"></script> -->
+
+</head>
+
+<script>
+$(document).ready(function(){
+  $("#btn4").click(function(){
+    $("#test1").text("Hello world!");
+  });
+  $("#btn5").click(function(){
+    $("#test2").html("<b>Hello world!</b>");
+  });
+  $("#btn6").click(function(){
+    $("#test3").val("Dolly Duck");
+  });
+}); //jq 끝
+
+	function f1(){
+	  document.getElementById("test1").innerHTML="JS설정"
+	}
+	function f2(){
+	  document.getElementsByTagName("p")[1].innerText="JS설정"
+	}
+</script>
+</head>
+
+<body>
+<h2>dom -set</h2>
+<p id="test1">이 부분은 문단.</p>
+<p id="test2">또<i>다른</i>문단</p>
+<p>Input field: <input type="text" class="c1" id="test3" value="Mickey Mouse" autofocus="autofocus"></p>
+
+* Jquery 스타일
+<button id="btn4">Set Text</button>
+<button id="btn5">Set HTML</button>
+<button id="btn6">Set Value</button>
+
+<hr/>
+* JS 스타일
+<button id="btn1" name="btn1" id="btn1" onclick="f1()">Set Text</button>
+<button id="btn2" name="btn2" id="btn2" onclick="f2()">Set HTML</button>
+
+</body>
+</html>
+
+```
+
+- 1-2. attr(속성변경)
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="<https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js>"></script>
+
+<script>
+$(document).ready(function(){
+  $("#btn4").click(function(){
+   // $(selector).attr(attribute) =>속성 값을 반환
+     alert($("#img1").attr("src"));
+  });
+
+  $("#btn5").click(function(){
+   // $(selector).attr(attribute,value)=>속성 및 값을 설정
+    $("#img1").attr("width",150);
+  });
+
+  $("#btn6").click(function(){
+     /* $(selector).attr({attribute:value, attribute:value,...})
+      =>{}를 사용하여  여러 속성 및 값 설정*/
+      $("#a1").attr({
+                      "href" :"<http://jQuery.com>",
+                      "title":"jQuery",
+                      "target":"_blank"
+                    });
+      $("#img1").attr({"src":"images/OIP.jpg",
+                       "width":150,
+                       "height":50});
+      /*<a href="<http://jQuery.com>" title="jQuery" target="_self" id="a1">
+        <img src="images/jQueryLogo.PNG" id="img1"
+             width="150" height="50"/>
+        </a>
+        */
+  });
+});//JQ끝
+
+</script>
+
+</head>
+<body>
+<a href="<http://www.naver.com>" title="네이버" target="_self" id="a1">
+<img src="images/naver.png" id="img1" width="150" height="100"/>
+</a>
+<hr/>
+*javascript식:
+<button id="btn1" onclick="f1();">이미지src가져오기</button>
+<button id="btn1" onclick="f2();">이미지너비변경</button>
+<button id="btn1" onclick="f3();">이미지여러속성변경</button>
+
+<hr/>
+*jquery식:
+<button id="btn4">이미지src가져오기</button>
+<button id="btn5">이미지너비변경</button>
+<button id="btn6">이미지여러속성변경</button>
+
+<hr/>
+ <h2>jQuery-DOM-attr()</h2>
+<pre>
+$(selector).attr(attribute) =>속성 값을 반환
+$(selector).attr(attribute,value)=>속성 및 값을 설정
+$(selector).attr({attribute:value, attribute:value,...})
+=>{}를 사용하여  여러 속성 및 값 설정
+$(selector).attr(attribute,function(index,currentvalue))
+=>함수를 사용하여 속성과 값을 설정.
+</pre>
+</body>
+</html>
+
+```
+
+## 2. append,prepend
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style></style>
+<!-- download방식으로 jquery 방식 연동 -->
+<script src="js/jquery-3.6.3.min.js"></script>
+ <!-- CDN방식으로 JQuery연동 -->
+<!-- <script src="<https://code.jquery.com/jquery-2.2.4.js>"></script> -->
+
+  <script>
+	  $(document).ready(function(){
+
+		  $("#btn1").click(function(){
+		    $("p").append("<b>★Appended text★</b>.");
+		  });
+
+		  $("#btn2").click(function(){
+		    $("ol").append("<li>★Appended item</li>");
+		  });
+
+      $("#btn3").click(function(){
+        $("p").prepend("<b>★Appended text★</b>.");
+      });
+
+      $("#btn4").click(function(){
+        $("ol").prepend("<li>★Appended item</li>");
+      });
+      $("#btn5").click(function(){
+    	  $("#div1").remove();
+      });
+      $("#btn6").click(function(){
+    	  $("#div1").empty();
+      });
+		});
+  </script>
+
+</head>
+<body>
+<div id="div1" style=" height:100px; width:300px; border:1px solid red;">
+	<p>This is a paragraph.</p>
+	<p>This is another paragraph.</p>
+</div>
+
+	<ol>
+	  <li>List item 1</li>
+	  <li>List item 2</li>
+	  <li>List item 3</li>
+	</ol>
+
+	<button id="btn1">Append </button>
+	<button id="btn2">Append list</button>
+
+	<button id="btn3">prepend </button>
+  <button id="btn4">prepend list</button>
+
+  <button id="btn5">remove </button>
+  <button id="btn6">empty</button>
+
+<!--append() = 선택한 요소의 끝에 내용 삽입.
+		prepend() = 선택한 요소의 시작 부분에 콘텐츠 삽입
+	  after() = 선택한 요소 뒤에 내용 삽입
+	  before() = 선택한 요소의 앞에 콘텐츠 삽입 -->
+
+</body>
+</html>
+
+```
+
+## 3.JQClass 문법
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+  span{display: inline-block; width: 50px; height:30px;
+       margin: 0px; text-align: center; font-weight: bold;
+       }
+  .reverse{color:white;background: black; }
+  .highlight{color:gray; background: fuchsia;}
+</style>
+<script src="js/jquery-3.6.3.min.js"></script>
+
+	<script>
+  $(document).ready(function(){
+	    $("#btn1").click(function(){
+
+	      $("span").addClass("reverse");
+	    });
+
+	    $("#btn2").click(function(){
+        $("span").removeClass("reverse");
+      });
+
+	    $("span").click(function(){
+	        $(this).toggleClass("reverse");
+	      });
+	    $("span").click(function(){
+	          $(this).toggleClass("reverse");
+	      });
+
+	    $("span").mouseover(function(){
+	    	event.stopPropagation();// 이벤트 전파를 차단(버블링 효과 멈춤.)
+	    	// 이벤트가 상위 DOM으로의 전달 , 전파가 되지 않도록 한다.
+	    	$(this).addClass("reverse");
+	    }).mouseout(function(){
+	    	$( this ).removeClass("reverse");
+	    });
+	  });
+
+	</script>
+
+</head>
+<body>
+
+  <span>메뉴1</span><span>메뉴2</span><span>메뉴3</span><span>메뉴4</span>
+	<hr/>
+	<button id="btn1">addclass()</button>
+	<button id="btn2">removeclass()</button>
+	<button id="btn3">toggleclass()</button>
+	<button id="btn4">css()</button>
+	<h2>Jquery-클래스 조작</h2>
+
+	<hr/>
+	<pre>
+	addclass() = 선택한 요소에 하나 이상의 클래스를 추가합니다.
+	removeclass() = 선택한 요소에서 하나 이상의 클래스를 제거합니다.
+	toggleclass() = 선택한 요소에서 클래스 추가/제거 간을 전환합니다.
+	css() =  스타일 속성을 설정하거나 반환합니다.
+	</pre>
+</body>
+</html>
+
+```
+
+## 4.Servelt
+
+CRUD
+C :create = 입력(insert) 회원가입, 상품정보등록, 게시글작성,장바구니담기
+R :read = 조회 (select)
+목록조회 :
+상세조회 :
+U :update = 수정 update 비번변경, 가격변경, 내용수정
+D :delete = 삭제 delete 부서정보삭제, 장바구니비우기, 게시글삭제
+
+### <!-- 서블릿을 web.xml로 매핑하기(499~501p) -->
+
+<servlet>
+<servlet-name>MyServlet</servlet-name>
+<servlet-class>ch17.MyServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+<servlet-name>MyServlet</servlet-name>
+<url-pattern>/ms1</url-pattern>
+</servlet-mapping>
+
+### 서블릿을 어노테이션을 이용한 매핑하기. (html 사용법)
+
+```
+package ch17;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(urlPatterns = "/ms2")
+public class MyServlet extends HttpServlet {
+   @Override
+   //웹 어플리케이션 시작시 단 한번만 호출
+   public void init() throws ServletException {
+    System.out.println("init()호출");
+   }
+
+@Override
+	//종료시 호출
+   public void destroy() {
+    System.out.println("destroy()호출");
+   	super.destroy();
+   }
+
+@Override
+	//get방식으로 요청시 호출
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    System.out.println("doGet()호출");
+    response.setContentType("text/html; charset=UTF-8");
+    PrintWriter out = response.getWriter();
+    out.println("h하잉2");
+    out.println("<!doctype html>");
+    out.println("<html>");
+    out.println("<head>");
+    out.println("<title>");
+    out.println("myservlet이야~");
+    out.println("</title>");
+    out.println("</head>");
+    out.println("<body>");
+    Date today = new Date();
+    out.println("<p>*현재시간:"+today+"</p>");
+    out.println("<h1>성공데쓰네</h1>");
+    out.println("</body>");
+    out.println("</html>");
+}
+@Override
+	//post방식으로 요청시 호출
+   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    System.out.println("doPost()호출");
+   	super.doPost(req, resp);
+   }
+
+}
+
+```
+
+.
