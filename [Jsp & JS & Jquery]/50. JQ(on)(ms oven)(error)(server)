@@ -1,0 +1,295 @@
+# 50. **JQ(on)(ms oven)(error)(server)**
+
+## 1.on을 이용한 JQuery 실행하기.
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+  .test   {border: 3px solid red; width: 300px; height: 100px;
+           text-align: center; line-height: 100px;}
+  .active {font-size: 0.8em;}
+	.inside {background-color: aqua;}
+  .cli    {color :silver;} /* 클릭할경우 */
+
+</style>
+<script src="js/jquery-3.6.3.min.js"></script>
+
+  <script>
+  /* $(selector).on(event,childSelector,data,function,map) */
+  $(function(){
+/* 	  $("div.test").click(function(){
+	  		$(this).addClass("cli");
+	  	 });
+
+	  	$("div.test").mouseenter(function(){
+        $(this).addClass("inside");
+       });
+
+	  	$("div.test").mouseleave(function(){
+        $(this).removeClass("inside");
+       }); */
+
+     /*위에와 아래는 같은 효과를 나타낼수 있다. (on) 같은 선택자를 사용시 여러 효과를 나타내줄수있다. */
+	    $("div.test").on({
+								    	click:function(){ $(this).addClass("cli").addClass("active");},
+								    	mouseenter:function(){ $(this).addClass("inside");},
+								    	mouseleave:function(){ $(this).removeClass("inside");}
+							       });
+  });
+  </script>
+
+</head>
+<body>
+   <div class="test">마우스진입, 마우스 빠져날때, 클릭시 </div>
+  <h2>JQuery event</h2>
+  <hr/>
+  $(selector).on({
+                  event:function(){},
+                  event:function(){},
+                  event:function(){}
+                  });
+
+</body>
+</html>
+
+```
+
+## 2. 버블링 효과에 따른 mouseover,enter에 따른 차이점
+
+- over은 자식객체까지 효과를 주어져 버블링효과가 발생한다.
+- enter은 효과를 준 대상만(자식x) 부여한다.
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+body {
+  width: 500px;
+  margin: 30px auto;
+}
+.outer {
+  width: 200px;
+  height: 200px;
+  background: Orange;
+  padding: 50px;
+  margin: 10px;
+}
+
+.inner {
+  width: 100%;
+  height: 100%;
+  background: Pink;
+}</style>
+<!-- download방식으로 jquery 방식 연동 -->
+<script src="js/jquery-3.6.3.min.js"></script>
+
+	<script>
+	 $(function(){
+		 $('.outer')
+		  .mouseover(function(){
+		    $('body').append('<p>마우스오버가 발생했습니다.</p>')
+		  })
+		  .mouseenter(function(){
+		    $('body').append('<p>마우스엔터,마우스엔터</p>')
+		  });
+
+	 });
+	</script>
+ <!-- CDN방식으로 JQuery연동 -->
+<!-- <script src="<https://code.jquery.com/jquery-2.2.4.js>"></script> -->
+
+</head>
+<body>
+	<h2></h2>
+	<hr/>
+
+	<div class="outer">
+  <div class="inner"></div>
+  </div>
+</body>
+</html>
+
+```
+
+### 2-1. 버블링 효과 막아주는
+
+1- event.preventDefault()
+2- event.stopPropagation()
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="<https://code.jquery.com/jquery-3.5.0.js>"></script>
+<style>
+div,p,sapn,section{color:white;}
+div {
+    background-color: #cccccc;
+    padding: 20px;
+    display: block;
+}
+
+p {
+    background-color: #aaa;
+    padding: 20px;
+    display: block;
+}
+
+span {
+    background-color: #888;
+    padding: 20px;
+    display: block;
+}
+
+a {
+    background-color: #888;
+    padding: 20px;
+    display: block;
+}
+
+section {
+    background-color: #4477AA;
+    padding: 0 10px 30px 20px;
+    margin: 50px 0 0 0;
+}
+
+section:before {
+    background-color: #114477;
+    padding: 5px;
+    margin: 0 0 0 -20px;
+    border-bottom: 2px solid #002244;
+    border-bottom-right-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    content:"결과 콘솔";
+}
+</style>
+<script>
+$(function(){
+  //DIV 영역에 클릭 이벤트 설정
+  $("#div_").on("click",function(event){
+      $("#console").append("<br>DIV 클릭");
+  });
+
+  //P 영역에 클릭 이벤트 설정
+  $("#p_").on("click",function(event){
+      $("#console").append("<br>P 클릭");
+      //event.stopPropagation();//이벤트 전파를 차단 => 상위요소로 전달을 차단
+  });
+
+  //SPAN 영역에 클릭 이벤트 설정
+  $("#span_").on("click",function(event){
+      $("#console").append("<br>SPAN 클릭");
+  });
+
+  //a 영역에 클릭 이벤트 설정
+  $("#a1_").on("click",function(event){
+      $("#console").append("<br>a 클릭");
+      event.preventDefault(); //a요소의 연결기본기능을 막는다
+  });
+});
+</script>
+</head>
+<body>
+<div id="div_">
+    DIV영역
+    <p id="p_">
+        P영역
+        <a href="<http://www.naver.com>" target="_blank" id="a1_">a영역</a>
+    </p>
+</div>
+
+<!-- <div id="div_">
+    DIV영역
+    <p id="p_">
+        P영역
+        <span id="span_">SPAN영역</span>
+    </p>
+</div> -->
+
+<section id="console"><br></section>
+
+<pre>
+*이벤트 전파 : 이벤트가 발생된 자식요소부터 최상위요소까지 이벤트가 전달,전파된다
+-여기에서는
+ span요소 click발생->부모 p요소 click발생->부모 div요소 click발생
+
+*event.stopPropagation() : 이벤트 전파를 차단 => 상위요소로 전달을 차단
+event.stopPropagation() Prevents the event from bubbling up the DOM tree, preventing any parent handlers from being notified of the event
+
+*event.preventDefault() : 기본동작을 차단
+event.preventDefault()  Prevents the default action of the event
+</pre>
+</body>
+</html>
+
+```
+
+## 3. server에 관한 총 정리
+
+```
+-------------------------------------------------
+client가 server에게 요청 (request)하면
+server는 client에게 응답(response)한다.
+
+*서버에서는 브라우저로 응답(response)을 보내는데
+서버에서는 정적데이터인지, 동적데이터인지에 따르게 처리한다.
+
+-정적(static)데이터 : 항상 동일하게 고정된 데이터를 전송하는 방식. 예)html,css,이미지
+-동적(dynamic)데이터 : 매번 다른 데이터를 동적으로 구성하여 전송.
+     예) 주문목록처럼 상황에 따라 동적으로 서버에서 데이터를 만들어 보내는 방식이라서
+     서버사이드프로그래밍(Server Side Promgramming)이라 한다.
+
+ 정적데이터를 보내는 역할을 수행하는 서버가 웹서버 (Web Server),
+ 동적데이터를 만들어 보내는 역할을 웹어플리케이션서버 (WAS: web Application Server)
+
+엄밀한 의미에서는 위의 처럼 나눌 수 있지만, 대부분의 WAS는 웹서버의 기능도 같이 포함되어 있다.
+
+  웹서버 예)apache server, IIS(Windows 전용 웹서버)등
+  WAS 예)Tomcat, Jboss, Jeus등
+  ---------------------------------------------
+ JSP는 파일을 요청하면, 웹서버에서 jsp > java로 변환 > class로 컴파일 하고
+ HTML문서로 응답하는 형태
+  예) index.jsp -> index_jsp.java -> index)jsp.class
+  C:\\webStudy\\webWK\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\work\\Catalina\\localhost\\webPro\\org\\apache\\jsp
+
+ client는 그 응답을 받고 그 데이터를 그냥 놔둔다 (<=Sever와의 연결이 끊긴다.)
+
+ 서블릿(servlet)은 jsp표준이 나오기 전에 만들어진 표준으로
+ 자바로 웹 어플리케이션을 개발할 수 있도록 만들어졌다.
+
+ URL주소를 통해 client의 요청을 파악하여 특정sevlet이 호출될 수 있도록 한다.
+
+```
+
+## 4. errorpage 구현방법.
+
+- web.xml에 작성할 코드
+- 404error 발생시 아래 error폴더에 error404.jsp 페이지를 여는 문구
+
+```
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error/error404.jsp</location>
+  </error-page>
+
+```
+
+.
