@@ -1,0 +1,123 @@
+# 51.**(checkbox)(ERD)**
+
+## 1. checkbox (검사하기)
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <meta charset="UTF-8">
+ <title></title>
+ <link rel="stylesheet" href="<https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css>"/>
+ <!-- download방식으로 jQuery연동
+ <script src="js/jquery-3.6.3.min.js"></script> -->
+ <!-- CDN방식으로 jQuery연동 -->
+ <script src="<https://code.jquery.com/jquery-2.2.4.min.js>"></script>
+ <style></style>
+
+</head>
+<body>
+<h2>form_checkbox</h2>
+
+<form name="frm1" id="frm1">
+ *취미:
+ <input type="checkbox" name="selectAll" id="selectAll" onclick="selectAllf(this)" /> <label for="selectAll">전체선택</label><br/>
+ <input type="checkbox" name="hobby" id="h0" value="game" checked="checked"/><label for="h0">게임</label>
+ <input type="checkbox" name="hobby" id="h1" value="sports"/><label for="h1">운동</label>
+ <input type="checkbox" name="hobby" id="h2" value="foodTour"/><label for="h2">맛집탐방</label>
+ <input type="checkbox" name="hobby" id="h3" value="movie"/><label for="h3">영화</label>
+ <input type="checkbox" name="hobby" id="h4" value="reading"/><label for="h4">독서</label>
+ <input type="checkbox" name="hobby" id="h5" value="tour"/><label for="h5">여행</label>
+ <input type="button" value="선택" id="btn1" onclick="requiredCheck();"/>
+</form>
+<hr/>
+<!-- 결과가 출력되는 영역 -->
+<div id="result"></div>
+
+<script>
+var resultArea = document.getElementById("result");
+var resultAre = document.getElementsByName("hobby");//object NodeList
+
+ /* const checkList2 =["사과","nana","foir"];
+ checkList2.forEach((현재요소,인덱스,배열)=>{})
+  checkList2.forEach((currentElement,index,array)=>{
+  currentElement는 checkList2에서의 각 요소 접근// ["사과", ["nana"], []"foir"]
+  index는 checkList2에서의 각 인덱스번호에 접근 // [0], [1], [2]
+  array는 checkList2에서의 각 총 배열 접근 //["사과","nana","foir"],["사과","nana","foir"],["사과","nana","foir"]
+});  */
+
+let checkList1 = document.querySelector("[name=hobby]");
+  //위와 같은 코드지만 Css선택자에 해당하는 요소에 접근하지만 첫번째 요소에만 접근한다.
+let checkList = document.querySelectorAll("input[name=hobby]");
+//위와 같은 코드지만 Css선택자에 해당하는 요소에 접근하고 모든 요소에 접근한다.
+let len = checkList.length;
+ /*
+ css선택자
+ document.querySelectorAll("css선택자");
+ document.querySelector("css선택자");
+ input => html문서내의 모든 input요소
+  [속성명] => html문서내의 속성을 가진 모든 요소
+ 예)[name] => html문서내의 name속성을 가진 모든요소
+  [속성명=값]=> html문서내의 특정속성값을 가진 모든요소
+ 예)[name="hobby"] => html문서내의 name에서 hobby속성값을 가진 모든요소
+ 예)input[name="hobby"] => html문서내의 name에서 hobby속성값을 가진 input요소
+ 예)input[name="hobby"]:checked => html문서내의 name에서 hobby속성값을 가진 input요소wnd 체크된 모든요소
+ */
+
+//체크박스 선택여부 검사
+function requiredCheck(){
+  for(i=0; i<len; i++){
+    if(checkList[i].checked){//선택하였다면 출력
+      f1();
+    }else{//선택 안되었으면 출력
+      alert("1개이상 필수로 선택하세요")
+      break;
+    }
+  }
+}
+
+function selectAllf(obj){
+  /* let checkList = document.querySelectorAll("input[name=hobby]"); */
+  checkList.forEach((element,index,array)=>{
+    element.checked = obj.checked;
+  });
+}
+
+function f1(){
+  let txt = "";
+  for(i=0; i<len; i++){ //check의 모든 item의 전부를 살펴보겠다.
+    if(checkList[i].checked){ //항목이 체크되었다면
+    txt += checkList[i].value+"<br/>";
+    resultArea.innerHTML = txt;
+    }
+  }
+  //console.log(checkList); ////object NodeList 배열로나옴
+  //console.log(len); //6
+  //let ch = document.getElementsByName("hobby")[0];//object HTMLInputElement
+  //let ch = document.getElementsByName("hobby")[0].type;//checkbox
+  //let ch = document.getElementsByName("hobby")[0].name;//hobby
+  //let ch = document.getElementsByName("hobby")[0].id;//h1
+  //let ch = document.getElementsByName("hobby")[0].value;//game
+
+  /*defaultChecked는 기본적으로 선택된 상태이면 true리턴
+    즉, <input type="checkbox" checked="checked">인 요소라면 true리턴*/
+  //let ch = document.getElementsByName("hobby")[0].defaultChecked;//t|f
+
+  //체크하였다면 true리턴, 미체크상태라면 false리턴
+  //let ch = document.getElementsByName("hobby")[0].checked;//t|f
+
+  //resultArea.innerHTML = ch;
+}
+</script>
+
+</body>
+</html>
+
+```
+
+## 2.ERD작성시 유용한
+
+- EDR 작성법
+- 홈페이지 이용시 편하게 작성할수 있다. ([https://www.erdcloud.com](https://www.erdcloud.com/))
