@@ -1,0 +1,201 @@
+# 52.**checkbox03**
+
+## 1.checkbox 최종
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <meta charset="UTF-8">
+ <title></title>
+ <!--<link rel="stylesheet" href="<https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css>"/> -->
+ <!-- download방식으로 jQuery연동
+ <script src="js/jquery-3.6.3.min.js"></script> -->
+ <!-- CDN방식으로 jQuery연동 -->
+ <script src="<https://code.jquery.com/jquery-2.2.4.min.js>"></script>
+</head>
+<body>
+<h2>form_checkbox</h2>
+<div>*javascript이용</div>
+<form name="frm1" id="frm1">
+ <input type="checkbox" name="selectAll" id="selectAll" onclick="selectAllf(this)"/><label for="selectAll">전체선택</label><br/>
+ <input type="checkbox" name="fruit" id="f0" class="c1" value="apple"     onclick="selectAllf2()"/><label for="f0">사과</label><br/>
+ <input type="checkbox" name="fruit" id="f1" class="c1" value="mango"   onclick="selectAllf2()"/><label for="f1">망고</label><br/>
+ <input type="checkbox" name="fruit" id="f2" class="c1" value="banana" onclick="selectAllf2()"/><label for="f2">바나나</label><br/>
+ <input type="checkbox" name="fruit" id="f3" class="c1" value="melon"    onclick="selectAllf2()"/><label for="f3">멜론</label><br/>
+ <input type="checkbox" name="fruit" id="f4" class="c1" value="fineapple"  onclick="selectAllf2()"/><label for="f4">파인애플</label><br/>
+ <input type="checkbox" name="fruit" id="f5" class="c1" value="applemango"     onclick="selectAllf2()"/><label for="f5">애플망고</label><br/>
+</form>
+<hr/>
+<!-- 결과가 출력되는 영역 -->
+<div id="result"></div>
+<script>
+function selectAllf2(){
+	//전체선택용 체크박스
+	let chboxAll = document.querySelector("input[name=selectAll]");
+	//전체선택 제외한 체크박스
+  let chboxs = document.querySelectorAll("input[name=fruit]");
+	//선택된 체크박스
+	let chboxtu = document.querySelectorAll("input[name=fruit]:checked");
+
+	if(chboxs.length === chboxtu.length){
+		chboxAll.checked=true;
+	}else{
+		chboxAll.checked=false;
+	}
+}
+
+function selectAllf(selectAllobj){
+/* 	각체크항목에 반복접근 (
+	  각 체크항목.checked = selectAllobj.checked;
+	); */
+	  const array = document.querySelectorAll(".c1")
+	  array.forEach((elements)=>{
+		  elements.checked = selectAllobj.checked;
+	  });
+}
+</script>
+/* ---------------------------------------------------------------------- */
+<!-- onclick="selectAllf(this)"
+onclick="selectAllf2()" -->
+<h2>form_checkbox</h2>
+<div>*Jquery이용</div>
+<form name="frm1_jq" id="frm1_jq">
+ <input type="checkbox"name="selectAll_jq" id="selectAll_jq" /><label for="selectAll_jq">전체선택</label><br/>
+ <input type="checkbox"name="fruit_jq"id="f0_jq"value="apple"/><label for="f0_jq">사과</label><br/>
+ <input type="checkbox"name="fruit_jq"id="f1_jq"value="mango"/><label for="f1_jq">망고</label><br/>
+ <input type="checkbox"name="fruit_jq"id="f2_jq"value="banana"/><label for="f2_jq">바나나</label><br/>
+ <input type="checkbox"name="fruit_jq"id="f3_jq"value="melon"/><label for="f3_jq">멜론</label><br/>
+ <input type="checkbox"name="fruit_jq"id="f4_jq"value="fineapple"/><label for="f4_jq">파인애플</label><br/>
+ <input type="checkbox"name="fruit_jq"id="f5_jq"value="applemango"/><label for="f5_jq">애플망고</label><br/>
+</form>
+<hr/>
+<!-- 결과가 출력되는 영역 -->
+<div id="result"></div>
+
+<script>
+ $(document).ready(function(){
+  //전체선택용 클릭시 호출
+  $("#selectAll_jq").click(function(){
+    //$(선택자).is(상태)
+    //$(선택자).prop(속성명)  =>선택자의 지정속성값을 가져오기
+    //$(선택자).prop(속성명,값)=>선택자의 지정속성값을 설정
+    //alert(  $("#selectAll_jq").prop("checked") );
+    //$("#selectAll_jq").prop("checked",true);
+    //alert( $("#selectAll_jq").is(":checked")  );
+
+    if( $("#selectAll_jq").is(":checked") ){ //전체선택용체크박스의 체크되었니?
+      //개별체크박스의 체크상태를 체크상태로 설정
+      $('input[name="fruit_jq"]').prop("checked",true);
+    }else{
+      //개별체크박스의 체크상태를 체크해제로 설정
+      $('input[name="fruit_jq"]').prop("checked",false);
+    }
+  });
+
+  //개별 체크박스 클릭시 onclick="selectAllf2_jq()~~~~"
+  $('input[name="fruit_jq"]').click(function(){
+    //체크박스 전체(여기에서는 전체선택용 체크박스는 제외).길이
+    let chboxesLen = $("input[name=fruit_jq]").length;
+
+    //선택된 체크박스.길이
+    let checkedboxLen = $("input[name=fruit_jq]:checked").length;
+
+    //체크박스개수 만큼  체크된다면
+    //=>fruit체크박스가 5개라면  체크된항목도 5개가 될 때 => 전체선택용도 체크되게 해라
+    if(chboxesLen===checkedboxLen){
+      $("input[name=selectAll_jq]").prop("checked",true);//선택상태
+    }else{
+      $("input[name=selectAll_jq]").prop("checked",false);//선택해제 상태
+    }
+  });
+ });
+ </script>
+
+<pre>
+const checkList = ["사과","애플","애플망고"];
+//배열명.forEach((처리할현재요소,인덱스,forEach()를호출한배열)=>{   });
+checkList.forEach((currentElement,index,array)=>{
+  console.log(currentElement);//사과  //애플  //애플망고
+  console.log(index);//0 //1 //2
+  console.log(array);//(3) ['사과', '애플', '애플망고']
+});
+
+ css선택자
+  input => html문서내의  모든 input요소
+   [속성명]=> html문서내의  속성을 가진 모든 요소
+  예)[name]=> html문서내의  name속성을 가진 모든 요소
+  [속성명=값]=> html문서내의  특정속성값을 가진 모든 요소
+  예)[name="hobby"]=> html문서내의  특정속성값과 일치하는 모든 요소
+  예)input[name="hobby"]=> html문서내의  name="hobby"인 모든 input요소
+  예)input[name=hobby]:checked => html문서내의  name="hobby"인 input요소중 체크된 요소 모두
+
+  document.querySelector(css선택자)
+  =>css선택자에 해당하는 첫 번째 요소에 접근
+  document.querySelectorAll(css선택자)
+  =>css선택자에 해당하는 모든(All) 요소에 접근
+</pre>
+</body>
+</html>
+
+```
+
+## 2. textarea 이력서 작성시 몇자 이내로 작성하시오 문법
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <meta charset="UTF-8">
+ <title></title>
+ <!-- download방식으로 jQuery연동
+ <script src="js/jquery-3.6.3.min.js"></script> -->
+ <!-- CDN방식으로 jQuery연동 -->
+ <script src="<https://code.jquery.com/jquery-2.2.4.min.js>"></script>
+ <style></style>
+ <script>
+  $(document).ready(function(){
+
+    //textarea에 글자가 입력되면(
+    $("#txtArea1").keyup(function(){
+      let conVal = $(this).val();//입력된 내용 가져오기
+
+      //입력된 글자수는 id="cnt"요소에 출력
+      if(conVal.length===0 || conVal.length==""){
+        $("#cnt").html("0자");
+      }else{
+        $("#cnt").html(conVal.length+"자");
+      }
+
+      //입력된 글자수가 최대글자수(200)가 넘으면
+      if(conVal.length>10 ){
+        alert("최대 200글자수까지 입력할 수 있어요");//경고메세지출력
+        //입력된 내용에서 200글자까지만 내용을 가져오기와서 textarea에 설정
+        //=>넘어가는 글자수는 제거
+        $(this).val(  $(this).val().slice(0,10) );
+      }
+    });
+  });//
+ </script>
+</head>
+<body>
+<h2>jQuery-textarea</h2>
+<hr />
+<div>최대 200글자 이내로 작성하세요</div>
+<div>
+  <span id="cnt">0자</span>/
+  <span id="totalCnt">200자</span>
+</div>
+<form name="frm1" id="frm1">
+  <textarea name="txtArea1" id="txtArea1" rows="5" cols="50"></textarea>
+</form>
+</body>
+</html>
+
+```
+
+.
