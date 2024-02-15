@@ -1,0 +1,65 @@
+# 55**DB연동**
+
+## 구조 방식 3가지
+
+## notice
+noticeDAO
+noticeService
+noticeController
+member
+MemberDAO
+memberService
+memberController
+
+## member
+member.dao(패키지)
+MyMemberDAO
+member.service
+MyMemberService
+member.controller
+MyMemberController
+MyMemberHandler
+
+## dao
+member
+notice
+service
+member
+notice
+controller
+member
+notice
+
+webContent => css,js.image등
+view폴더
+교재에서는 회원가입폼 joinForm.jsp(600)
+로그인성공 joinSuccess.jsp(601)
+member폴더
+우리는 회원가입폼  myJoinForm.jsp
+로그인성공 myjoinSuccess.jsp -> index.jsp
+notice폴더
+qua폴더
+
+구현기능 : 아이디찾기 (id중복검색)
+Member.dao.MemberDAO
+int selectById(String id){
+=> select * from member where memberid=매개변수명id;
+}
+
+서비스 MemberService
+아이디찾기
+int selectById(String id){
+DAO의 아이디 찾기 메서드를 호출
+MemberDAO mDAO = new MemberDAO();
+int result =mDAO.selectById(user가 입력한 id);
+}
+
+컨트롤러
+Memberservice의 아이디 찾기 메서드를 호출
+Memberservice의 참조변수 = new Memberservice의();
+int result=mService.selectById(user가 입력한 id);
+if(result==0){
+index.jsp 보여줄게
+}else{
+joinFrm.jsp 회원가입폼 보여줄게.
+}
