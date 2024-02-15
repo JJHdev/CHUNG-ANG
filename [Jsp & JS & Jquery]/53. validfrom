@@ -1,0 +1,419 @@
+# 53.**validfrom**
+
+## 1. 유효성 검사 체크
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>폼</title>
+<style>
+ #memberFrm td, #memberFrm th{
+  border: 1px solid #ddd;
+  padding: 5px;
+ }
+ #memberFrm th{
+  text-align:right;
+  background-color:#555;
+  color:white;
+ }
+ .c1 {width:120px;}
+</style>
+<script>
+//폼의 유효성검사
+function validChk(){
+  let frmObj = document.getElementById("memberFrm");
+  //alert(frmObj); //object HTMLFormElement
+
+//function validChk(frmObj){
+  //alert(frmObj); //object HTMLFormElement
+  //상위계층요소.하위계층요소
+  //window.document.폼객체.폼하위객체
+  //alert(frmObj.mid); //object HTMLInputElement
+  /*
+  //아이디필수입력
+  if(frmObj.mid.value==""){ //아이디를 입력하지않았다면
+    alert("아이디를 입력하세요.");
+    frmObj.mid.focus(); //포커스위치
+    return false;
+  }
+
+  let reg0= /(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,12}/g;
+
+  if(!reg0.test(frmObj.mpwd.value)){
+    alert("비밀번호는 최소 한개이상의 숫자,영어대소문자 4~12이내 입력하세요.");
+    frmObj.mpwd.focus(); //포커스위치
+    return false;
+  }
+
+  //비밀번호필수입력
+  if(frmObj.mpwd.value==""){ //비밀번호를 입력하지않았다면
+    alert("비밀번호를 입력하세요.");
+    frmObj.mpwd.focus(); //포커스위치
+    return false;
+  }
+
+  //비밀번호 글자수제한 편의상 4~12
+  if(frmObj.mpwd.value.length<4 || frmObj.mpwd.value.length>12){ //비밀번호의 글자수가 4~12이 아니면
+    alert("비밀번호는 4~12글자로 입력하세요.");
+    frmObj.mpwd.value="";//초기화
+    frmObj.mpwd.focus(); //포커스위치
+    return false;
+  }
+
+  //비밀번호재확인필수입력
+  if(frmObj.re_mpwd.value==""){ //비밀번호재확인를 입력하지않았다면
+    alert("비밀번호재확인을 입력하세요.");
+    frmObj.re_mpwd.focus(); //포커스위치
+    return false;
+  }
+
+  //비밀번호와 비밀번호재확인 일치여부
+  if(frmObj.mpwd.value!=frmObj.re_mpwd.value){
+    alert("비밀번호와 비밀번호재확인 일치해야합니다.");
+    frmObj.mpwd.value="";//초기화
+    frmObj.re_mpwd.value="";
+    frmObj.mpwd.focus(); //포커스위치
+    return false;
+  }
+
+  //이름 필수체크
+  if(frmObj.mname.value==""){ //이름을 입력하지않았다면
+    alert("이름을 입력하세요.");
+    frmObj.mname.focus(); //포커스위치
+    return false;
+  }
+
+  //성별 필수체크
+  let gObj = frmObj.gender;
+  if(!gObj[0].checked && !gObj[1].checked){
+    alert("성별을 선택하세요.");
+    return false;
+  }
+
+  //전화번호
+  let reg = /^[0-9]+/g; //0~9가 포함되어있는지
+  // 정규표현식.test(대상문자열) => 맞으면 true리턴, 그렇지않으면 false
+  if( !reg.test(frmObj.tel.value) ){
+    alert("전화번호는 숫자만 입력하세요");
+    frmObj.tel.focus();
+    return false;
+  }
+  */
+
+  //약관동의 필수체크  미선택시 checked의 속성은 false리턴
+  if(!frmObj.agree.checked){
+    alert("약관에 동의하셔야 진행됩니다.");
+    return false;
+  }
+
+  frmObj.method = "post";  //폼객체의 method속성설정
+  frmObj.action = "ok.jsp";//폼객체의 action속성설정
+  //유효성 검사통과하면 submit진행되게 하라
+  frmObj.submit();
+}
+
+//이메일 선택반영
+function selectEamil(selectObj){
+  //alert(selectObj);//select객체.object HTMLSelectElement
+  //alert(selectObj.options);//option객체들.object HTMLOptionsCollection
+
+  let idx = selectObj.options.selectedIndex; //선택한 option의 인덱스번호. 0부터시작
+  let val = selectObj.options[idx].value;//선택한 option의 value
+
+  /*가져온 option의 value를
+    form의 하위요소중  이름이 email_d인 요소의 값으로 출력*/
+  document.memberFrm.email_d.value = val;
+}
+</script>
+</head>
+<body>
+<h2>*javascript를 이용한 유효성검사</h2>
+<form name="memberFrm" id="memberFrm">
+<!-- <form name="memberFrm" id="memberFrm"
+      method="get" action="ok.jsp" onsubmit="return validChk(this);">
+ -->
+ <table>
+  <caption>회원가입</caption>
+  <tbody>
+   <tr>
+    <th class="c1">아이디</th>
+    <td>
+     <input type="text" name="mid" id="mid"
+            autofocus required="required"/>
+    </td>
+   </tr>
+   <tr>
+    <th class="c1">비밀번호</th>
+    <td>
+     <input type="password" name="mpwd" id="mpwd"/>
+    </td>
+   </tr>
+   <tr>
+    <th class="c1">비밀번호재확인</th>
+    <td>
+     <input type="password"  name="re_mpwd" id="re_mpwd"/>
+    </td>
+   </tr>
+   <tr>
+    <th class="c1">이름</th>
+    <td>
+     <input type="text" name="mname" id="mname"/>
+    </td>
+   </tr>
+   <tr>
+    <th class="c1">성별</th>
+    <td>
+     <input type="radio" name="gender" id="gender0" value="woman"/><label for="gender0">여성</label>
+     <input type="radio" name="gender" id="gender1" value="man"/><label for="gender1">남성</label>
+    </td>
+   </tr>
+   <tr>
+    <th class="c1">전화번호</th>
+    <td>
+     <input type="text" name="tel" id="tel" placeholder="예)0101234567 -문자없이입력"/>
+    </td>
+   </tr>
+   <tr>
+    <th class="c1">이메일</th>
+    <td>
+     <input type="text" name="email_id" id="email_id" size="12"/>
+     @
+     <input type="text" name="email_d" id="email_d"  size="12"/>
+     <select name="email_dd" id="email_dd" onchange="selectEamil(this);">
+        <option value="">직접입력</option>
+        <option value="daum.net">daum.net</option>
+        <option value="gmail.com">gmail.com</option>
+        <option value="nate.com">nate.com</option>
+        <option value="naver.com">naver.com</option>
+     </select>
+    </td>
+   </tr>
+   <tr>
+    <td colspan="2" style="text-align:center;">
+     <input type="checkbox" name="agree" id="agree"/>
+     <label for="agree">약관에 동의합니다</label>
+    </td>
+   </tr>
+   <tr>
+    <td colspan="2" style="text-align:center;">
+     <input type="button" value="가입(button)" onclick="validChk()"/>
+     <input type="submit" value="가입(submit)"/>
+     <input type="reset" value="취소"/>
+    </td>
+   </tr>
+  </tbody>
+ </table>
+</form>
+</body>
+</html>
+
+```
+
+## 2. 유효성 검사체크 (Jquery)
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>폼</title>
+<script src="<https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js>"></script>
+<style>
+ #memberFrm td, #memberFrm th{
+  border: 1px solid #ddd;
+  padding: 5px;
+ }
+ #memberFrm th{
+  text-align:right;
+  background-color:#555;
+  color:white;
+ }
+ .c1 {width:120px;}
+</style>
+<script>
+$(document).ready(function(){
+
+/*<form name="memberFrm" id="memberFrm"
+   method="get" action="ok.jsp">요소에 서브밋이벤트 발생시*/
+ //폼의 유효성검사
+ $("form#memberFrm").submit(function(){
+
+  let frmObj = $(this);
+  //alert(frmObj.attr("name")); //memberFrm
+
+  //아이디필수입력
+  if($("#mid").val()==""){ //아이디를 입력하지않았다면
+    alert("아이디를 입력하세요.");
+    $("#mid").focus(); //포커스위치
+    return false;
+  }
+
+  let reg0= /(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,12}/g;
+
+  if(!reg0.test($("#mpwd").val())){
+    alert("비밀번호는 최소 한개이상의 숫자,영어대소문자 4~12이내 입력하세요.");
+    $("#mpwd").focus(); //포커스위치
+    return false;
+  }
+
+  //비밀번호필수입력
+  if($("#mpwd").val()==""){ //비밀번호를 입력하지않았다면
+    alert("비밀번호를 입력하세요.");
+    $("#mpwd").focus(); //포커스위치
+    return false;
+  }
+
+  //비밀번호 글자수제한 편의상 4~12
+  if($("#mpwd").val().length<4 || $("#mpwd").val().length>12){ //비밀번호의 글자수가 4~12이 아니면
+    alert("비밀번호는 4~12글자로 입력하세요.");
+    $("#mpwd").val(""); //초기화
+    $("#mpwd").focus(); //포커스위치
+    return false;
+  }
+
+  //비밀번호재확인필수입력
+  if($("#re_mpwd").val()==""){ //비밀번호재확인를 입력하지않았다면
+    alert("비밀번호재확인을 입력하세요.");
+    $("#re_mpwd").focus(); //포커스위치
+    return false;
+  }
+
+  //비밀번호와 비밀번호재확인 일치여부
+  if($("#mpwd").val()!=$("#re_mpwd").val()){
+    alert("비밀번호와 비밀번호재확인 일치해야합니다.");
+    $("#mpwd").val("");   //초기화
+    $("#re_mpwd").val("");
+    $("#mpwd").focus(); //포커스위치
+    return false;
+  }
+
+  //이름 필수체크
+  if($("#mname").val()==""){ //이름을 입력하지않았다면
+    alert("이름을 입력하세요.");
+    $("#mname").focus(); //포커스위치
+    return false;
+  }
+
+  //성별 필수체크
+  var n = $("input[type=radio]:checked").length;
+  if(n===0){
+    alert("성별을 선택하세요.");
+    return false;
+  }
+
+  //전화번호
+  let reg = /^[0-9]+/g; //0~9가 포함되어있는지
+  // 정규표현식.test(대상문자열) => 맞으면 true리턴, 그렇지않으면 false
+  if( !reg.test($("#tel").val()) ){
+    alert("전화번호는 숫자만 입력하세요");
+    $("#tel").focus();
+    return false;
+  }
+
+  //약관동의 필수체크
+  if($("input[type=checkbox]:checked").length===0){
+    alert("약관에 동의하셔야 진행됩니다.");
+    return false;
+  }
+
+});//폼의  submit()끝
+
+//이메일 선택반영
+//<select name="email_dd" id="email_dd">에 change이벤트
+$("#email_dd").change(function(){
+  let val = $("select#email_dd option:selected").val();
+  $("#email_d").val(val);
+});
+
+}); //jQuery끝
+</script>
+</head>
+<body>
+<h2>*jQuery를 이용한 유효성검사</h2>
+<!--<form name="memberFrm" id="memberFrm">-->
+ <form name="memberFrm" id="memberFrm" method="get" action="ok.jsp">
+ <table>
+  <caption>회원가입</caption>
+  <tbody>
+   <tr>
+    <th class="c1">아이디</th>
+    <td>
+     <input type="text" name="mid" id="mid"
+            autofocus/> required="required"
+    </td>
+   </tr>
+   <tr>
+    <th class="c1">비밀번호</th>
+    <td>
+     <input type="password" name="mpwd" id="mpwd"/>
+    </td>
+   </tr>
+   <tr>
+    <th class="c1">비밀번호재확인</th>
+    <td>
+     <input type="password"  name="re_mpwd" id="re_mpwd"/>
+    </td>
+   </tr>
+   <tr>
+    <th class="c1">이름</th>
+    <td>
+     <input type="text" name="mname" id="mname"/>
+    </td>
+   </tr>
+   <tr>
+    <th class="c1">성별</th>
+    <td>
+     <input type="radio" name="gender" id="gender0" value="woman"/><label for="gender0">여성</label>
+     <input type="radio" name="gender" id="gender1" value="man"/><label for="gender1">남성</label>
+    </td>
+   </tr>
+   <tr>
+    <th class="c1">전화번호</th>
+    <td>
+     <input type="text" name="tel" id="tel" placeholder="예)0101234567 -문자없이입력"/>
+    </td>
+   </tr>
+   <tr>
+    <th class="c1">이메일</th>
+    <td>
+     <input type="text" name="email_id" id="email_id" size="12"/>
+     @
+     <input type="text" name="email_d" id="email_d"  size="12"/>
+     <!-- <select name="email_dd" id="email_dd" onchange="selectEamil(this);"> -->
+     <select name="email_dd" id="email_dd">
+        <option value="">직접입력</option>
+        <option value="daum.net">daum.net</option>
+        <option value="gmail.com">gmail.com</option>
+        <option value="nate.com">nate.com</option>
+        <option value="naver.com">naver.com</option>
+     </select>
+    </td>
+   </tr>
+   <tr>
+    <td colspan="2" style="text-align:center;">
+     <input type="checkbox" name="agree" id="agree"/>
+     <label for="agree">약관에 동의합니다</label>
+    </td>
+   </tr>
+   <tr>
+    <td colspan="2" style="text-align:center;">
+     <!-- <input type="button" value="가입(button)" onclick="validChk()"/> -->
+     <input type="submit" value="가입(submit)로 진행"/>
+     <input type="reset" value="취소"/>
+    </td>
+   </tr>
+  </tbody>
+ </table>
+</form>
+</body>
+</html>
+
+```
+
+.
