@@ -1,0 +1,13 @@
+# 41. MYsql 생성, 권한
+
+https://dev.mysql.com/downloads/installer/ 홈페이지에 가서 원하는 버전 설치하기 본 강의는 5버전 최신버전 다운받아 설치함 설치시 비밀번호 설정은 항상 어딘가에 적어두자.
+
+## 1. 유저 생성및 Db 생성 권한 부여.
+
+- - Mysql 주석문 (365p 참고) 데이터베이스 생성 create database chap14 default character set utf8;
+- - user생성 -- create user '유저(스키마명)'@'주소' -- identified by '비번';
+
+create user 'jspexam'@'localhost' identified by 'jsppw';
+
+- - 권한 부여 -- grant 권한명,~~~ on 객체 to 유저명; -- 호스트가 localhost인 경우 localhost에서 해당 계정으로 접근 grant all privileges on chap14.* to 'jspexam'@'localhost' ;
+- - 권한 부여 -- grant 권한명,~~~ on 객체 to 유저명; -- 호스트가 %인 경우 모든 host에서 해당 계정으로 접근 -- 1. MySQL에서는 localhost와 다른 호스트를 구분하므로 사용자 계정을 생성할때에는 localhost용 계정과 -- 2. 외부에서 접근할 때 사용할 계정을 각각 생성해야 한다. create user 'jspexam'@'%' identified by 'jsppw'; grant all privileges on chap14.* to 'jspexam'@'%' ;
