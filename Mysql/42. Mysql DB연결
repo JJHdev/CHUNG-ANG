@@ -1,0 +1,235 @@
+# 42. Mysql DB연결
+
+## 1. eclipse에서 DB연결방법.
+
+- eclipse에서 아래쪽 Data Source Explorer 클릭
+- Database Connections 오른쪽 클릭 > new > 내가 사용할 DB클라이언트 선택 (oracle or mysql) >next 선택
+- Drivers 설정하기. > +선택(new Driver definition)
+- 
+- name/type > database 버전 선택하기 (강의에서는 oracle thin Driver orcale 11 선택)
+- jar List > ojdbc14.jar 리무브 하기 > 예전 자바에서 db연결 메소드 연습시 ojdbc6.jar 사용함 (아래 주소는 예전 설치 경로임)
+> add에서 C:\oraclexe\app\oracle\product\11.2.0\server\jdbc\lib 주소로 들어가 ojdbc6 선택하기. > ok
+> general > 에서 각자 양식 맞게 작성
+> 1. SID : xe
+> 2. Host : localhost
+> 3. User name: scott
+> 4. Password : tiger
+> 5. catalog : user
+
+> finish
+> 
+
+## 2. MYSQL 데이터 입력
+
+```
+-- MYSQL 데이터타입은 p367참고
+
+-- DEPT테이블 삭제
+DROP TABLE DEPT;
+
+-- DEPT테이블 생성
+CREATE TABLE DEPT(
+	DEPTNO int auto_increment PRIMARY KEY,
+	DNAMempempEMPNOE VARCHAR(14) ,
+	LOC VARCHAR(13)
+    )engine=InnoDB default character set = utf8;
+
+-- EMP테이블 삭제
+DROP TABLE EMP;
+
+-- EMP테이블 생성
+CREATE TABLE EMP(
+   EMPNO int(4) auto_increment primary key,
+   ENAME VARCHAR(10),
+   JOB VARCHAR(9),
+   MGR int(4),
+   HIREDATE date,
+   SAL int,
+   COMM int,
+   DEPTNO int,
+   constraint EMP_DEPTNO_FK foreign key (DEPTNO) references DEPT(DEPTNO)
+   )engine=InnoDB default character set = utf8;
+
+-- CONSTRAINT 제약조건명 FOREIGN KEY (fk용컬럼명) REFERENCES 부모테이블명(참조하는컬럼명)
+
+-- DEPT테이블에  데이터입력
+INSERT INTO DEPT VALUES
+   (10,'ACCOUNTING','NEW YORK');
+INSERT INTO DEPT VALUES (20,'RESEARCH','DALLAS');
+INSERT INTO DEPT VALUES
+   (30,'SALES','CHICAGO');
+INSERT INTO DEPT VALUES
+   (40,'OPERATIONS','BOSTON');
+
+-- EMP테이블 데이터입력
+INSERT INTO EMP VALUES
+(7369,'SMITH','CLERK',7902,'1980-12-17',800,NULL,20);
+INSERT INTO EMP VALUES
+(7499,'ALLEN','SALESMAN',7698,str_to_date('20-2-1981','%d-%m-%Y'),1600,300,30);
+INSERT INTO EMP VALUES
+(7521,'WARD','SALESMAN',7698,str_to_date('22-2-1981','%d-%m-%Y'),1250,500,30);
+INSERT INTO EMP VALUES
+(7566,'JONES','MANAGER',7839,str_to_date('2-4-1981','%d-%m-%Y'),2975,NULL,20);
+INSERT INTO EMP VALUES
+(7654,'MARTIN','SALESMAN',7698,str_to_date('28-9-1981','%d-%m-%Y'),1250,1400,30);
+INSERT INTO EMP VALUES
+(7698,'BLAKE','MANAGER',7839,str_to_date('1-5-1981','%d-%m-%Y'),2850,NULL,30);
+INSERT INTO EMP VALUES
+(7782,'CLARK','MANAGER',7839,str_to_date('9-6-1981','%d-%m-%Y'),2450,NULL,10);
+INSERT INTO EMP VALUES
+(7788,'SCOTT','ANALYST',7566,str_to_date('13-5-87','%d-%m-%Y'),3000,NULL,20);
+INSERT INTO EMP VALUES
+(7839,'KING','PRESIDENT',NULL,str_to_date('17-11-1981','%d-%m-%Y'),5000,NULL,10);
+INSERT INTO EMP VALUES
+(7844,'TURNER','SALESMAN',7698,str_to_date('8-9-1981','%d-%m-%Y'),1500,0,30);
+INSERT INTO EMP VALUES
+(7876,'ADAMS','CLERK',7788,str_to_date('13-3-87','%d-%m-%Y'),1100,NULL,20);
+INSERT INTO EMP VALUES
+(7900,'JAMES','CLERK',7698,str_to_date('3-12-1981','%d-%m-%Y'),950,NULL,30);
+INSERT INTO EMP VALUES
+(7902,'FORD','ANALYST',7566,str_to_date('3-12-1981','%d-%m-%Y'),3000,NULL,20);
+INSERT INTO EMP VALUES
+(7934,'MILLER','CLERK',7782,str_to_date('23-1-1982','%d-%m-%Y'),1300,NULL,10);
+
+commit;
+
+```
+
+## 3. mysql로 javaEE DB 연동
+
+- mysql-connector-java-5.1.49.zip 다운받기. (홈페이지 주소 - https://dev.mysql.com/downloads/connector/j/ 여기서 5.최신버전 다운받음)
+- 압축을 풀고나서 webstudty에 pg에 넣고 ysql-connector-java-5.1.49-bin 파일을 webcontent > web-inf > lib 에다가 복사 붙여넣기.
+- 그러면 web app livraries에 mysql-connector-java 파일이 생기면 잘 넣어진것이다.
+
+### 3-1. mysql로 javaee db연동
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="java.sql.DriverManager"%>
+<%@ page import="java.sql.SQLException"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dbConnectionTest</title>
+</head>
+<body>
+ <h2>MySQL ConnectionTest</h2>
+
+<%
+String url ="jdbc:mysql://localhost:3306/chap14?"+
+			"useUnicode=true&characterEncoding=utf8";
+String user="jspexam";
+String password="jsppw";
+Connection conn=null;
+
+//1.JDBC Driver등록
+try {
+	Class.forName("com.mysql.jdbc.Driver");
+} catch (ClassNotFoundException e) {
+	System.out.println("ClassNotFoundException발생 e="+e);
+	e.printStackTrace();
+}
+System.out.println("1.JDBC Driver등록-성공");
+out.write("1.JDBC Driver등록-성공<br/>");
+
+//2.연결 Connection얻기
+//DriverManager.getConnection(연결DB서버url, 접속user명, 비밀번호)
+
+try {
+	conn=DriverManager.getConnection(url, user, password);
+} catch (SQLException e) {
+	System.out.println("SQLException발생");
+	e.printStackTrace();
+}
+System.out.println("2.Connection얻기-성공");
+out.write("2.Connection얻기-성공<br/>");
+
+//3.객체준비-Statement객체,PreparedStatement객체
+
+//4.쿼리실행
+
+//5.자원반납
+try {
+	if(conn!=null) {
+		conn.close();
+	}
+} catch (SQLException e) {
+	e.printStackTrace();
+}
+System.out.println("5.자원반납완료");
+	out.write("5.자원반납완료<br/>");
+%>
+</body>
+</html>
+
+```
+
+### 3-2. oracle로 javaee db연동
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="java.sql.DriverManager"%>
+<%@ page import="java.sql.SQLException"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dbConnectionTest</title>
+</head>
+<body>
+ <h2>오라클ConnectionTest</h2>
+
+<%
+String url ="jdbc:oracle:thin:@localhost:1521/xe";
+String user="scott";
+String password="tiger";
+Connection conn=null;
+
+//1.JDBC Driver등록
+try {
+	Class.forName("oracle.jdbc.OracleDriver");
+} catch (ClassNotFoundException e) {
+	System.out.println("ClassNotFoundException발생 e="+e);
+	e.printStackTrace();
+}
+System.out.println("1.JDBC Driver등록-성공");
+out.write("1.JDBC Driver등록-성공<br/>");
+
+//2.연결 Connection얻기
+//DriverManager.getConnection(연결DB서버url, 접속user명, 비밀번호)
+
+try {
+	conn=DriverManager.getConnection(url, user, password);
+} catch (SQLException e) {
+	System.out.println("SQLException발생");
+	e.printStackTrace();
+}
+System.out.println("2.Connection얻기-성공");
+out.write("2.Connection얻기-성공<br/>");
+//3.객체준비-Statement객체,PreparedStatement객체
+
+//4.쿼리실행
+
+//5.자원반납
+try {
+	if(conn!=null) {
+		conn.close();
+	}
+} catch (SQLException e) {
+	e.printStackTrace();
+}
+System.out.println("5.자원반납완료");
+out.write("5.자원반납완료<br/>");
+%>
+
+</body>
+</html>
+
+```
+
+.
