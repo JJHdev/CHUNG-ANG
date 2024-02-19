@@ -1,0 +1,89 @@
+# 37.Self From
+
+```
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>회원가입</h1>
+	<form  name="form" id="form"  method="get" action="">
+
+<fieldset>
+	<legend>필수 입력 사항</legend>
+				<table>
+						<tr>
+									<td>ID</td>
+									<td><input type="text"  name="ID" id="ID" required="required"  placeholder="아이디 10글자 이내" ></td>
+									<td><button>중복 확인</button></td>
+						</tr>
+
+						<tr>
+									<td>비밀번호 </td>
+									<td><input type="password" name="pwd" id="pwd1"  required="required" placeholder="영문,숫자,특수문자 포함 8자 이상"></td>
+						</tr>
+
+						<tr>
+								<td>비밀번호 확인 </td>
+								<td><input type="password" name="pwd" id="pwd2"  required="required" ></td>
+						</tr>
+
+						<tr>
+								<td>Email</td>
+								<td><input type="email" name="email" id="email" ></td>
+							   <td>	<select name="loc" id="loc" >
+							      		  <option value="0" >직접입력</option>
+							      			<option value="newyork">뉴욕</option>
+							      			<option value="seoul">서울</option>
+												</select>
+							</td>
+						</tr>
+
+				</table>
+</fieldset>
+
+	<fieldset>
+			<legend>추가정보</legend>
+
+				프로필사진
+				<input type="file" name="file" id="file">
+				<br/>
+
+				성별 :
+				<input type="radio" name="sex" id="m" value="male"> 남자
+				<input type="radio" name="sex" id="w" value="woman"> 여자
+			<br/>
+
+			  생년월일:
+			  <input type="date" name="birth" id="birth" >
+			  <br/>
+
+			  취미:
+			  <input type="checkbox" name="ho1" id="a1" value="a">야구
+				<input type="checkbox" name="ho2" id="a2" value="b">농구
+				<input type="checkbox" name="ho3" id="a3" value="c">축구
+				<input type="checkbox" name="ho4" id="a4" value="d">공부
+				<input type="checkbox" name="ho5" id="a5" value="e">음악감상
+				<input type="checkbox" name="ho6" id="a6" value="f">기타
+				<textarea cols="10" rows="1"></textarea>
+			<br/>
+
+				자기소개
+				<br/>
+				<textarea cols="100" rows="10"></textarea>
+			</fieldset>
+			<br/>
+			<button type="submit">회원가입</button>
+			<button type="reset">다시입력</button>
+			<button type="button">이전으로</button>
+	</form>
+</body>
+</html>
+
+```
+
+.
