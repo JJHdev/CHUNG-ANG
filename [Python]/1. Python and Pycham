@@ -1,0 +1,84 @@
+# 1. Python and Pycham
+
+# 1. Python
+
+1. Python 홈페이지 가서 자신이 원하는 버전 받기. (강의에서는 3.11.2V 다운로드함)  // 설치 시 custom으로 들어가서 모든 체크박스 체크 한 후 진행하기.
+2. Pycham 다운로드 받기. (최신버전 받았음)
+3. Python  특징
+    1. 플랫폼 독립적 
+    2. 개발 생산성이 높다.
+    3. 동적 데이터 타입 지원
+    4. 인터프리터 언어
+    5. 다양한 라이브러리, 모듈을 활용 (높은 확장성)
+    
+    ```python
+    '''높은 확장'''
+    
+    a=1 ;b=2; a=a+10
+    print(a+b)
+    
+    c,d = 10,200
+    print(c,d)
+    
+    x=y=z=100
+    print(x,y,z)
+    
+    x=[1,2,3]
+    print(x)
+    y=['a','b','c']
+    print(y)
+    x[0]=123
+    print(x)
+    
+    # pyton의 데이터타입은 실제 값이 변수에 저장될 떄 정해진다.
+    # python의 모든 변수는 객체가 된다.
+    # x=100
+    # type(x)
+    # <class 'int'>
+    
+    # x='문자열'
+    # type(x)
+    # <class 'str'>
+    
+    # x=1.4
+    # type(x)
+    # <class 'float'>
+    
+    # x=true
+    # type(x)
+    # <class 'bool'>
+    
+    # int, float, str, bool 은 내장된 클래스 이다.
+    
+    a=[1,2,3] ; b=["가","나",a]
+    print(a)
+    #[1,2,3]
+    print(b)
+    #['가','나',[1,2,3]]
+    
+    # - 자료형(p39)
+    # 숫자형, 문자열, 리스트 ,튜플, 딕셔너리, 집합, 불
+    
+    # 숫자형
+    i=15 #10진수
+    octal = 0o15 #8진수
+    hexa=0x15 #16진수
+    print(i,octal,hexa)
+    
+    # 실수(float)
+    x=3.5
+    y=3.5e1
+    z=3.5e2
+    o=3.5e-2
+    print(x,y,z,o)
+    
+    x= 3**4
+    print(x)
+    
+    print(14/3)  # 4.66666(float) 총 나누기 몫
+    print(14//3) # 4(int) 몫
+    print(14%3)  # 2(int) 나머지
+    ```
+    
+
+.
