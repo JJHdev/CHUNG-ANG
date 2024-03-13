@@ -1,0 +1,98 @@
+# 2. 2일차 문법
+
+1. 2일차 문법 공부
+    
+    ```python
+    #dictionary(딕셔너리 p88) -----------------
+    '''
+    '이름'='홍길동'
+    '생일'='0000년 00월 00일' 이라는 대응관계를 나타내는 자료형
+    =>이를 연관배열(Associative array) 또는 해시(Hash)라고 한다
+    ==>python에서는 이러한 자료형을 dictionary(딕셔너리)라고 한다
+    key=value가 한 쌍으로 구성
+    key를 이용하여 value가져오기
+    ==> key는 중복되거나 변경불가. value는 변경가능
+    '''
+    # dictionary생성문법
+    # a={'key':value, ... ,'key':value}
+    a={'name':"홍GD", 'age':20}
+    a['name']
+    # '홍GD'
+    a['age']
+    # 20
+    
+    #요소 추가
+    a['키']=190
+    a
+    # {'name': '홍GD', 'age': 20, '키': 190}
+    
+    #요소 삭제
+    del a['키']
+    a
+    # {'name': '홍GD', 'age': 20}
+    
+    #keys(): key만 가져오기
+    a.keys()
+    # dict_keys(['name', 'age'])
+    
+    #items() : value만 가져오기
+    a.items()
+    # dict_items([('name', '홍GD'), ('age', 20)])
+    
+    #clear() : 지우기
+    a.clear()
+    a
+    # {}
+    
+    #2개의 list를   zip()함수를 이용하여  묶은 뒤
+    #dictionary로 생성하기
+    a=['a','b','c']
+    b=[11, 12 ,13]
+    # d=zip(a,b)
+    # d
+    # <zip object at 0x0000021B0CABF100>
+    d={ x:y   for  x,y in  zip(a,b) }
+    d
+    # {'a': 11,
+    #  'b': 12,
+    #  'c': 13}
+    
+    #형변환(casting)
+    float(3)  #실수형으로 변환
+    # 3.0
+    int(3.0)  #정수형으로 변환
+    # 3
+    str(3)    #문자열형으로 변환
+    # '3'
+    
+    #tuple() : list -> tuple형으로 변환
+    tuple(['a','b']) #('a', 'b')
+    #list() : tuple -> list형으로 변환
+    list((1,2,3))    #[1, 2, 3]
+    #set() : list를 -> 집합자료형으로 변환
+    set([1,2,3])     #{1, 2, 3}
+    
+    #집합자료형(p97)
+    #집합자료형은 set키워드사용
+    set([1,2,3])
+    # {1, 2, 3}
+    
+    set("hello")
+    # {'h', 'e', 'o', 'l'}
+    # 순서가 제각각, 중복허용x(여기에서는 l이 중복)
+    #비교> list,tupe은 순차적, 중복불가
+    
+    #교집합   intersection(), &기호
+    s1 = set([1,2,3,4,5,6])
+    s2 = set([4,5,6,7,8,9])
+    s1.intersection(s2)   #{4, 5, 6}
+    s1 & s2               #{4, 5, 6}
+    #합집합   union, |기호
+    s1.union(s2)         #{1, 2, 3, 4, 5, 6, 7, 8, 9}
+    s1 | s2              #{1, 2, 3, 4, 5, 6, 7, 8, 9}
+    #차집합   difference, -기호
+    s1.difference(s2)   #{1, 2, 3}
+    s2 - s1             #{8, 9, 7}
+    ```
+    
+    .
