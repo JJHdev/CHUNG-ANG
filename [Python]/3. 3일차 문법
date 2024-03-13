@@ -1,0 +1,300 @@
+# 3. 3일차 문법
+
+```python
+#2개의 list를   zip()함수를 이용하여  묶은 뒤
+#dictionary로 생성하기
+a=['a','b','c']
+b=[11, 12 ,13]
+# d=zip(a,b)
+# d
+# <zip object at 0x0000021B0CABF100>
+d={ x:y   for  x,y in  zip(a,b) }
+d
+# {'a': 11,
+#  'b': 12,
+#  'c': 13}
+
+#형변환(casting)----------------------------------
+float(3)  #실수형으로 변환
+# 3.0
+int(3.0)  #정수형으로 변환
+# 3
+str(3)    #문자열형으로 변환
+# '3'
+
+#tuple() : list -> tuple형으로 변환
+tuple(['a','b']) #('a', 'b')
+#list() : tuple -> list형으로 변환
+list((1,2,3))    #[1, 2, 3]
+#set() : list를 -> 집합자료형으로 변환
+set([1,2,3])     #{1, 2, 3}
+
+#dict() : list를-> dictionary형으로 변환
+dict( [ [1,2],[3,4] ] )
+# {1:2, 3:4}
+
+#집합자료형(p97)----------------------------------
+#집합자료형은 set키워드사용
+set([1,2,3])
+# {1, 2, 3}
+
+set("hello")
+# {'h', 'e', 'o', 'l'}
+# 순서가 제각각, 중복허용x(여기에서는 l이 중복)
+#비교> list,tupe은 순차적, 중복불가
+
+#교집합   intersection(), &기호
+s1 = set([1,2,3,4,5,6])
+s2 = set([4,5,6,7,8,9])
+s1.intersection(s2)   #{4, 5, 6}
+s1 & s2               #{4, 5, 6}
+#합집합   union, |기호
+s1.union(s2)         #{1, 2, 3, 4, 5, 6, 7, 8, 9}
+s1 | s2              #{1, 2, 3, 4, 5, 6, 7, 8, 9}
+#차집합   difference, -기호
+s1.difference(s2)   #{1, 2, 3}
+s2 - s1             #{8, 9, 7}
+
+# 변수(p107) ==================================
+a=100
+b=200
+
+#전역변수
+globals()
+"""
+{'__name__': '__main__', 
+'__doc__': None, 
+ '__package__': '', 
+ '__loader__': <_frozen_importlib_external.SourceFileLoader object at 0x0000020A64A64610>, '__spec__': None, '__file__': '<input>', '__builtins__': {'__name__': 'builtins', '__doc__': "Built-in functions, exceptions, and other objects.\n\nNoteworthy: None is the `nil' object; Ellipsis represents `...' in slices.", '__package__': '', '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': ModuleSpec(name='builtins', loader=<class '_frozen_importlib.BuiltinImporter'>, origin='built-in'), '__build_class__': <built-in function __build_class__>, '__import__': <bound method ImportHookManager.do_import of <module '_pydev_bundle.pydev_import_hook.import_hook'>>, 'abs': <built-in function abs>, 'all': <built-in function all>, 'any': <built-in function any>, 'ascii': <built-in function ascii>, 'bin': <built-in function bin>, 'breakpoint': <built-in function breakpoint>, 'callable': <built-in function callable>, 'chr': <built-in function chr>, 'compile': <built-in function compile>, 'delattr': <built-in function delattr>, 'dir': <built-in function dir>, 'divmod': <built-in function divmod>, 'eval': <built-in function eval>, 'exec': <built-in function exec>, 'format': <built-in function format>, 'getattr': <built-in function getattr>, 'globals': <built-in function globals>, 'hasattr': <built-in function hasattr>, 'hash': <built-in function hash>, 'hex': <built-in function hex>, 'id': <built-in function id>, 'input': <built-in function input>, 'isinstance': <built-in function isinstance>, 'issubclass': <built-in function issubclass>, 'iter': <built-in function iter>, 'aiter': <built-in function aiter>, 'len': <built-in function len>, 'locals': <built-in function locals>, 'max': <built-in function max>, 'min': <built-in function min>, 'next': <built-in function next>, 'anext': <built-in function anext>, 'oct': <built-in function oct>, 'ord': <built-in function ord>, 'pow': <built-in function pow>, 'print': <built-in function print>, 'repr': <built-in function repr>, 'round': <built-in function round>, 'setattr': <built-in function setattr>, 'sorted': <built-in function sorted>, 'sum': <built-in function sum>, 'vars': <built-in function vars>, 'None': None, 'Ellipsis': Ellipsis, 'NotImplemented': NotImplemented, 'False': False, 'True': True, 'bool': <class 'bool'>, 'memoryview': <class 'memoryview'>, 'bytearray': <class 'bytearray'>, 'bytes': <class 'bytes'>, 'classmethod': <class 'classmethod'>, 'complex': <class 'complex'>, 'dict': <class 'dict'>, 'enumerate': <class 'enumerate'>, 'filter': <class 'filter'>, 'float': <class 'float'>, 'frozenset': <class 'frozenset'>, 'property': <class 'property'>, 'int': <class 'int'>, 'list': <class 'list'>, 'map': <class 'map'>, 'object': <class 'object'>, 'range': <class 'range'>, 'reversed': <class 'reversed'>, 'set': <class 'set'>, 'slice': <class 'slice'>, 'staticmethod': <class 'staticmethod'>, 'str': <class 'str'>, 'super': <class 'super'>, 'tuple': <class 'tuple'>, 'type': <class 'type'>, 'zip': <class 'zip'>, '__debug__': True, 'BaseException': <class 'BaseException'>, 'BaseExceptionGroup': <class 'BaseExceptionGroup'>, 'Exception': <class 'Exception'>, 'GeneratorExit': <class 'GeneratorExit'>, 'KeyboardInterrupt': <class 'KeyboardInterrupt'>, 'SystemExit': <class 'SystemExit'>, 'ArithmeticError': <class 'ArithmeticError'>, 'AssertionError': <class 'AssertionError'>, 'AttributeError': <class 'AttributeError'>, 'BufferError': <class 'BufferError'>, 'EOFError': <class 'EOFError'>, 'ImportError': <class 'ImportError'>, 'LookupError': <class 'LookupError'>, 'MemoryError': <class 'MemoryError'>, 'NameError': <class 'NameError'>, 'OSError': <class 'OSError'>, 'ReferenceError': <class 'ReferenceError'>, 'RuntimeError': <class 'RuntimeError'>, 'StopAsyncIteration': <class 'StopAsyncIteration'>, 'StopIteration': <class 'StopIteration'>, 'SyntaxError': <class 'SyntaxError'>, 'SystemError': <class 'SystemError'>, 'TypeError': <class 'TypeError'>, 'ValueError': <class 'ValueError'>, 'Warning': <class 'Warning'>, 'FloatingPointError': <class 'FloatingPointError'>, 'OverflowError': <class 'OverflowError'>, 'ZeroDivisionError': <class 'ZeroDivisionError'>, 'BytesWarning': <class 'BytesWarning'>, 'DeprecationWarning': <class 'DeprecationWarning'>, 'EncodingWarning': <class 'EncodingWarning'>, 'FutureWarning': <class 'FutureWarning'>, 'ImportWarning': <class 'ImportWarning'>, 'PendingDeprecationWarning': <class 'PendingDeprecationWarning'>, 'ResourceWarning': <class 'ResourceWarning'>, 'RuntimeWarning': <class 'RuntimeWarning'>, 'SyntaxWarning': <class 'SyntaxWarning'>, 'UnicodeWarning': <class 'UnicodeWarning'>, 'UserWarning': <class 'UserWarning'>, 'BlockingIOError': <class 'BlockingIOError'>, 'ChildProcessError': <class 'ChildProcessError'>, 'ConnectionError': <class 'ConnectionError'>, 'FileExistsError': <class 'FileExistsError'>, 'FileNotFoundError': <class 'FileNotFoundError'>, 'InterruptedError': <class 'InterruptedError'>, 'IsADirectoryError': <class 'IsADirectoryError'>, 'NotADirectoryError': <class 'NotADirectoryError'>, 'PermissionError': <class 'PermissionError'>, 'ProcessLookupError': <class 'ProcessLookupError'>, 'TimeoutError': <class 'TimeoutError'>, 'IndentationError': <class 'IndentationError'>, 'IndexError': <class 'IndexError'>, 'KeyError': <class 'KeyError'>, 'ModuleNotFoundError': <class 'ModuleNotFoundError'>, 'NotImplementedError': <class 'NotImplementedError'>, 'RecursionError': <class 'RecursionError'>, 'UnboundLocalError': <class 'UnboundLocalError'>, 'UnicodeError': <class 'UnicodeError'>, 'BrokenPipeError': <class 'BrokenPipeError'>, 'ConnectionAbortedError': <class 'ConnectionAbortedError'>, 'ConnectionRefusedError': <class 'ConnectionRefusedError'>, 'ConnectionResetError': <class 'ConnectionResetError'>, 'TabError': <class 'TabError'>, 'UnicodeDecodeError': <class 'UnicodeDecodeError'>, 'UnicodeEncodeError': <class 'UnicodeEncodeError'>, 'UnicodeTranslateError': <class 'UnicodeTranslateError'>, 'ExceptionGroup': <class 'ExceptionGroup'>, 'EnvironmentError': <class 'OSError'>, 'IOError': <class 'OSError'>, 'WindowsError': <class 'OSError'>, 'open': <built-in function open>, 'quit': Use quit() or Ctrl-Z plus Return to exit, 'exit': Use exit() or Ctrl-Z plus Return to exit, 'copyright': Copyright (c) 2001-2023 Python Software Foundation.
+"""
+#지역변수
+locals()
+
+#전역변수를 local에서 사용
+#전역변수생성
+a = [1,2,3]
+
+#test()선언
+def test():
+    a=[4,5,6]
+
+#test()호출
+test()
+
+print(a)
+# [1, 2, 3]이 출력되면서 전역변수의 값이 변경되지 않았았음을 보여준다
+# ------------
+#전역변수를 local에서 사용
+#전역변수생성
+a = [10,20,30]
+
+#test()선언
+def test():
+    global a
+    a=[40,50,60]
+
+#test()호출
+test()
+
+print(a)
+# [40, 50, 60]이 출력되면서 전역변수의 값이 변경되지 되었음을 보여준다
+
+#local변수확인
+def temp():
+    a=3 #지역변수 선언 및 초기화
+    print( locals() )
+
+temp()
+# {'a': 3}
+
+#함수(p149~~~)
+#내장산술함수
+sum([1,2,3])  #6
+max([1,2,3])  #3
+abs(-20)      #20
+pow(4,2)      #16  4의 2제곱. 4**2와 동일
+divmod(5,2)   #(2, 1) 5를 2로 나눈 몫& 나머지를 리턴
+round(3.14)   #3 소수점첫번째자리에서 반올림
+round(13.1415,-1)  #10.0   일의자리에서       반올림
+round(3.14,0)      #3.0
+round(13.1415,1)   #13.1   소수점2번째자리에서 반올림
+round(13.1415,2)   #13.14  소수점3번째자리에서 반올림
+
+# 사사오입 원칙
+round(3.5)   #4??4  #반올림할 자리수의 수가 홀수이면  올림
+round(4.5)   #5??4  #반올림할 자리수의 수가 짝수이면  내림
+
+#math 모듈
+#문법> import 모듈
+import math
+math.ceil(3.14)  #올림 #4
+math.ceil(-3.14)      #-3
+
+math.floor(3.14)  #내림 #3
+math.floor(-3.14)      #-4
+
+math.trunc(3.14)  #내림 #3
+math.trunc(-3.14)      #-3
+#trunc는 내림함수이지만 0으로 향한다는 점에서 floor와 차이가 있다
+
+#정수
+int(3.14)  #3
+int(-3.14) #-3
+
+#식별연산자
+#is연산자는 주소지를 비교
+a=10
+b=10
+a is b    #True  a와  b가 동일 (메모리)주소를 가졌는지 확인
+a is not b #False
+
+10==10.0    #True 값을 비교
+10 is 10.0  #False   is연산자는 주소지를 비교
+
+# 정수 -5~256는 저장되어있다
+a=257
+b=257
+a is b  #False a와  b가 동일 (메모리)주소를 가졌는지 확인
+
+# 리스트는 mutable이다
+a = ["aaa"]
+a       #['aaa']
+a[0]    #'aaa'
+a[0]= '111'
+a[0]    #'111'
+a       #['111']
+b = a   #주소복사
+b       #['111']
+a is b  #True
+
+# ---------------
+import copy
+
+a = ['qqq']
+b =  copy.deepcopy(a)
+
+a  #['qqq']
+b  #['qqq']
+a[0] = 'change'
+a  #['change']
+b  #['qqq']
+a is b #False
+
+#멤버연산자 : in
+100 in [1,2,100]
+# True
+
+'a' in ['q','w','qwer']
+# False
+
+'a' in ['q','w','qwer','A']
+# False
+
+'a' in ['q','w','qwer','asdf']
+# False
+
+'a' in ['q','w','qwer','asdf','a']
+# True
+
+#논리연산자  : and  or not
+a=1
+b=2
+if a==1 and b==2:
+    print("ok~")
+#ok~
+
+a=1
+b=2
+if a==1 or b==3:
+    print("ok~")
+#ok
+
+a=10
+if not a==4:
+    print('ok')
+#ok
+
+#문자열 슬라이싱
+a="apple"
+a
+# 'apple'
+
+a[0]
+# 'a'
+a[1:3] #인덱스는 자릿수(위치)를 의미함을 기억하자
+# 'pp'
+a[:4] #'appl'  #인덱스가 4까지
+a[2:] #'ple'   #인덱스가 2부터 끝까지
+
+for s in a:
+    print(s)
+'''출력결과
+a
+p
+p
+l
+e
+'''
+
+#문자열 합치기
+a="hello"
+b="World"
+a+b
+# 'helloWorld'
+
+#문자열반복
+"Hi"*5
+# 'HiHiHiHiHi'
+
+#문자열안에  "넣기
+a='그 분은 말씀하셨지. "점심먹자!" '
+a
+# '그 분은 말씀하셨지. "점심먹자!" '
+a='그 분은 말씀하셨지. \"점심먹자!\" '
+a
+# '그 분은 말씀하셨지. "점심먹자!" '
+
+#문자열안에  '넣기
+a="그 분은 말씀하셨지. '저녁먹자!' "
+a
+#"그 분은 말씀하셨지. '저녁먹자!' "
+
+a="그 분은 말씀하셨지. \'오전수업끝나기 00전\' "
+a
+#"그 분은 말씀하셨지. '오전수업끝나기 00전' "
+
+#대상문자열.find(찾고자하는 문자열) : 찾는문자열의 인덱스를 반환
+a="hello"
+a.find('h') #0
+a.find('e') #1
+a.find('l') #2
+a.find('H') #-1
+
+#문자열 길이 : len()
+a="hello world1!한글"
+len(a)  #15
+
+#문자열바꾸기 : replace(old문자,new문자)
+a="Good boy!"
+a.replace("Good","beautiful")
+
+#문자열나누기: split() =>기본공백을 기준으로 나눈다
+a="Good boy!"
+a.split()
+# ['Good', 'boy!']
+
+a="Good...boy!"
+a.split('...')  #=>'...'을 기준으로 나눈다
+# ['Good', 'boy!']
+
+a="Good"
+list(a) #=>문자열을 list타입으로 형변환
+# ['G', 'o', 'o', 'd']
+
+#대소문자 변환
+a="Good"
+a.upper()           #'GOOD'
+(a.upper()).lower() #'good'
+```
+
+.
